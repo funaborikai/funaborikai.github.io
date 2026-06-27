@@ -76,25 +76,21 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(255,250,244,.92);ba
 .slide-label{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:14px 16px;color:#fff;font-size:13px;background:linear-gradient(transparent,rgba(120,80,55,.45));text-shadow:0 1px 4px rgba(0,0,0,.2)}
 @media(max-width:560px){ .hero h1{font-size:27px} }
 
-/* ---- 全面写真ヒーロー（A案：写真ドーン＋左上に白文字） ---- */
-.hero-photo{position:relative;background:none;min-height:480px;overflow:hidden}
-.hero-photo .hero-bg{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:0;border:none;box-shadow:none;background:#cfe2cf}
+/* ---- 写真ヒーロー（A案：囲み枠・角丸・左上に白文字） ---- */
+.hero-photo{position:relative;background:none;padding:18px 0 2px}
+.hero-photo .hero-stage{position:relative;height:330px;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:#ffe0c9}
+.hero-photo .hero-bg{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:0;border:none;box-shadow:none}
 .hero-photo .hero-bg .slide{border-radius:0}
-.hero-photo .hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(125deg,rgba(38,52,44,.66) 0%,rgba(38,52,44,.34) 40%,rgba(38,52,44,0) 70%)}
-.hero-photo .hero-overlay{position:relative;z-index:2;padding-top:56px;padding-bottom:44px;color:#fff}
-.hero-photo .eyebrow{background:none;box-shadow:none;color:#fff;padding:0;font-size:14px;text-shadow:0 1px 7px rgba(0,0,0,.4);margin:0 0 14px}
-.hero-photo .hero-brand{font-size:70px;line-height:1.05;margin:0 0 14px;padding:0;background:none;-webkit-text-fill-color:#fff;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.42)}
-.hero-photo .hero-catch{color:#fff;margin:0 0 14px;text-shadow:0 1px 9px rgba(0,0,0,.42)}
-.hero-photo .lead{color:#fff;max-width:520px;text-shadow:0 1px 9px rgba(0,0,0,.48)}
-.hero-photo .quick{margin-top:26px}
-.hero-photo .slide-label{z-index:2}
+.hero-photo .hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,rgba(70,40,24,.58) 0%,rgba(70,40,24,.28) 44%,rgba(70,40,24,0) 72%)}
+.hero-photo .hero-overlay{position:absolute;z-index:2;left:36px;top:32px;right:36px;color:#fff}
+.hero-photo .eyebrow{background:none;box-shadow:none;color:#fff;padding:0;font-size:14px;text-shadow:0 1px 7px rgba(0,0,0,.4);margin:0 0 12px}
+.hero-photo .hero-brand{font-size:60px;line-height:1.05;margin:0;padding:0;background:none;-webkit-text-fill-color:#fff;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.42)}
 @media(max-width:760px){
-  .hero-photo{min-height:380px}
-  .hero-photo .hero-scrim{background:linear-gradient(160deg,rgba(38,52,44,.62) 0%,rgba(38,52,44,.36) 60%,rgba(38,52,44,.14) 100%)}
-  .hero-photo .hero-overlay{padding-top:34px}
-  .hero-photo .hero-brand{font-size:48px}
-  .hero-photo .hero-catch{font-size:19px}
-  .hero-photo .lead{font-size:15px}
+  .hero-photo{padding:12px 0 2px}
+  .hero-photo .hero-stage{height:220px;border-radius:20px}
+  .hero-photo .hero-scrim{background:linear-gradient(150deg,rgba(70,40,24,.56) 0%,rgba(70,40,24,.30) 60%,rgba(70,40,24,.12) 100%)}
+  .hero-photo .hero-overlay{left:24px;top:22px;right:24px}
+  .hero-photo .hero-brand{font-size:42px}
 }
 
 /* 写真の下の導入（キャッチ・説明・ボタン） */
