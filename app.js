@@ -26,11 +26,11 @@ const SAMPLE_EVENTS = [
       {name:"星野 由紀子", company:"社会福祉法人いすず会　一之江あゆみの園", profile:"施設長", logo:"images/sample/logo2.png", photo:""}
     ],
     datetime:"2026-07-18T18:45",
-    dateLabel:"2026年7月18日（土）18:45〜20:10　※18:30〜受付開始",
+    dateLabel:"2026年6月18日（木）18:45〜20:10　※18:30〜受付開始",
     place:"船堀コミュニティ会館 第4集会室（江戸川区船堀一丁目3番1号）", fee:"200円　※受付にて徴収させていただきます",
     party:"",
     notes:"20:15完全退室となります。本会終了後は速やかに退室をお願いいたします。",
-    social:{ place:"酒蔵季TOKI 船堀駅前店", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、{期限}までに船堀会の下記メールアドレスまでご連絡をお願いいたします。それ以降または当日の無断キャンセルの場合は、キャンセル料を徴収いたします。ご了承ください。", email:"funaborikai@gmail.com" },
+    social:{ place:"酒蔵季TOKI 船堀駅前店", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、6月16日（火）18時までに船堀会の下記メールアドレスまでご連絡をお願いいたします。それ以降または当日の無断キャンセルの場合は、キャンセル料を徴収いたします。ご了承ください。", email:"funaborikai@gmail.com" },
     formUrl:"https://docs.google.com/forms/d/e/1FAIpQLSe-upse0rPJLEx2xo_NvYNhK3_PYIuaF1aK6EU4nb576aTIoQ/viewform"
   }
 ];
@@ -163,7 +163,7 @@ function initEvents(){
     const sp=splitEvents(events);
     if(fm){
       fm.innerHTML = sp.upcoming.length
-        ? sp.upcoming.map(featureHTML).join("")
+        ? featureHTML(sp.upcoming[0])
         : '<div class="feature"><div class="body"><p class="empty">次回の勉強会は準備中です。決まり次第こちらに掲載します。</p></div></div>';
     }
     if(am){
