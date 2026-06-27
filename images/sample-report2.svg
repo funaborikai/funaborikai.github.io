@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="room2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef4fb"/><stop offset="1" stop-color="#dde9f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#room2)"/>
+  <!-- screen / whiteboard -->
+  <rect x="46" y="34" width="180" height="96" rx="8" fill="#ffffff" stroke="#cdd9e6" stroke-width="3"/>
+  <g stroke="#86b7e6" stroke-width="5" stroke-linecap="round"><path d="M66 60h120"/><path d="M66 80h140" stroke="#f0a979"/><path d="M66 100h90"/></g>
+  <!-- table -->
+  <ellipse cx="200" cy="214" rx="172" ry="34" fill="#e7c79c"/>
+  <ellipse cx="200" cy="208" rx="172" ry="34" fill="#f3d9b0"/>
+  <!-- people around table -->
+  <g><circle cx="92" cy="176" r="16" fill="#f3c39e"/><path d="M70 214c0-18 10-30 22-30s22 12 22 30Z" fill="#5fb6bd"/></g>
+  <g><circle cx="200" cy="166" r="16" fill="#fbd8b6"/><path d="M178 206c0-18 10-30 22-30s22 12 22 30Z" fill="#f1899a"/></g>
+  <g><circle cx="308" cy="176" r="16" fill="#f6c7a6"/><path d="M286 214c0-18 10-30 22-30s22 12 22 30Z" fill="#f3b24e"/></g>
+  <rect x="14" y="222" width="118" height="24" rx="12" fill="#ffffff" opacity=".85"/>
+  <text x="24" y="239" font-family="'Noto Sans JP',sans-serif" font-size="14" fill="#5b7a99">サンプル写真</text>
+</svg>

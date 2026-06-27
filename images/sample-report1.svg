@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe7c2"/><stop offset="1" stop-color="#ffd2a6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#sky1)"/>
+  <circle cx="320" cy="62" r="30" fill="#ffd36b"/>
+  <g stroke="#fbc24a" stroke-width="3" stroke-linecap="round">
+    <path d="M320 18v10"/><path d="M320 96v10"/><path d="M366 62h-10"/><path d="M284 62h-10"/><path d="M352 30l-7 7"/><path d="M295 87l-7 7"/>
+  </g>
+  <path d="M0 196 Q200 168 400 196 V260 H0 Z" fill="#9fce7e"/>
+  <path d="M0 220 Q200 200 400 220 V260 H0 Z" fill="#86bd66"/>
+  <!-- grill -->
+  <rect x="150" y="150" width="100" height="20" rx="5" fill="#5b4636"/>
+  <rect x="160" y="170" width="6" height="34" fill="#7a6450"/><rect x="234" y="170" width="6" height="34" fill="#7a6450"/>
+  <circle cx="172" cy="160" r="6" fill="#e8703a"/><circle cx="200" cy="160" r="6" fill="#f4a23c"/><circle cx="228" cy="160" r="6" fill="#e8703a"/>
+  <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7">
+    <path d="M178 148c-6-8 6-12 0-20"/><path d="M204 146c-6-8 6-12 0-20"/><path d="M226 148c-6-8 6-12 0-20"/>
+  </g>
+  <!-- people -->
+  <g><circle cx="92" cy="150" r="13" fill="#f3c39e"/><path d="M74 200c0-20 8-34 18-34s18 14 18 34Z" fill="#5fb6bd"/></g>
+  <g><circle cx="312" cy="156" r="13" fill="#fbd8b6"/><path d="M294 204c0-20 8-34 18-34s18 14 18 34Z" fill="#f1899a"/></g>
+  <rect x="14" y="222" width="118" height="24" rx="12" fill="#ffffff" opacity=".82"/>
+  <text x="24" y="239" font-family="'Noto Sans JP',sans-serif" font-size="14" fill="#9a6a3c">サンプル写真</text>
+</svg>

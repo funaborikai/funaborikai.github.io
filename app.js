@@ -9,7 +9,9 @@
 
 /* スプレッドシート「公開」タブのCSV URL。空ならサンプル表示。 */
 const CONFIG = {
-  SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv"
+  SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv",
+  REPORTS_CSV_URL: "",
+  SCHEDULE_CSV_URL: ""
 };
 
 /* CSV未設定・読み込み失敗時に表示されるサンプル（登場する人物・団体はすべて架空です） */
@@ -163,10 +165,68 @@ function archItemHTML(e){
     '<p class="who">'+esc(who)+'</p></div></div>';
 }
 
+/* ===== 今後の予定（活動スケジュール）：専用シートから ===== */
+const SAMPLE_SCHEDULE = [
+  { date:"2026/9/17（木）", no:"127", title:"訪問リハビリの実際（サンプル）", place:"船堀コミュニティ会館 第4集会室" },
+  { date:"2026/10/15（木）", no:"128", title:"内容調整中（サンプル）", place:"船堀コミュニティ会館 第4集会室" }
+];
+async function loadSchedule(){
+  if(!CONFIG.SCHEDULE_CSV_URL) return SAMPLE_SCHEDULE;
+  try{
+    const res = await fetch(CONFIG.SCHEDULE_CSV_URL);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const rows = parseCSV(await res.text()).filter(r=>r.some(c=>c.trim()!==""));
+    if(rows.length<2) return SAMPLE_SCHEDULE;
+    const h = rows[0].map(s=>s.trim());
+    const get=(cells,name)=>{ const i=h.indexOf(name); return i>=0?(cells[i]||"").trim():""; };
+    return rows.slice(1).map(function(cells){
+      return { date:get(cells,"日程"), no:get(cells,"回"), title:get(cells,"内容"), place:get(cells,"会場"),
+        published: h.indexOf("公開")>=0 ? isPublished(get(cells,"公開")) : true };
+    }).filter(r=>r.published && (r.date||r.title));
+  }catch(err){ console.warn("予定読み込みに失敗。サンプルを表示します:",err); return SAMPLE_SCHEDULE; }
+}
+function scheduleHTML(list){
+  if(!list || !list.length) return '<p class="empty">次回以降の予定が決まり次第、こちらに掲載します。</p>';
+  const rows = list.map(function(r){
+    const no = /^\d+$/.test((r.no||"").trim()) ? "第"+r.no.trim()+"回" : (r.no||"");
+    return '<tr><td class="s-date">'+esc(r.date)+'</td><td class="s-no">'+esc(no)+'</td><td class="s-title">'+esc(r.title||"内容未定")+'</td><td class="s-place">'+esc(r.place||"")+'</td></tr>';
+  }).join("");
+  return '<div class="sched"><table><thead><tr><th>日程</th><th>回</th><th>内容</th><th>会場</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+/* ===== 活動報告・お知らせ ===== */
+const SAMPLE_REPORTS = [
+  { date:"2026年5月17日", title:"船堀会BBQを開催しました！", body:"新左近川バーベキュー場で恒例のBBQを開催しました。たくさんのご家族・事業所の皆さまにご参加いただき、職種を越えて交流を深めました。ご参加ありがとうございました！（※これは表示見本です）", photo:"images/sample-report1.svg" },
+  { date:"2026年4月16日", title:"第123回 勉強会を開催しました", body:"「こども食堂」をテーマに、地域包括ケアについて学びました。活発な意見交換ができ、参加者同士のつながりも広がりました。（※これは表示見本です）", photo:"images/sample-report2.svg" }
+];
+async function loadReports(){
+  if(!CONFIG.REPORTS_CSV_URL) return SAMPLE_REPORTS;
+  try{
+    const res = await fetch(CONFIG.REPORTS_CSV_URL);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const rows = parseCSV(await res.text()).filter(r=>r.some(c=>c.trim()!==""));
+    if(rows.length<2) return SAMPLE_REPORTS;
+    const h = rows[0].map(s=>s.trim());
+    const get=(cells,name)=>{ const i=h.indexOf(name); return i>=0?(cells[i]||"").trim():""; };
+    return rows.slice(1).map(function(cells){
+      return { date:get(cells,"日付"), title:get(cells,"タイトル"), body:get(cells,"本文"), photo:get(cells,"写真URL"),
+        published: h.indexOf("公開")>=0 ? isPublished(get(cells,"公開")) : true };
+    }).filter(r=>r.published && (r.title||r.body));
+  }catch(err){ console.warn("お知らせ読み込みに失敗。サンプルを表示します:",err); return SAMPLE_REPORTS; }
+}
+function reportHTML(r){
+  const img = r.photo ? '<img class="report-photo" src="'+esc(r.photo)+'" alt="'+esc(r.title)+'" loading="lazy" onerror="this.remove()">' : "";
+  return '<article class="report-item">'+img+
+    '<div class="report-body"><p class="report-date">'+esc(r.date)+'</p>'+
+    '<h3>'+esc(r.title)+'</h3><p class="report-text">'+esc(tidySummary(r.body))+'</p></div></article>';
+}
+
 function initEvents(){
   const fm=document.getElementById("feature-mount");
   const am=document.getElementById("archive-mount");
-  if(!fm && !am) return;
+  const rm=document.getElementById("reports-mount");
+  const scm=document.getElementById("schedule-mount");
+  if(!fm && !am && !rm && !scm) return;
   loadEvents().then(function(events){
     const sp=splitEvents(events);
     if(fm){
@@ -178,5 +238,13 @@ function initEvents(){
       am.innerHTML = sp.past.length ? sp.past.map(archItemHTML).join("") : "";
     }
   });
+  if(scm){ loadSchedule().then(function(list){ scm.innerHTML = scheduleHTML(list); }); }
+  if(rm){
+    loadReports().then(function(reports){
+      rm.innerHTML = reports.length
+        ? reports.slice(0,6).map(reportHTML).join("")
+        : '<p class="empty">活動報告は準備中です。</p>';
+    });
+  }
 }
 document.addEventListener("DOMContentLoaded", initEvents);
