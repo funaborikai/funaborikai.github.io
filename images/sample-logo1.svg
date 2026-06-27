@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 64" width="210" height="64">
+  <!-- cloud + sky mark -->
+  <g>
+    <circle cx="34" cy="32" r="26" fill="#e8f4fb"/>
+    <path d="M22 38 a7 7 0 0 1 1 -13 a9 9 0 0 1 17 -3 a7 7 0 0 1 2 16 Z" fill="#6cb7e6"/>
+    <circle cx="44" cy="20" r="5" fill="#ffd36b"/>
+  </g>
+  <text x="70" y="30" font-family="'Zen Maru Gothic','M PLUS Rounded 1c','Noto Sans JP',sans-serif" font-size="22" font-weight="700" fill="#3a8fc4">あおぞら</text>
+  <text x="70" y="50" font-family="'Noto Sans JP',sans-serif" font-size="12.5" font-weight="500" fill="#6b8a9c">在宅ケアネット</text>
+</svg>

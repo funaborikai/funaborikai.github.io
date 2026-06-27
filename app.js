@@ -14,28 +14,27 @@ const CONFIG = {
 /* CSV未設定・読み込み失敗時に表示されるサンプル */
 const SAMPLE_EVENTS = [
   {
-    published:true, no:125,
-    title:"障害福祉制度から考える障害者入所支援の今後",
-    summary:"今年で無認可時代を含めると創立58年を迎えた「もぐらの家」と、同じ江戸川区にある今年で23年を迎えた「あゆみの園」。\n2026年から利用者の地域移行への意向確認が義務化され、施設から地域への移行がすすめられています。養護学校卒業後の働く場所として設立した「もぐらの家」、知的障害者の親なきあとを想い設立した「あゆみの園」。両施設の歴史と今後の在り方を、障害福祉制度の歴史と共に、両施設の職員が発信し、障害福祉について共有できればと思います。",
+    published:true, no:126,
+    title:"在宅で『最期まで食べる』を支える 〜多職種で挑む摂食嚥下ケア〜",
+    summary:"「口から食べる」を諦めない——。在宅の現場では、医療と介護がチームになって、一人ひとりの『食べたい』に向き合っています。\n今回は言語聴覚士と訪問看護師のお二人をお招きし、嚥下評価のポイントや、ご家族・多職種との連携づくりについて、事例を交えてお話しいただきます。これから在宅の食支援に関わる方にもおすすめの内容です。",
     speakers:[
-      {name:"土田 一平", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"三事業サービス管理責任者", logo:"", photo:""},
-      {name:"成田 充里", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"就労継続支援B型責任者", logo:"", photo:""},
-      {name:"鈴木 優一", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"生活支援員", logo:"", photo:""},
-      {name:"長谷部 淳", company:"もぐらの家／第二オハナ", profile:"指導員", logo:"", photo:""},
-      {name:"大藤 さゆり", company:"もぐらの家／第二オハナ", profile:"指導員", logo:"", photo:""},
-      {name:"星野 由紀子", company:"社会福祉法人いすず会　一之江あゆみの園", profile:"施設長", logo:"", photo:""}
+      {name:"海原 みなと", company:"一般社団法人 あおぞら在宅ケアネット", profile:"言語聴覚士／摂食嚥下リハビリ担当。在宅での食支援に長く携わる。", logo:"images/sample-logo1.svg", photo:"images/sample-avatar1.svg"},
+      {name:"七海 さくら", company:"ひだまり訪問看護ステーション", profile:"管理者・看護師。多職種連携とご家族支援を専門とする。", logo:"images/sample-logo2.svg", photo:"images/sample-avatar2.svg"}
     ],
-    datetime:"2026-07-18T18:45",
-    dateLabel:"2026年6月18日（木）18:45〜20:10　※18:30〜受付開始",
-    place:"船堀コミュニティ会館 第4集会室（江戸川区船堀一丁目3番1号）", fee:"200円　※受付にて徴収させていただきます",
+    datetime:"2026-08-20T18:45",
+    dateLabel:"2026年8月20日（木）18:45〜20:10　※18:30〜受付開始",
+    place:"船堀コミュニティ会館 第4集会室（江戸川区船堀一丁目3番1号）",
+    fee:"200円　※受付にて徴収させていただきます",
     party:"",
-    notes:"20:15完全退室となります。本会終了後は速やかに退室をお願いいたします。",
-    social:{ place:"酒蔵季TOKI 船堀駅前店", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、6月16日（火）18時までに船堀会の下記メールアドレスまでご連絡をお願いいたします。それ以降または当日の無断キャンセルの場合は、キャンセル料を徴収いたします。ご了承ください。", email:"funaborikai@gmail.com" },
-    formUrl:"https://docs.google.com/forms/d/e/1FAIpQLSe-upse0rPJLEx2xo_NvYNhK3_PYIuaF1aK6EU4nb576aTIoQ/viewform"
+    notes:"※こちらは表示見本（サンプル）です。登場する人物・団体はすべて架空です。実際の勉強会データを入力すると自動で差し替わります。",
+    social:{ place:"居酒屋 さんぽ道 船堀店（サンプル）", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、開催の2日前18時までに船堀会の下記メールアドレスまでご連絡をお願いいたします。", email:"funaborikai@gmail.com" },
+    formUrl:""
   }
 ];
 
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function nameHonor(n){ n=String(n==null?"":n).trim(); if(!n) return ""; return /(氏|先生|様|さん|博士|教授|ちゃん|君|医師|院長|理事長)$/.test(n)?n:n+" 氏"; }
+function tidySummary(s){ s=String(s==null?"":s).replace(/\r/g,""); return s.replace(/\n{2,}/g,"\u0000").replace(/[ \t]*\n[ \t]*/g,"").replace(/\u0000/g,"\n\n"); }
 
 function parseCSV(text){
   const rows=[]; let row=[], field="", q=false;
@@ -79,6 +78,7 @@ function rowToEvent(h, cells){
 }
 
 async function loadEvents(){
+  try{ if(new URLSearchParams(location.search).get("sample")==="1") return SAMPLE_EVENTS; }catch(e){}
   if(!CONFIG.SHEET_CSV_URL) return SAMPLE_EVENTS;
   try{
     const res = await fetch(CONFIG.SHEET_CSV_URL);
@@ -109,7 +109,7 @@ function speakerHTML(s){
     : '<span class="avatar">'+initial+'</span>';
   const logo = s.logo ? '<img class="org-logo" src="'+esc(s.logo)+'" alt="'+esc(s.company)+'" onerror="this.remove()">' : "";
   return '<div class="speaker">'+avatar+
-    '<div class="sp-body"><div class="name">'+esc(s.name)+'</div>'+
+    '<div class="sp-body"><div class="name">'+esc(nameHonor(s.name))+'</div>'+
     '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>'+
     '<p class="profile">'+esc(s.profile)+'</p></div></div>';
 }
@@ -137,7 +137,7 @@ function featureHTML(e){
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
   const cta = joinBtn ? '<div class="cta">'+joinBtn+'<span class="note">ボタンを押すとお申し込みフォームが開きます。</span></div>' : "";
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
-    '<div class="body"><h3>'+esc(e.title)+'</h3><p class="summary">'+esc(e.summary)+'</p>'+
+    '<div class="body"><h3>'+esc(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
     '<div class="grid">'+
       '<div class="meta"><span class="k">日時</span><span class="v">'+esc(e.dateLabel)+'</span></div>'+
       '<div class="meta"><span class="k">会場</span><span class="v">'+esc(e.place)+'</span></div>'+
@@ -172,4 +172,4 @@ function initEvents(){
     }
   });
 }
-document.addEventListener("DOMContentLoaded", initEvents);
+document.addEven
