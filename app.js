@@ -4,6 +4,7 @@
    ・ホーム(#feature-mount)に「今月の勉強会」
    ・アーカイブ(#archive-mount)に過去の勉強会
    を自動表示します。開催日が過ぎた回は自動でアーカイブへ。
+   ※ index.html?sample=1 を開くと、データが入っていても見本（サンプル）を表示します。
    ============================================================ */
 
 /* スプレッドシート「公開」タブのCSV URL。空ならサンプル表示。 */
@@ -11,7 +12,7 @@ const CONFIG = {
   SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv"
 };
 
-/* CSV未設定・読み込み失敗時に表示されるサンプル */
+/* CSV未設定・読み込み失敗時に表示されるサンプル（登場する人物・団体はすべて架空です） */
 const SAMPLE_EVENTS = [
   {
     published:true, no:126,
@@ -34,7 +35,13 @@ const SAMPLE_EVENTS = [
 
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function nameHonor(n){ n=String(n==null?"":n).trim(); if(!n) return ""; return /(氏|先生|様|さん|博士|教授|ちゃん|君|医師|院長|理事長)$/.test(n)?n:n+" 氏"; }
-function tidySummary(s){ s=String(s==null?"":s).replace(/\r/g,""); return s.replace(/\n{2,}/g,"\u0000").replace(/[ \t]*\n[ \t]*/g,"").replace(/\u0000/g,"\n\n"); }
+function tidySummary(s){
+  return String(s==null?"":s).replace(/\r/g,"")
+    .split(/\n{2,}/)
+    .map(function(p){ return p.split("\n").join(""); })
+    .filter(function(p){ return p.length>0; })
+    .join("\n\n");
+}
 
 function parseCSV(text){
   const rows=[]; let row=[], field="", q=false;
@@ -172,4 +179,4 @@ function initEvents(){
     }
   });
 }
-document.addEven
+document.addEventListener("DOMContentLoaded", initEvents);
