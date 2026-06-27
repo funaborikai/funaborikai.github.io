@@ -7,13 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
 <header class="site">
   <div class="wrap nav">
     <a class="logo" href="index.html"><img class="logo-mark" src="logo-mark.png" alt="船堀会ロゴ"><span class="logo-name">船堀会</span></a>
+    <input type="checkbox" id="navtoggle" class="nav-toggle" aria-hidden="true">
+    <label for="navtoggle" class="nav-burger" aria-label="メニュー"><span></span><span></span><span></span></label>
     <nav>
       <a href="index.html">ホーム</a>
       <a href="about.html">船堀会について</a>
@@ -37,83 +39,197 @@
     <h2 class="sec">活動アーカイブ</h2>
     <p class="sec-sub">過去の勉強会の記録です。開催が終わった回は、自動でこちらに新しい順で加わります。</p>
     <div id="archive-mount"></div>
-    <div class="arch-item"><span class="no">第124回</span><div class="main"><p class="date">2026年5月21日 ・ 船堀コミュニティ会館</p><h3>ご存じですか？『重度認知症ケア』 ～医師がおすすめできるもう一つの認知症治療～</h3><p class="who">医療法人社団城東桐和会 タムスさくら病院江戸川 重度認知症デイケア ／ 尾張 友美 氏</p></div></div>
-    <div class="arch-item"><span class="no">第123回</span><div class="main"><p class="date">2026年4月16日 ・ 船堀コミュニティ会館</p><h3>『こども食堂』は食事だけの場ではない。 ～体験格差とネグレクトを超え、誰も置き去りにしない地域包括ケアへ～</h3><p class="who">NPO法人らいおんはーと ／ 佐藤 すずみ 氏</p></div></div>
-    <div class="arch-item"><span class="no">第122回</span><div class="main"><p class="date">2026年3月19日 ・ コミュニティプラザ一之江</p><h3>令和6年能登半島地震とBCP</h3><p class="who">医療法人社団美加未会 ひかりホームクリニック ／ 森 智治 氏</p></div></div>
-    <div class="arch-item"><span class="no">第121回</span><div class="main"><p class="date">2026年2月19日 ・ 船堀コミュニティ会館</p><h3>高齢者のメンタルヘルスとコミュニケーション</h3><p class="who">医療法人すずらん会 たろうクリニック葛西 ／ 浦島 創 氏</p></div></div>
-    <div class="arch-item"><span class="no">第120回</span><div class="main"><p class="date">2026年1月22日 ・ 船堀コミュニティ会館</p><h3>介護保険制度の見直し（令和7年度補正予算・令和8年度／令和9年度 介護報酬改定について）</h3><p class="who">株式会社 マロー・サウンズ・カンパニー ／ 代表取締役 田中 紘太 氏</p></div></div>
-
-    <p class="sec-sub" style="margin:30px 0 14px">― 設立期（2015年〜）の記録も順次追加しています ―</p>
-
-    <div class="arch-item"><span class="no">第69回</span><div class="main"><p class="date">2021年5月 ・ ZOOM開催（オンライン）</p><h3>地域包括ケアにおけるAIとICTの活用〜地域資源の見える化とケアプラン作成支援AIの連携〜</h3><p class="who">株式会社ウエルモ</p></div></div>
-    <div class="arch-item"><span class="no">第68回</span><div class="main"><p class="date">2021年4月 ・ ZOOM開催（オンライン）</p><h3>アクティブシニアについて〜介護の仕事について語り合おう〜</h3><p class="who">グループ討議</p></div></div>
-    <div class="arch-item"><span class="no">第66回</span><div class="main"><p class="date">2021年2月18日 ・ ZOOM開催（WEB研修）</p><h3>令和3年度 介護報酬改定セミナー</h3><p class="who">※コロナのため約1年の中断を経てオンラインで再開</p></div></div>
-    <div class="arch-item"><span class="no">第65回</span><div class="main"><p class="date">2020年1月23日 ・ 船堀コミュニティ会館</p><h3>腰痛を無くそう！（腰痛のメカニズム・予防・ストレッチ）</h3><p class="who">芝本 幸俊 氏（スマイリー訪問看護ステーション 理学療法士）</p></div></div>
-    <div class="arch-item"><span class="no">第64回</span><div class="main"><p class="date">2019年12月19日 ・ キリンシティー船堀（タワーホール船堀1F）</p><h3>クリスマスパーティー</h3><p class="who">会員交流（プレゼント交換・3年ぶり復活）</p></div></div>
-    <div class="arch-item"><span class="no">第63回</span><div class="main"><p class="date">2019年11月21日 ・ 船堀コミュニティ会館</p><h3>言語聴覚士にできること</h3><p class="who">畦地 雄平 氏（株式会社アオアクア 訪問看護ステーションアオアクア）</p></div></div>
-    <div class="arch-item"><span class="no">第62回</span><div class="main"><p class="date">2019年10月17日 ・ 船堀コミュニティ会館</p><h3>精神障害のある方が長く働き続けるために知っておいてほしいこと</h3><p class="who">宮脇 康成 副所長（江戸川区障害者就労支援センター）</p></div></div>
-    <div class="arch-item"><span class="no">第61回</span><div class="main"><p class="date">2019年9月19日 ・ 特別養護老人ホーム 暖心苑</p><h3>高齢者の心不全とフレイルについて</h3><p class="who">赤塚 健彦 先生（森山記念病院 循環器内科）</p></div></div>
-    <div class="arch-item"><span class="no">第60回</span><div class="main"><p class="date">2019年8月22日 ・ 船堀コミュニティ会館</p><h3>これって虐待ですか？〜高齢者虐待について考えてみませんか？〜</h3><p class="who">グループ討論</p></div></div>
-    <div class="arch-item"><span class="no">第59回</span><div class="main"><p class="date">2019年7月25日 ・ 船堀コミュニティ会館</p><h3>テンプラで伝わる！伝え方講座</h3><p class="who">日比 孝祐 氏（Team Builders トップ経営コーチ）</p></div></div>
-    <div class="arch-item"><span class="no">第58回</span><div class="main"><p class="date">2019年6月18日 ・ 船堀コミュニティ会館</p><h3>紙オムツの正しい使い方と選び方</h3><p class="who">佐藤 正治 氏（株式会社 光洋-ディスパース）</p></div></div>
-    <div class="arch-item"><span class="no">第57回</span><div class="main"><p class="date">2019年5月16日 ・ 船堀コミュニティ会館</p><h3>熟年者の必要な栄養摂取について</h3><p class="who">宅配クック123 管理栄養士</p></div></div>
-    <div class="arch-item"><span class="no">第56回</span><div class="main"><p class="date">2019年4月18日 ・ 二之江コミュニティ会館</p><h3>訪問診療における超音波検査の有用性</h3><p class="who">佐賀 栄一 先生（げんきいろクリニック 院長）</p></div></div>
-    <div class="arch-item"><span class="no">第55回</span><div class="main"><p class="date">2019年3月20日 ・ 特別養護老人ホーム 清心苑</p><h3>船堀会 mini 福祉機器展</h3><p class="who">電動車椅子WHILL・自動寝返り支援ベッド等の体験会</p></div></div>
-    <div class="arch-item"><span class="no">第54回</span><div class="main"><p class="date">2019年2月21日 ・ 船堀コミュニティ会館</p><h3>不安を無くそう！呼吸器疾患の方に対する介護と運動</h3><p class="who">高橋 洋介 氏（訪問看護リハビリステーションここゆい 代表取締役／理学療法士）</p></div></div>
-    <div class="arch-item"><span class="no">第53回</span><div class="main"><p class="date">2019年1月17日 ・ 船堀コミュニティ会館</p><h3>新春座談会</h3><p class="who">賀詞交歓会・グループ座談会</p></div></div>
-    <div class="arch-item"><span class="no">第52回</span><div class="main"><p class="date">2018年12月20日 ・ 船堀コミュニティ会館</p><h3>医療介護の専門性からのファイナンシャルプランニングについて</h3><p class="who">木村 誠 先生（『注文を間違える料理店』スタッフ）／福田 啓子 先生</p></div></div>
-    <div class="arch-item"><span class="no">第51回</span><div class="main"><p class="date">2018年11月15日 ・ 暖心苑（社会福祉法人 東京清音会）</p><h3>認知症の対応方法について</h3><p class="who">波多野 良二 副院長（東京さくら病院・認知症疾患医療センター）</p></div></div>
-    <div class="arch-item"><span class="no">第50回</span><div class="main"><p class="date">2018年10月18日 ・ 船堀コミュニティ会館</p><h3>認知症サポーター ステップアップ講座</h3><p class="who">認知症サポーター養成講座 修了者向け</p></div></div>
-    <div class="arch-item"><span class="no">第49回</span><div class="main"><p class="date">2018年9月20日 ・ 葛西区民館</p><h3>いつまでも自分らしく生きるためのフレイル予防</h3><p class="who">飯塚 早苗 氏（清新町健康サポートセンター 理学療法士）</p></div></div>
-    <div class="arch-item"><span class="no">第48回</span><div class="main"><p class="date">2018年8月23日 ・ 特別養護老人ホーム 清心苑</p><h3>義肢装具について</h3><p class="who">五十嵐 隆 氏（川村義肢株式会社）</p></div></div>
-    <div class="arch-item"><span class="no">第46回</span><div class="main"><p class="date">2018年6月21日 ・ 船堀コミュニティ会館</p><h3>介護のしごとシリーズ 第4回「これからの訪問看護（訪問リハビリ）」</h3><p class="who">訪問看護事業所による座談会</p></div></div>
-    <div class="arch-item"><span class="no">第45回</span><div class="main"><p class="date">2018年5月17日 ・ 船堀コミュニティ会館</p><h3>介護のしごとシリーズ 第3回「これからのケアマネ」〜顔の見える多職種連携〜</h3><p class="who">進行：久家 定男 氏（清心苑）</p></div></div>
-    <div class="arch-item"><span class="no">第44回</span><div class="main"><p class="date">2018年4月19日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズⅡ「船堀橋クリニック 竹内院長先生を囲んで」</h3><p class="who">竹内 孝治 院長（船堀橋クリニック）</p></div></div>
-    <div class="arch-item"><span class="no">第43回</span><div class="main"><p class="date">2018年3月15日 ・ 清心苑</p><h3>介護のしごとシリーズ 第2回「これからの訪問介護」</h3><p class="who">訪問介護事業者による座談会</p></div></div>
-    <div class="arch-item"><span class="no">第42回</span><div class="main"><p class="date">2018年2月15日 ・ きらら一之江</p><h3>介護のしごとシリーズ 第1回「これからのデイサービス」</h3><p class="who">山内 氏（きらら一之江デイサービス 管理者）ほか公開座談会</p></div></div>
-    <div class="arch-item"><span class="no">第41回</span><div class="main"><p class="date">2018年1月18日 ・ はなの舞 一之江店</p><h3>新年会</h3><p class="who">賀詞交歓会・抽選会</p></div></div>
-    <div class="arch-item"><span class="no">第40回</span><div class="main"><p class="date">2017年12月21日 ・ 船堀コミュニティ会館</p><h3>平成30年度 介護保険制度改正の概要</h3><p class="who">田中 紘太 氏（株式会社マロー・サウンズ・カンパニー 代表取締役）</p></div></div>
-    <div class="arch-item"><span class="no">第39回</span><div class="main"><p class="date">2017年11月16日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズ 第3回「医療者の価値観を押しつけない在宅医療〜アフリカでの経験から〜」</h3><p class="who">山中 光茂 先生（げんきいろクリニック院長／元・松阪市長）</p></div></div>
-    <div class="arch-item"><span class="no">第38回</span><div class="main"><p class="date">2017年10月19日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズ 第2回「慢性腎臓病と病診連携について」</h3><p class="who">川田 有香 先生／住田 美穂 先生</p></div></div>
-    <div class="arch-item"><span class="no">第37回</span><div class="main"><p class="date">2017年9月21日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズ 第1回</h3><p class="who">竹内 孝治 院長（船堀橋クリニック）／新妻 晋一郎 院長（南行徳駅前クリニック）</p></div></div>
-    <div class="arch-item"><span class="no">第36回</span><div class="main"><p class="date">2017年8月24日 ・ 勤労福祉会館</p><h3>3周年記念「認知症ケア×演劇ワークショップ」</h3><p class="who">齋藤 恵草 氏（江戸川介護劇団たなごころ 座長）</p></div></div>
-    <div class="arch-item"><span class="no">第35回</span><div class="main"><p class="date">2017年7月20日 ・ 勤労福祉会館</p><h3>デス・カフェ</h3><p class="who">堀口 裕子 氏（シニアライフデザイン 代表）</p></div></div>
-    <div class="arch-item"><span class="no">第34回</span><div class="main"><p class="date">2017年6月19日 ・ 清心苑（特別養護老人ホーム）</p><h3>特発性正常圧水頭症を「知る」</h3><p class="who">厚地 正道 先生（厚地脳神経外科病院 理事長／東京慈恵会医科大学 葛飾医療センター 非常勤講師）</p></div></div>
-    <div class="arch-item"><span class="no">第33回</span><div class="main"><p class="date">2017年5月18日 ・ 勤労福祉会館</p><h3>訪問看護の現状について</h3><p class="who">杉浦 美代子 氏（江戸川区医師会訪問看護ステーション 所長）</p></div></div>
-    <div class="arch-item"><span class="no">第32回</span><div class="main"><p class="date">2017年4月20日 ・ 勤労福祉会館</p><h3>訪問マッサージにできること〜ふれあいから生まれる心の安定〜</h3><p class="who">只野 慎吾 氏（タダノ訪問リハビリマッサージ あん摩マッサージ指圧師）</p></div></div>
-    <div class="arch-item"><span class="no">第31回</span><div class="main"><p class="date">2017年3月16日 ・ 勤労福祉会館</p><h3>認知症サポーター養成講座</h3><p class="who">岡本 広司・馬上 英樹 氏（清心苑地域包括支援センター）／久家 定男・舘 明美 氏（暖心苑地域包括支援センター）</p></div></div>
-    <div class="arch-item"><span class="no">第30回</span><div class="main"><p class="date">2017年2月16日 ・ 勤労福祉会館</p><h3>私たちはどこに行こうとしているのか。</h3><p class="who">福田 英二 氏（一般社団法人 暮らしの保健室かなで 代表理事・室長）</p></div></div>
-    <div class="arch-item"><span class="no">第29回</span><div class="main"><p class="date">2017年1月19日 ・ 勤労福祉会館</p><h3>新春特別講演「認知症患者における便通コントロールについて」</h3><p class="who">松枝 啓 先生（さくらライフ錦糸クリニック院長）／茂呂 勝美 先生（さくらライフ江戸川クリニック院長）</p></div></div>
-    <div class="arch-item"><span class="no">第28回</span><div class="main"><p class="date">2016年12月15日 ・ キリンシティー船堀</p><h3>クリスマスパーティー</h3><p class="who">会員交流（プレゼント交換・歌・飲み放題）</p></div></div>
-    <div class="arch-item"><span class="no">第27回</span><div class="main"><p class="date">2016年11月17日 ・ グリーンパレス</p><h3>これだけは知っておきたい相続のあれこれ</h3><p class="who">大畠 太郎 氏（大畠司法書士事務所）</p></div></div>
-    <div class="arch-item"><span class="no">第26回</span><div class="main"><p class="date">2016年10月20日 ・ 勤労福祉会館</p><h3>薬剤師との連携について</h3><p class="who">槇原 昭典 氏（公益社団法人 江戸川区薬剤師会 会長）</p></div></div>
-    <div class="arch-item"><span class="no">第25回</span><div class="main"><p class="date">2016年9月23日 ・ 特別養護老人ホーム 清心苑</p><h3>最新の福祉用具を知ろう</h3><p class="who">水上 真二 氏（野口株式会社 介護事業部長）</p></div></div>
-    <div class="arch-item"><span class="no">第24回</span><div class="main"><p class="date">2016年8月18日 ・ 勤労福祉会館</p><h3>徘徊の早期発見…江戸川区モデルを検討する</h3><p class="who">梅澤 宗一郎 氏（株式会社ウメザワ）</p></div></div>
-    <div class="arch-item"><span class="no">第23回</span><div class="main"><p class="date">2016年7月21日 ・ 勤労福祉会館</p><h3>生活困窮者の方への自立支援</h3><p class="who">西川 晃将 氏（くらしごと相談室葛西 自立相談支援員）</p></div></div>
-    <div class="arch-item"><span class="no">第22回</span><div class="main"><p class="date">2016年6月16日 ・ 勤労福祉会館</p><h3>いつまでも健康な歯を維持するために</h3><p class="who">滝川 裕子 氏（医療法人社団恬生会 安寿歯科 院長）</p></div></div>
-    <div class="arch-item"><span class="no">第21回</span><div class="main"><p class="date">2016年5月24日 ・ 一之江コミュニティプラザ</p><h3>パーキンソン病を知ろう！運動と介助方法</h3><p class="who">高橋 洋介 氏（訪問看護ステーションつぐみ 理学療法士）</p></div></div>
-    <div class="arch-item"><span class="no">第20回</span><div class="main"><p class="date">2016年4月21日 ・ 勤労福祉会館</p><h3>葬儀を知る…エンディングとは</h3><p class="who">生江 洋史 氏（株式会社想和 代表取締役）</p></div></div>
-    <div class="arch-item"><span class="no">第19回</span><div class="main"><p class="date">2016年3月17日 ・ 勤労福祉会館</p><h3>認知症特集 第二弾「認知症の人を知ろう！」</h3><p class="who">小泉 由美子 氏（NPO法人 地域生活サポートセンター／認知症介護研究・研修東京センター 客員研究員）</p></div></div>
-    <div class="arch-item"><span class="no">第17回</span><div class="main"><p class="date">2016年1月21日 ・ 勤労福祉会館</p><h3>解かりやすいマイナンバー制度</h3><p class="who">寄村 進 氏（野村経営労務パートナーズ 代表）／水本 智 氏（たつみ社会保険労務士事務所）</p></div></div>
-    <div class="arch-item"><span class="no">第15回</span><div class="main"><p class="date">2015年11月19日 ・ 勤労福祉会館</p><h3>認知症特集 第1弾「みんなで認知症を語ろう！『バアちゃんの世界』から学ぶ事例研究」</h3><p class="who">岡本 久司 氏（地域包括支援センター 清心苑）</p></div></div>
-    <div class="arch-item"><span class="no">第14回</span><div class="main"><p class="date">2015年10月15日 ・ 勤労福祉会館</p><h3>詳しく解りやすい感染症のお話</h3><p class="who">松野 吉晃 氏（江戸川保健所 感染症対策第2課）</p></div></div>
-    <div class="arch-item"><span class="no">第13回</span><div class="main"><p class="date">2015年9月17日 ・ コミュニティプラザ一之江</p><h3>介護事業所における介護事故の判例</h3><p class="who">矢田 尚子 氏（日本大学法学部 准教授）／進行：小幡 覚 氏（縁綜合伝喜支援センター 代表理事）</p></div></div>
-    <div class="arch-item"><span class="no">第12回</span><div class="main"><p class="date">2015年8月20日 ・ 勤労福祉会館</p><h3>船堀会1周年記念講演「地域おこしを考える」</h3><p class="who">出口 治明 氏（ライフネット生命保険 代表取締役会長兼CEO）</p></div></div>
-    <div class="arch-item"><span class="no">第11回</span><div class="main"><p class="date">2015年7月16日 ・ 勤労福祉会館</p><h3>最近の感染症について「誰もが知っている？結核のお話」</h3><p class="who">大坪 くみ 氏（江戸川保健所 感染症第1課）</p></div></div>
-    <div class="arch-item"><span class="no">第10回</span><div class="main"><p class="date">2015年6月18日 ・ コミュニティプラザ一之江</p><h3>みんなで語ろう 介護の近況報告会</h3><p class="who">参加者全員による情報交換・PR</p></div></div>
-    <div class="arch-item"><span class="no">第9回</span><div class="main"><p class="date">2015年5月21日 ・ 勤労福祉会館</p><h3>NPO法人なぎさ虹の会の事業紹介と地域連携</h3><p class="who">池山 恭子 氏（なぎさ虹の会 会長）</p></div></div>
-    <div class="arch-item"><span class="no">第8回</span><div class="main"><p class="date">2015年4月16日 ・ コミュニティプラザ一之江</p><h3>訪問介護の役割について</h3><p class="who">古谷 則子 氏（さくらライフクリニック 訪問看護リーダー）</p></div></div>
-    <div class="arch-item"><span class="no">第7回</span><div class="main"><p class="date">2015年3月19日 ・ 勤労福祉会館</p><h3>地域密着型サービス〜認知症対応共同生活介護とは〜</h3><p class="who">秋山 純子 氏（ラックの花 課長）／総括：岡本 広司 氏（地域包括支援センター 清心苑）</p></div></div>
-    <div class="arch-item"><span class="no">第6回</span><div class="main"><p class="date">2015年2月26日 ・ 清心苑 本館1階ふれあいホール</p><h3>地域密着型サービス「定期巡回・随時対応型訪問介護看護」〜在宅介護の究極のサービス〜</h3><p class="who">下津佐 省一 氏・鈴木 雄樹 氏（ジャパンケア）／総括：久家 定男 氏（地域包括支援センター 暖心苑）</p></div></div>
-    <div class="arch-item"><span class="no">第5回</span><div class="main"><p class="date">2015年1月22日 ・ 勤労福祉会館</p><h3>小規模多機能型居宅介護事業所の現状と方向性</h3><p class="who">鷹觜 友 氏（あおぞら 施設長）／総括：岡本 広司 氏（地域包括支援センター 清心苑）</p></div></div>
-
-    <p class="sec-sub" style="margin:30px 0 14px">― 番外編（懇親・交流イベント）―</p>
-    <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2016年3月27日 ・ 葛西臨海公園 バーベキュー広場</p><h3>お花見BBQ</h3><p class="who">会員交流イベント</p></div></div>
-    <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2015年12月17日 ・ 船堀タワーホール（キリンシティー）</p><h3>クリスマスパーティー</h3><p class="who">忘年・会員交流（約35名参加）</p></div></div>
-    <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2015年8月23日 ・ 東京湾</p><h3>東京湾アジ釣り大会</h3><p class="who">会員交流イベント</p></div></div>
-    <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2015年8月22日 ・ 西伊豆</p><h3>介護研修の旅</h3><p class="who">会員交流イベント</p></div></div>
+    <details class="year-acc" open>
+      <summary>2026年 <span class="cnt">5回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第124回</span><div class="main"><p class="date">2026年5月21日 ・ 船堀コミュニティ会館</p><h3>ご存じですか？『重度認知症ケア』 ～医師がおすすめできるもう一つの認知症治療～</h3><p class="who">医療法人社団城東桐和会 タムスさくら病院江戸川 重度認知症デイケア ／ 尾張 友美 氏</p></div></div>
+        <div class="arch-item"><span class="no">第123回</span><div class="main"><p class="date">2026年4月16日 ・ 船堀コミュニティ会館</p><h3>『こども食堂』は食事だけの場ではない。 ～体験格差とネグレクトを超え、誰も置き去りにしない地域包括ケアへ～</h3><p class="who">NPO法人らいおんはーと ／ 佐藤 すずみ 氏</p></div></div>
+        <div class="arch-item"><span class="no">第122回</span><div class="main"><p class="date">2026年3月19日 ・ コミュニティプラザ一之江</p><h3>令和6年能登半島地震とBCP</h3><p class="who">医療法人社団美加未会 ひかりホームクリニック ／ 森 智治 氏</p></div></div>
+        <div class="arch-item"><span class="no">第121回</span><div class="main"><p class="date">2026年2月19日 ・ 船堀コミュニティ会館</p><h3>高齢者のメンタルヘルスとコミュニケーション</h3><p class="who">医療法人すずらん会 たろうクリニック葛西 ／ 浦島 創 氏</p></div></div>
+        <div class="arch-item"><span class="no">第120回</span><div class="main"><p class="date">2026年1月22日 ・ 船堀コミュニティ会館</p><h3>介護保険制度の見直し（令和7年度補正予算・令和8年度／令和9年度 介護報酬改定について）</h3><p class="who">株式会社 マロー・サウンズ・カンパニー ／ 代表取締役 田中 紘太 氏</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2025年 <span class="cnt">11回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第119回</span><div class="main"><p class="date">2025年11月20日 ・ 船堀コミュニティー会館 第4集会室</p><h3>要介護高齢者への口腔ケアと嚥下障害への対応 〜食べる喜びの支援〜</h3><p class="who">医療法人社団ハピネス すぎもと歯科・ファミリア歯科 ／ 訪問専門医 白井 朋代 先生</p></div></div>
+        <div class="arch-item"><span class="no">第118回</span><div class="main"><p class="date">2025年10月16日 ・ 船堀コミュニティー会館 第4集会室</p><h3>お一人様支援</h3><p class="who">一般社団法人愛の会 ／ 主任ソーシャルワーカー・社会福祉士 岡江 晃児 氏</p></div></div>
+        <div class="arch-item"><span class="no">第117回</span><div class="main"><p class="date">2025年9月25日</p><h3>最期の時を豊かに 〜在宅での看取りと高齢者の幸福感〜</h3><p class="who">ひまわりクリニック ／ 院長 山田 智子 先生</p></div></div>
+        <div class="arch-item"><span class="no">第116回</span><div class="main"><p class="date">2025年8月28日</p><h3>心療内科医が語る「家族で考える最期」〜家族療法の視点から学ぶACP〜</h3><p class="who">聖路加国際病院 心療内科 ／ 医長・高齢者ケアチームリーダー 山田 宇以 先生</p></div></div>
+        <div class="arch-item"><span class="no">第115回</span><div class="main"><p class="date">2025年7月17日</p><h3>フットケアの重要性</h3><p class="who">フットケア専門職</p></div></div>
+        <div class="arch-item"><span class="no">第114回</span><div class="main"><p class="date">2025年6月19日</p><h3>ユマニチュード 〜「見る・話す・触れる・立つ」で伝えるケア〜</h3><p class="who">医療現場での実践報告</p></div></div>
+        <div class="arch-item"><span class="no">第113回</span><div class="main"><p class="date">2025年5月15日</p><h3>老人ホームの探し方 〜高齢者施設の現状〜</h3><p class="who">ロイヤル介護 入居相談室</p></div></div>
+        <div class="arch-item"><span class="no">第112回</span><div class="main"><p class="date">2025年4月17日</p><h3>訪問診療の相談員との情報交換会</h3><p class="who">訪問診療相談員 4名</p></div></div>
+        <div class="arch-item"><span class="no">第111回</span><div class="main"><p class="date">2025年3月27日</p><h3>障がい者支援の現状と課題</h3><p class="who">江戸川区議会議員 神尾 てるあき 氏</p></div></div>
+        <div class="arch-item"><span class="no">第110回</span><div class="main"><p class="date">2025年2月20日</p><h3>ヤングケアラー</h3><p class="who">グループワーク</p></div></div>
+        <div class="arch-item"><span class="no">第109回</span><div class="main"><p class="date">2025年1月23日 ・ 船堀コミュニティー会館 集会室第4</p><h3>診ることを通して不確実性や曖昧さを許容する能力を育てましょう 〜答えのない時代に、答えを求めない思考を〜</h3><p class="who">たろうクリニック ／ 訪問医・写真家 鮫島 先生</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2024年 <span class="cnt">10回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第108回</span><div class="main"><p class="date">2024年11月21日</p><h3>管理栄養士の仕事について</h3><p class="who">管理栄養士</p></div></div>
+        <div class="arch-item"><span class="no">第107回</span><div class="main"><p class="date">2024年10月17日</p><h3>これからの摂食嚥下リハビリテーション</h3><p class="who">東京科学大学大学院 医歯学総合研究科 ／ 教授 戸原 玄 先生</p></div></div>
+        <div class="arch-item"><span class="no">第106回</span><div class="main"><p class="date">2024年9月19日</p><h3>認知症と診断されて…</h3><p class="who">認知症当事者 竹内 裕 氏（対談形式）</p></div></div>
+        <div class="arch-item"><span class="no">第105回</span><div class="main"><p class="date">2024年8月15日</p><h3>ACPの前に知っておきたい終末期医療の知識</h3><p class="who">終末期医療の専門職</p></div></div>
+        <div class="arch-item"><span class="no">第104回</span><div class="main"><p class="date">2024年7月18日</p><h3>フットケアの重要性</h3><p class="who">フットケア専門職（実演あり）</p></div></div>
+        <div class="arch-item"><span class="no">第103回</span><div class="main"><p class="date">2024年6月20日 ・ 船堀コミュニティー会館 第4集会室</p><h3>思いを伝える「もしもの時」その前に考えよう 〜大病からの生還と私たちのACP〜</h3><p class="who">体験を交えたACPのお話</p></div></div>
+        <div class="arch-item"><span class="no">第102回</span><div class="main"><p class="date">2024年5月16日 ・ 船堀コミュニティー会館 第4集会室</p><h3>共生社会を目指して 〜江戸川区の認知症施策と公式アプリ「eito」〜</h3><p class="who">江戸川区の認知症施策のご紹介</p></div></div>
+        <div class="arch-item"><span class="no">第101回</span><div class="main"><p class="date">2024年4月18日 ・ 船堀コミュニティ会館 集会室第4</p><h3>医療の視点と介護の視点 〜事例から学ぶグループワーク〜</h3><p class="who">ひまわりクリニック 山田 先生</p></div></div>
+        <div class="arch-item"><span class="no">第100回</span><div class="main"><p class="date">2024年2月15日</p><h3>第100回記念 〜これからの地域連携〜</h3><p class="who">江戸川区で地域連携にご尽力された方</p></div></div>
+        <div class="arch-item"><span class="no">第99回</span><div class="main"><p class="date">2024年1月18日</p><h3>令和6年度 介護保険制度改正・トリプル改定について</h3><p class="who">制度改定の解説</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2023年 <span class="cnt">10回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第97回</span><div class="main"><p class="date">2023年11月16日</p><h3>ICTを活用した多職種連携について</h3><p class="who">多職種連携の実践</p></div></div>
+        <div class="arch-item"><span class="no">第96回</span><div class="main"><p class="date">2023年10月19日 ・ 船堀コミュニティー会館 集会室第4</p><h3>福祉用具の体験勉強会 〜知って、体験して、万が一に備えよう〜</h3><p class="who">福祉用具の体験ワーク</p></div></div>
+        <div class="arch-item"><span class="no">第95回</span><div class="main"><p class="date">2023年9月21日 ・ コミュニティプラザ一之江 集会室第2</p><h3>最近の葬儀から考える終活</h3><p class="who">葬儀・終活のお話</p></div></div>
+        <div class="arch-item"><span class="no">第94回</span><div class="main"><p class="date">2023年8月17日</p><h3>江戸川区のゴミ屋敷問題を考える</h3><p class="who">地域課題のお話</p></div></div>
+        <div class="arch-item"><span class="no">第93回</span><div class="main"><p class="date">2023年7月20日 ・ コミュニティプラザ一之江 集会室第4</p><h3>定期巡回・随時対応型訪問介護看護「しろひげレンジャー24時」</h3><p class="who">定期巡回サービスの実際</p></div></div>
+        <div class="arch-item"><span class="no">第92回</span><div class="main"><p class="date">2023年6月22日 ・ コミュニティプラザ一之江 集会室第2</p><h3>パーキンソン病の介護について考えよう</h3><p class="who">パーキンソン病の介護</p></div></div>
+        <div class="arch-item"><span class="no">第91回</span><div class="main"><p class="date">2023年5月18日</p><h3>会場開催 再開記念トークセッション</h3><p class="who">医療法人社団ハピネス 杉本 先生 ／ kokoa訪問鍼灸マッサージ 市毛 先生</p></div></div>
+        <div class="arch-item"><span class="no">第90回</span><div class="main"><p class="date">2023年4月20日</p><h3>近況報告会（会食形式での交流会）</h3><p class="who">参加者交流</p></div></div>
+        <div class="arch-item"><span class="no">第89回</span><div class="main"><p class="date">2023年2月16日 ・ ZOOM開催（オンライン）</p><h3>これからの介護保険改定について 〜2024年トリプル改定に向けて〜</h3><p class="who">制度改定の解説</p></div></div>
+        <div class="arch-item"><span class="no">第88回</span><div class="main"><p class="date">2023年1月26日 ・ ZOOM開催（オンライン）</p><h3>わたしにできる地域連携って</h3><p class="who">地域連携のお話</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2022年 <span class="cnt">11回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第87回</span><div class="main"><p class="date">2022年11月17日 ・ ZOOM開催（オンライン）</p><h3>新型コロナウイルスクラスター発生！ 〜あなたの事業所はだいじょうぶ？〜</h3><p class="who">区内施設のクラスター事例とBCP</p></div></div>
+        <div class="arch-item"><span class="no">第86回</span><div class="main"><p class="date">2022年10月20日 ・ ZOOM開催（オンライン）</p><h3>ケアマネージャーに聞いてみよう</h3><p class="who">ケアマネージャー 3名（座談会）</p></div></div>
+        <div class="arch-item"><span class="no">第85回</span><div class="main"><p class="date">2022年9月15日 ・ ZOOM開催（オンライン）</p><h3>もしバナゲームしませんか 〜わたしにとって大切なもの〜</h3><p class="who">ゲーム形式のグループワーク</p></div></div>
+        <div class="arch-item"><span class="no">第84回</span><div class="main"><p class="date">2022年8月18日 ・ ZOOM＋会場（ハイブリッド）</p><h3>コロナ禍に癒しを 〜訪問鍼灸マッサージの現場から〜</h3><p class="who">からだ元気治療院</p></div></div>
+        <div class="arch-item"><span class="no">第83回</span><div class="main"><p class="date">2022年7月21日 ・ ZOOM開催（オンライン）</p><h3>介護事故と保険請求について</h3><p class="who">保険の専門家（事例を交えて）</p></div></div>
+        <div class="arch-item"><span class="no">第82回</span><div class="main"><p class="date">2022年6月16日 ・ ZOOM開催（オンライン）</p><h3>緩和ケア 〜病院と在宅の違い〜</h3><p class="who">緩和ケア認定看護師</p></div></div>
+        <div class="arch-item"><span class="no">第81回</span><div class="main"><p class="date">2022年5月26日 ・ ZOOM開催（オンライン）</p><h3>吉野家レトルトケア牛丼の提案 〜吉野家が考える嚥下食〜</h3><p class="who">株式会社吉野家</p></div></div>
+        <div class="arch-item"><span class="no">第80回</span><div class="main"><p class="date">2022年4月21日 ・ ZOOM開催（オンライン）</p><h3>働きやすい職場とは</h3><p class="who">座談会</p></div></div>
+        <div class="arch-item"><span class="no">第79回</span><div class="main"><p class="date">2022年3月17日 ・ ZOOM開催（オンライン）</p><h3>歩行・ウォーキングについて</h3><p class="who">勉強会・グループワーク</p></div></div>
+        <div class="arch-item"><span class="no">第78回</span><div class="main"><p class="date">2022年2月17日 ・ ZOOM開催（オンライン）</p><h3>認知症の対応について、お話しませんか？</h3><p class="who">「注文を間違える料理店」スタッフ 木村 誠 先生</p></div></div>
+        <div class="arch-item"><span class="no">第77回</span><div class="main"><p class="date">2022年1月20日 ・ ZOOM開催（オンライン）</p><h3>オンライン勉強会（グループワーク）</h3><p class="who">勉強会・グループワーク</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2021年 <span class="cnt">10回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第76回</span><div class="main"><p class="date">2021年12月16日 ・ ZOOM開催（オンライン）</p><h3>今年を振り返り、来年に向かっての抱負</h3><p class="who">参加者ディスカッション</p></div></div>
+        <div class="arch-item"><span class="no">第75回</span><div class="main"><p class="date">2021年11月18日 ・ ZOOM開催（オンライン）</p><h3>グループワーク</h3><p class="who">勉強会・グループワーク</p></div></div>
+        <div class="arch-item"><span class="no">第74回</span><div class="main"><p class="date">2021年10月21日 ・ ZOOM開催（オンライン）</p><h3>人と人との繋がりについて考えませんか（座談会）</h3><p class="who">勉強会・グループワーク</p></div></div>
+        <div class="arch-item"><span class="no">第73回</span><div class="main"><p class="date">2021年9月16日 ・ ZOOM開催（オンライン）</p><h3>江戸川区の水害と避難行動要支援者の対策について</h3><p class="who">江戸川区 危機管理部 防災危機管理課 計画係</p></div></div>
+        <div class="arch-item"><span class="no">第72回</span><div class="main"><p class="date">2021年8月19日 ・ ZOOM開催（オンライン）</p><h3>明日から使える摂食嚥下の基礎知識</h3><p class="who">医療法人社団ハピネス ／ 理事長 杉本 先生</p></div></div>
+        <div class="arch-item"><span class="no">第71回</span><div class="main"><p class="date">2021年7月15日 ・ ZOOM開催（オンライン）</p><h3>アドバンス・ケア・プランニング（人生会議）〜浦安の事例から〜</h3><p class="who">勉強会・グループワーク</p></div></div>
+        <div class="arch-item"><span class="no">第70回</span><div class="main"><p class="date">2021年6月17日 ・ ZOOM開催（オンライン）</p><h3>ACP（人生会議）〜在宅医療からの提案と緩和ケアの事例〜</h3><p class="who">あかり在宅クリニック 十九浦 先生 ／ 関口 看護師</p></div></div>
+        <div class="arch-item"><span class="no">第69回</span><div class="main"><p class="date">2021年5月 ・ ZOOM開催（オンライン）</p><h3>地域包括ケアにおけるAIとICTの活用〜地域資源の見える化とケアプラン作成支援AIの連携〜</h3><p class="who">株式会社ウエルモ</p></div></div>
+        <div class="arch-item"><span class="no">第68回</span><div class="main"><p class="date">2021年4月 ・ ZOOM開催（オンライン）</p><h3>アクティブシニアについて〜介護の仕事について語り合おう〜</h3><p class="who">グループ討議</p></div></div>
+        <div class="arch-item"><span class="no">第66回</span><div class="main"><p class="date">2021年2月18日 ・ ZOOM開催（オンライン）</p><h3>令和3年度 介護報酬改定セミナー</h3><p class="who">WEB研修</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2020年 <span class="cnt">1回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第65回</span><div class="main"><p class="date">2020年1月23日 ・ 船堀コミュニティ会館</p><h3>腰痛を無くそう！ 〜腰痛のメカニズム・予防・ストレッチ体操〜</h3><p class="who">スマイリー訪問看護ステーション ／ 理学療法士 芝本 幸俊 氏</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2019年 <span class="cnt">12回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第64回</span><div class="main"><p class="date">2019年12月19日 ・ キリンシティー船堀（タワーホール船堀1F）</p><h3>クリスマスパーティー（懇親会・プレゼント交換）</h3><p class="who">懇親イベント</p></div></div>
+        <div class="arch-item"><span class="no">第63回</span><div class="main"><p class="date">2019年11月21日 ・ 船堀コミュニティ会館</p><h3>言語聴覚士にできること</h3><p class="who">株式会社アオアクア 訪問看護ステーションアオアクア ／ 畦地 雄平 氏</p></div></div>
+        <div class="arch-item"><span class="no">第62回</span><div class="main"><p class="date">2019年10月17日 ・ 船堀コミュニティ会館</p><h3>精神障害のある方が長く働き続けるために知っておいてほしいこと</h3><p class="who">江戸川区障害者就労支援センター ／ 副所長 宮脇 康成 氏</p></div></div>
+        <div class="arch-item"><span class="no">第61回</span><div class="main"><p class="date">2019年9月19日 ・ 特別養護老人ホーム 暖心苑</p><h3>高齢者の心不全とフレイルについて 〜心不全パンデミックの到来！予防・治療しよう〜</h3><p class="who">社会医療法人社団 森山記念病院 循環器内科 ／ 赤塚 健彦 先生</p></div></div>
+        <div class="arch-item"><span class="no">第60回</span><div class="main"><p class="date">2019年8月22日 ・ 船堀コミュニティ会館</p><h3>これって虐待ですか？ 〜高齢者虐待について考えてみませんか？〜</h3><p class="who">グループ討論</p></div></div>
+        <div class="arch-item"><span class="no">第59回</span><div class="main"><p class="date">2019年7月25日 ・ 船堀コミュニティ会館</p><h3>テンプラで伝わる！伝え方講座 〜伝える力がなぜ必要か？〜</h3><p class="who">Team Builders ／ トップ経営コーチ 日比 孝祐 氏</p></div></div>
+        <div class="arch-item"><span class="no">第58回</span><div class="main"><p class="date">2019年6月18日 ・ 船堀コミュニティ会館</p><h3>紙オムツの正しい使い方と選び方</h3><p class="who">株式会社光洋-ディスパース 本社営業部 ／ 佐藤 正治 氏</p></div></div>
+        <div class="arch-item"><span class="no">第57回</span><div class="main"><p class="date">2019年5月16日 ・ 船堀コミュニティ会館</p><h3>熟年者の必要な栄養摂取について</h3><p class="who">宅配クック123 ／ 管理栄養士（試食会あり）</p></div></div>
+        <div class="arch-item"><span class="no">第56回</span><div class="main"><p class="date">2019年4月18日 ・ 二之江コミュニティ会館</p><h3>訪問診療における超音波検査の有用性</h3><p class="who">医療法人社団げんき会 げんきいろクリニック ／ 院長 佐賀 栄一 先生</p></div></div>
+        <div class="arch-item"><span class="no">第55回</span><div class="main"><p class="date">2019年3月20日 ・ 特別養護老人ホーム 清心苑</p><h3>船堀会 mini 福祉機器展（電動車椅子・自動寝返り支援ベッド等の体験会）</h3><p class="who">機器体験会</p></div></div>
+        <div class="arch-item"><span class="no">第54回</span><div class="main"><p class="date">2019年2月21日 ・ 船堀コミュニティ会館</p><h3>不安を無くそう！呼吸器疾患の方に対する介護と運動</h3><p class="who">株式会社COCOYUI 訪問看護リハビリステーションここゆい ／ 代表取締役・理学療法士 高橋 洋介 氏</p></div></div>
+        <div class="arch-item"><span class="no">第53回</span><div class="main"><p class="date">2019年1月17日 ・ 船堀コミュニティ会館</p><h3>新春座談会（賀詞交歓会・グループ座談会）</h3><p class="who">参加者座談会</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2018年 <span class="cnt">11回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第52回</span><div class="main"><p class="date">2018年12月20日 ・ 船堀コミュニティ会館</p><h3>医療介護の専門性からのファイナンシャルプランニングについて</h3><p class="who">木村 誠 先生（『注文を間違える料理店』スタッフ）／ 福田 啓子 先生</p></div></div>
+        <div class="arch-item"><span class="no">第51回</span><div class="main"><p class="date">2018年11月15日 ・ 暖心苑（社会福祉法人 東京清音会）</p><h3>認知症の対応方法について</h3><p class="who">東京さくら病院・認知症疾患医療センター ／ 副院長 波多野 良二 先生</p></div></div>
+        <div class="arch-item"><span class="no">第50回</span><div class="main"><p class="date">2018年10月18日 ・ 船堀コミュニティ会館</p><h3>認知症サポーター ステップアップ講座</h3><p class="who">認知症サポーター養成</p></div></div>
+        <div class="arch-item"><span class="no">第49回</span><div class="main"><p class="date">2018年9月20日 ・ 葛西区民館</p><h3>いつまでも自分らしく生きるためのフレイル予防</h3><p class="who">清新町健康サポートセンター ／ 理学療法士 飯塚 早苗 氏</p></div></div>
+        <div class="arch-item"><span class="no">第48回</span><div class="main"><p class="date">2018年8月23日 ・ 特別養護老人ホーム 清心苑</p><h3>義肢装具について</h3><p class="who">川村義肢株式会社 ／ 五十嵐 隆 氏</p></div></div>
+        <div class="arch-item"><span class="no">第46回</span><div class="main"><p class="date">2018年6月21日 ・ 船堀コミュニティ会館</p><h3>介護のしごとシリーズ 第4回「これからの訪問看護（訪問リハビリ）」</h3><p class="who">訪問看護事業所による座談会</p></div></div>
+        <div class="arch-item"><span class="no">第45回</span><div class="main"><p class="date">2018年5月17日 ・ 船堀コミュニティ会館</p><h3>介護のしごとシリーズ 第3回「これからのケアマネ」〜顔の見える多職種連携〜</h3><p class="who">進行：久家 定男 氏（清心苑）</p></div></div>
+        <div class="arch-item"><span class="no">第44回</span><div class="main"><p class="date">2018年4月19日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズⅡ「船堀橋クリニック 竹内院長先生を囲んで」</h3><p class="who">船堀橋クリニック ／ 院長 竹内 孝治 先生</p></div></div>
+        <div class="arch-item"><span class="no">第43回</span><div class="main"><p class="date">2018年3月15日 ・ 特別養護老人ホーム 清心苑</p><h3>介護のしごとシリーズ 第2回「これからの訪問介護」</h3><p class="who">訪問介護事業者による座談会</p></div></div>
+        <div class="arch-item"><span class="no">第42回</span><div class="main"><p class="date">2018年2月15日 ・ きらら一之江</p><h3>介護のしごとシリーズ 第1回「これからのデイサービス」</h3><p class="who">きらら一之江デイサービス ／ 管理者 山内 氏 ほか公開座談会</p></div></div>
+        <div class="arch-item"><span class="no">第41回</span><div class="main"><p class="date">2018年1月18日 ・ はなの舞 一之江店</p><h3>新年会（賀詞交歓会・抽選会）</h3><p class="who">懇親イベント</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2017年 <span class="cnt">12回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第40回</span><div class="main"><p class="date">2017年12月21日 ・ 船堀コミュニティ会館</p><h3>平成30年度 介護保険制度改正の概要</h3><p class="who">株式会社マロー・サウンズ・カンパニー ／ 代表取締役 田中 紘太 氏</p></div></div>
+        <div class="arch-item"><span class="no">第39回</span><div class="main"><p class="date">2017年11月16日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズ 第3回「医療者の価値観を押しつけない在宅医療 〜アフリカでの経験から〜」</h3><p class="who">医療法人社団げんき会 げんきいろクリニック ／ 院長 山中 光茂 先生（元・松阪市長）</p></div></div>
+        <div class="arch-item"><span class="no">第38回</span><div class="main"><p class="date">2017年10月19日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズ 第2回「慢性腎臓病と病診連携について」</h3><p class="who">川田 有香 先生 ／ 住田 美穂 先生</p></div></div>
+        <div class="arch-item"><span class="no">第37回</span><div class="main"><p class="date">2017年9月21日 ・ 船堀コミュニティ会館</p><h3>地域医療から学ぶシリーズ 第1回</h3><p class="who">船堀橋クリニック 竹内 孝治 院長 ／ 南行徳駅前クリニック 新妻 晋一郎 院長</p></div></div>
+        <div class="arch-item"><span class="no">第36回</span><div class="main"><p class="date">2017年8月24日 ・ 勤労福祉会館</p><h3>3周年記念「認知症ケア×演劇ワークショップ」</h3><p class="who">江戸川介護劇団たなごころ ／ 座長 齋藤 恵草 氏</p></div></div>
+        <div class="arch-item"><span class="no">第35回</span><div class="main"><p class="date">2017年7月20日 ・ 勤労福祉会館</p><h3>デス・カフェ</h3><p class="who">シニアライフデザイン ／ 代表 堀口 裕子 氏</p></div></div>
+        <div class="arch-item"><span class="no">第34回</span><div class="main"><p class="date">2017年6月19日 ・ 特別養護老人ホーム 清心苑</p><h3>特発性正常圧水頭症を「知る」</h3><p class="who">厚地脳神経外科病院 ／ 理事長 厚地 正道 先生</p></div></div>
+        <div class="arch-item"><span class="no">第33回</span><div class="main"><p class="date">2017年5月18日 ・ 勤労福祉会館</p><h3>訪問看護の現状について</h3><p class="who">江戸川区医師会訪問看護ステーション ／ 所長 杉浦 美代子 氏</p></div></div>
+        <div class="arch-item"><span class="no">第32回</span><div class="main"><p class="date">2017年4月20日 ・ 勤労福祉会館</p><h3>訪問マッサージにできること 〜ふれあいから生まれる心の安定〜</h3><p class="who">タダノ訪問リハビリマッサージ ／ あん摩マッサージ指圧師 只野 慎吾 氏</p></div></div>
+        <div class="arch-item"><span class="no">第31回</span><div class="main"><p class="date">2017年3月16日 ・ 勤労福祉会館</p><h3>認知症サポーター養成講座</h3><p class="who">清心苑・暖心苑 地域包括支援センター（岡本 広司／馬上 英樹／久家 定男／舘 明美 氏）</p></div></div>
+        <div class="arch-item"><span class="no">第30回</span><div class="main"><p class="date">2017年2月16日 ・ 勤労福祉会館</p><h3>私たちはどこに行こうとしているのか。</h3><p class="who">一般社団法人 暮らしの保健室かなで ／ 代表理事・室長 福田 英二 氏</p></div></div>
+        <div class="arch-item"><span class="no">第29回</span><div class="main"><p class="date">2017年1月19日 ・ 勤労福祉会館</p><h3>新春特別講演「認知症患者における便通コントロールについて」</h3><p class="who">さくらライフ錦糸クリニック 松枝 啓 院長 ／ さくらライフ江戸川クリニック 茂呂 勝美 院長</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2016年 <span class="cnt">11回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第28回</span><div class="main"><p class="date">2016年12月15日 ・ キリンシティー船堀</p><h3>クリスマスパーティー（懇親会・プレゼント交換）</h3><p class="who">懇親イベント</p></div></div>
+        <div class="arch-item"><span class="no">第27回</span><div class="main"><p class="date">2016年11月17日 ・ グリーンパレス</p><h3>これだけは知っておきたい相続のあれこれ</h3><p class="who">大畠司法書士事務所 ／ 大畠 太郎 氏</p></div></div>
+        <div class="arch-item"><span class="no">第26回</span><div class="main"><p class="date">2016年10月20日 ・ 勤労福祉会館</p><h3>薬剤師との連携について</h3><p class="who">公益社団法人 江戸川区薬剤師会 ／ 会長 槇原 昭典 氏</p></div></div>
+        <div class="arch-item"><span class="no">第25回</span><div class="main"><p class="date">2016年9月23日 ・ 特別養護老人ホーム 清心苑</p><h3>最新の福祉用具を知ろう</h3><p class="who">野口株式会社 ／ 介護事業部長 水上 真二 氏</p></div></div>
+        <div class="arch-item"><span class="no">第24回</span><div class="main"><p class="date">2016年8月18日 ・ 勤労福祉会館</p><h3>徘徊の早期発見…江戸川区モデルを検討する</h3><p class="who">株式会社ウメザワ ／ 梅澤 宗一郎 氏</p></div></div>
+        <div class="arch-item"><span class="no">第23回</span><div class="main"><p class="date">2016年7月21日 ・ 勤労福祉会館</p><h3>生活困窮者の方への自立支援</h3><p class="who">くらしごと相談室葛西 ／ 自立相談支援員 西川 晃将 氏</p></div></div>
+        <div class="arch-item"><span class="no">第22回</span><div class="main"><p class="date">2016年6月16日 ・ 勤労福祉会館</p><h3>いつまでも健康な歯を維持するために</h3><p class="who">医療法人社団恬生会 安寿歯科 ／ 院長 滝川 裕子 氏</p></div></div>
+        <div class="arch-item"><span class="no">第21回</span><div class="main"><p class="date">2016年5月24日 ・ 一之江コミュニティプラザ</p><h3>パーキンソン病を知ろう！運動と介助方法</h3><p class="who">訪問看護ステーションつぐみ ／ 理学療法士 高橋 洋介 氏</p></div></div>
+        <div class="arch-item"><span class="no">第20回</span><div class="main"><p class="date">2016年4月21日 ・ 勤労福祉会館</p><h3>葬儀を知る…エンディングとは</h3><p class="who">株式会社想和 ／ 代表取締役 生江 洋史 氏</p></div></div>
+        <div class="arch-item"><span class="no">第19回</span><div class="main"><p class="date">2016年3月17日 ・ 勤労福祉会館</p><h3>認知症特集 第二弾「認知症の人を知ろう！」</h3><p class="who">NPO法人 地域生活サポートセンター ／ 小泉 由美子 氏</p></div></div>
+        <div class="arch-item"><span class="no">第17回</span><div class="main"><p class="date">2016年1月21日 ・ 勤労福祉会館</p><h3>解かりやすいマイナンバー制度</h3><p class="who">野村経営労務パートナーズ 寄村 進 氏 ／ たつみ社会保険労務士事務所 水本 智 氏</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>2015年 <span class="cnt">11回</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">第15回</span><div class="main"><p class="date">2015年11月19日 ・ 勤労福祉会館</p><h3>認知症特集 第1弾「みんなで認知症を語ろう！『バアちゃんの世界』から学ぶ事例研究」</h3><p class="who">地域包括支援センター 清心苑 ／ 岡本 久司 氏</p></div></div>
+        <div class="arch-item"><span class="no">第14回</span><div class="main"><p class="date">2015年10月15日 ・ 勤労福祉会館</p><h3>詳しく解りやすい感染症のお話（インフルエンザ・ノロウイルス対策）</h3><p class="who">江戸川保健所 感染症対策第2課 ／ 松野 吉晃 氏</p></div></div>
+        <div class="arch-item"><span class="no">第13回</span><div class="main"><p class="date">2015年9月17日 ・ コミュニティプラザ一之江</p><h3>介護事業所における介護事故の判例</h3><p class="who">日本大学法学部 ／ 准教授 矢田 尚子 氏（進行：縁綜合伝喜支援センター 小幡 覚 氏）</p></div></div>
+        <div class="arch-item"><span class="no">第12回</span><div class="main"><p class="date">2015年8月20日 ・ 勤労福祉会館</p><h3>1周年記念講演「地域おこしを考える」</h3><p class="who">ライフネット生命保険 ／ 代表取締役会長兼CEO 出口 治明 氏</p></div></div>
+        <div class="arch-item"><span class="no">第11回</span><div class="main"><p class="date">2015年7月16日 ・ 勤労福祉会館</p><h3>最近の感染症について「誰もが知っている？結核のお話」</h3><p class="who">江戸川保健所 感染症第1課 ／ 大坪 くみ 氏</p></div></div>
+        <div class="arch-item"><span class="no">第10回</span><div class="main"><p class="date">2015年6月18日 ・ コミュニティプラザ一之江</p><h3>みんなで語ろう 介護の近況報告会</h3><p class="who">参加者全員による情報交換</p></div></div>
+        <div class="arch-item"><span class="no">第9回</span><div class="main"><p class="date">2015年5月21日 ・ 勤労福祉会館</p><h3>NPO法人なぎさ虹の会の事業紹介</h3><p class="who">なぎさ虹の会 ／ 会長 池山 恭子 氏</p></div></div>
+        <div class="arch-item"><span class="no">第8回</span><div class="main"><p class="date">2015年4月16日 ・ コミュニティプラザ一之江</p><h3>訪問介護の役割について</h3><p class="who">さくらライフクリニック ／ 訪問看護リーダー 古谷 則子 氏</p></div></div>
+        <div class="arch-item"><span class="no">第7回</span><div class="main"><p class="date">2015年3月19日 ・ 勤労福祉会館</p><h3>地域密着型サービス 〜認知症対応型共同生活介護とは〜</h3><p class="who">ラックの花 ／ 課長 秋山 純子 氏（総括：地域包括支援センター清心苑 岡本 広司 氏）</p></div></div>
+        <div class="arch-item"><span class="no">第6回</span><div class="main"><p class="date">2015年2月26日 ・ 清心苑 本館1階ふれあいホール</p><h3>地域密着型サービス「定期巡回・随時対応型訪問介護看護」〜在宅介護の究極のサービス〜</h3><p class="who">ジャパンケア 下津佐 省一 氏・鈴木 雄樹 氏（総括：地域包括支援センター暖心苑 久家 定男 氏）</p></div></div>
+        <div class="arch-item"><span class="no">第5回</span><div class="main"><p class="date">2015年1月22日 ・ 勤労福祉会館 3階集会室</p><h3>小規模多機能型居宅介護事業所の現状と方向性</h3><p class="who">あおぞら ／ 施設長 鷹觜 友 氏（総括：地域包括支援センター清心苑 岡本 広司 氏）</p></div></div>
+      </div>
+    </details>
+    <details class="year-acc">
+      <summary>番外編 <span class="cnt">交流・懇親</span></summary>
+      <div class="year-body">
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2026年5月17日 ・ THE RIVERSIDE BBQ NISHIKASAI（新左近川バーベキュー場）</p><h3>船堀会BBQ</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2025年5月11日（日）・ THE RIVERSIDE BBQ NISHIKASAI（新左近川バーベキュー場）</p><h3>船堀会BBQ</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2024年5月19日（日）・ 葛西臨海公園バーベキュー広場</p><h3>船堀会BBQ</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2023年5月28日（日）</p><h3>船堀会BBQ</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2019年4月ごろ ・ 親睦バーベキュー</p><h3>親睦バーベキュー</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2016年3月27日 ・ 葛西臨海公園バーベキュー広場</p><h3>お花見BBQ（第19回 船堀会と併催）</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2015年12月17日 ・ 船堀タワーホール1F キリンシティー</p><h3>クリスマスパーティー（約35名参加）</h3><p class="who">懇親イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2015年8月23日 ・ 東京湾</p><h3>東京湾アジ釣り大会</h3><p class="who">交流イベント</p></div></div>
+        <div class="arch-item"><span class="no">番外編</span><div class="main"><p class="date">2015年8月22日 ・ 西伊豆</p><h3>介護研修の旅（西伊豆）</h3><p class="who">研修旅行</p></div></div>
+      </div>
+    </details>
   </section>
-  <div class="deco-br"><img src="images/deco/d14.png" alt=""></div>
+  <div class="deco-br"><img src="images/deco/d08.png" alt=""></div>
 </main>
 
 <footer>
@@ -131,7 +247,6 @@
     </div>
   </div>
 </footer>
-
 <script src="app.js?v=3"></script>
 </body>
 </html>

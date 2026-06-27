@@ -241,47 +241,26 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 @keyframes joinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
 /* ② タワーホールの絵を左右の余白に（広い画面のみ・2枚だけ） */
-.tower-deco{display:none}
-@media(min-width:1280px){
-  .tower-deco{display:block}
-  .tower-deco .tw{position:fixed;z-index:0;pointer-events:none;opacity:.9;filter:drop-shadow(0 6px 11px rgba(190,140,110,.18))}
-  .tower-deco .tw-l{left:18px;top:210px;width:118px}
-  .tower-deco .tw-r{right:22px;bottom:96px;width:150px}
-}
+.to
+/* === 活動アーカイブ：年ごとの折りたたみ === */
+.year-acc{border:1px solid #efe2d3;border-radius:16px;margin:14px 0;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(120,80,40,.05)}
+.year-acc>summary{list-style:none;cursor:pointer;padding:15px 20px;font-weight:700;font-size:1.1rem;color:#5b4630;background:#fbf1e6;display:flex;align-items:center;gap:12px;user-select:none}
+.year-acc>summary::-webkit-details-marker{display:none}
+.year-acc>summary::before{content:"\25B8";color:#e09a5a;font-size:.95em;transition:transform .2s}
+.year-acc[open]>summary::before{transform:rotate(90deg)}
+.year-acc>summary:hover{background:#f7e8d6}
+.year-acc>summary .cnt{margin-left:auto;font-weight:500;font-size:.82rem;color:#a8917a;background:#fff;border:1px solid #efe2d3;border-radius:999px;padding:2px 12px}
+.year-acc .year-body{padding:8px 16px 16px}
 
-/* 「船堀会」の文字を、丸くてかわいい書体に */
-.logo .logo-name, .hero .hero-brand{font-family:"Zen Maru Gothic",sans-serif;font-weight:900}
-.logo .logo-name{line-height:1.28;padding-bottom:2px}
-.hero .hero-brand{font-size:60px;line-height:1.26;padding:4px 0}
-@media(max-width:560px){ .hero .hero-brand{font-size:44px} .logo .logo-name{font-size:26px} }
-
-/* 中央寄せの横長バナー挿絵（タワー等） */
-.deco-banner{display:block;margin:20px auto 6px;max-width:520px;width:100%;filter:drop-shadow(0 8px 14px rgba(190,140,110,.14))}
-
-/* 注意事項は2列ぶち抜きで表示 */
-.meta.meta-wide{grid-column:1 / -1}
-
-/* 懇親会セクション */
-.social{margin-top:24px;padding:20px 22px;background:#fff6ee;border:2px dotted var(--peach);border-radius:16px}
-.social h4{margin:0 0 14px;color:var(--coral-d);font-size:17px;display:flex;align-items:center;gap:8px}
-.social h4::before{content:"🍵"}
-.social .grid{margin:0}
-.social .meta{background:#fff}
-.social .meta .v a{color:var(--coral-d)}
-
-/* 上部の参加申込ボタン（区切り線なし・コンパクト） */
-.cta.cta-top{border-top:none;padding-top:0;margin:8px 0 4px}
-
-/* スマホ：トップは「写真を上・文章を下」に */
-@media(max-width:760px){
-  .hero .hero-inner{flex-direction:column; gap:26px}
-  .hero .hero-art{order:-1; flex:none; width:100%; max-width:100%}
-  .hero .hero-text{flex:none; width:100%}
-}
-
-/* トップ：サイト名「船堀会」を最上部に */
-.hero .hero-head{padding-top:46px;margin-bottom:12px}
-.hero .hero-inner{padding-top:16px}
-@media(max-width:760px){
-  .hero .hero-head{padding-top:30px;margin-bottom:6px}
+/* === スマホ用ハンバーガーメニュー === */
+.nav-toggle,.nav-burger{display:none}
+@media(max-width:640px){
+  .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:6px;width:46px;height:42px;padding:8px;margin-left:auto;cursor:pointer;border-radius:12px;-webkit-tap-highlight-color:transparent}
+  .nav-burger span{display:block;height:3px;width:28px;background:var(--coral-d);border-radius:3px;transition:transform .25s ease,opacity .2s ease}
+  .nav nav{display:none;flex-direction:column;width:100%;flex-basis:100%;order:3;gap:5px;padding:8px 0 12px}
+  .nav nav a{margin:0 !important;width:100%;text-align:center;padding:13px;font-size:16px}
+  .nav-toggle:checked ~ nav{display:flex}
+  .nav-toggle:checked + .nav-burger span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+  .nav-toggle:checked + .nav-burger span:nth-child(2){opacity:0}
+  .nav-toggle:checked + .nav-burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
 }
