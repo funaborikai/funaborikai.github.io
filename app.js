@@ -29,7 +29,7 @@ const SAMPLE_EVENTS = [
     party:"",
     notes:"※こちらは表示見本（サンプル）です。登場する人物・団体はすべて架空です。実際の勉強会データを入力すると自動で差し替わります。",
     social:{ place:"居酒屋 さんぽ道 船堀店（サンプル）", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、開催の2日前18時までに船堀会の下記メールアドレスまでご連絡をお願いいたします。", email:"funaborikai@gmail.com" },
-    formUrl:""
+    formUrl:"https://docs.google.com/forms/d/e/1FAIpQLSe-upse0rPJLEx2xo_NvYNhK3_PYIuaF1aK6EU4nb576aTIoQ/viewform"
   }
 ];
 
