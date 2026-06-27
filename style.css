@@ -1,0 +1,262 @@
+/* ============================================================
+   船堀会サイト 共通スタイル （やわらか × ロゴ色パステル・かわいい）
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap');
+
+:root{
+  --bg:#fff7ef;
+  --card:#ffffff;
+  --ink:#6b574c;
+  --muted:#a78f81;
+  --line:#f3e6d8;
+  --coral:#f3996e;
+  --coral-d:#e87f51;
+  --peach:#fbd2b3;
+  --pink:#f5aabb;
+  --pink-d:#ec88a1;
+  --yellow:#f8cf73;
+  --mint:#a3d8a6;
+  --mint-d:#7ec487;
+  --sky:#a9d8e8;
+  --sky-d:#7cc0d6;
+  --shadow:0 10px 26px rgba(190,140,110,.16);
+  --shadow-sm:0 4px 14px rgba(190,140,110,.13);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:"M PLUS Rounded 1c",system-ui,"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.9;
+}
+h1,h2,h3,.logo,.badge,.btn{font-family:"Zen Maru Gothic","M PLUS Rounded 1c",sans-serif;font-weight:700;letter-spacing:.01em}
+a{color:var(--coral-d)}
+img{max-width:100%}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+
+/* ---- ヘッダー / ナビ ---- */
+header.site{position:sticky;top:0;z-index:50;background:rgba(255,250,244,.92);backdrop-filter:blur(10px);border-bottom:2px dotted var(--peach)}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:70px;flex-wrap:wrap;gap:6px}
+.logo{display:flex;align-items:center;gap:12px;font-size:21px;color:var(--ink);text-decoration:none}
+.logo .logo-mark{height:52px;width:auto;display:block;filter:drop-shadow(0 3px 5px rgba(190,140,110,.18))}
+.logo small{display:block;font-size:11px;color:var(--muted);font-family:"M PLUS Rounded 1c",sans-serif;letter-spacing:.02em}
+.nav nav{display:flex;flex-wrap:wrap}
+.nav nav a{margin-left:6px;padding:9px 17px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:700;font-size:14.5px;transition:.16s;font-family:"M PLUS Rounded 1c",sans-serif}
+.nav nav a:hover{color:var(--coral-d);background:#fde9dc}
+.nav nav a.active{color:#fff;background:linear-gradient(135deg,var(--coral),var(--pink-d));box-shadow:var(--shadow-sm)}
+@media(max-width:560px){ .nav nav a{margin-left:2px;padding:7px 12px;font-size:13.5px} .logo{font-size:18px} .logo .logo-mark{height:44px} }
+
+/* ---- ヒーロー（2カラム：テキスト＋写真スライド） ---- */
+.hero{position:relative;background:
+   radial-gradient(circle at 15% 30%, #ffe0c9 0 13px, transparent 14px),
+   radial-gradient(circle at 80% 22%, #cfe7f5 0 10px, transparent 11px),
+   radial-gradient(circle at 38% 72%, #ffd4df 0 12px, transparent 13px),
+   radial-gradient(circle at 88% 80%, #fbe6a8 0 15px, transparent 16px),
+   linear-gradient(160deg,#eaf6fb 0%,#fff7ef 55%,#ffeede 100%)}
+.hero .hero-inner{display:flex;gap:36px;align-items:center;padding:50px 0 58px;flex-wrap:wrap}
+.hero-text{flex:1 1 320px}
+.hero .eyebrow{display:inline-block;background:#fff;color:var(--coral-d);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;box-shadow:var(--shadow-sm);margin:0 0 16px;font-family:"M PLUS Rounded 1c",sans-serif}
+.hero h1{font-size:34px;line-height:1.45;margin:0 0 16px;color:var(--ink)}
+.hero .lead{color:#7a675b;font-size:16px;margin:0;max-width:560px}
+.hero .quick{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero-art{flex:1 1 360px;max-width:460px}
+
+/* 写真スライド（クロスフェード）— 丸い枠でかわいく */
+.slider{position:relative;width:100%;aspect-ratio:4/3;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);border:6px solid #fff;background:#fff}
+.slider .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;animation:heroFade 24s infinite}
+.slider .slide:nth-child(1){animation-delay:0s}
+.slider .slide:nth-child(2){animation-delay:6s}
+.slider .slide:nth-child(3){animation-delay:12s}
+.slider .slide:nth-child(4){animation-delay:18s}
+.slide.ph1{background-image:linear-gradient(135deg,#ffe0c9,#f7b58c)}
+.slide.ph2{background-image:linear-gradient(135deg,#ffd4df,#f3a9c0)}
+.slide.ph3{background-image:linear-gradient(135deg,#d8f0d4,#a6d6a6)}
+.slide.ph4{background-image:linear-gradient(135deg,#d6eef8,#a9d8e8)}
+@keyframes heroFade{0%{opacity:0}3%{opacity:1}22%{opacity:1}25%{opacity:0}100%{opacity:0}}
+.slide-label{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:14px 16px;color:#fff;font-size:13px;background:linear-gradient(transparent,rgba(120,80,55,.45));text-shadow:0 1px 4px rgba(0,0,0,.2)}
+@media(max-width:560px){ .hero h1{font-size:27px} }
+
+/* やさしい波の区切り */
+.wave{display:block;width:100%;height:46px;margin-top:-1px}
+
+/* ---- ページ見出し（下層ページ） ---- */
+.page-head{background:linear-gradient(135deg,var(--coral),var(--pink-d));color:#fff;padding:44px 0 40px;position:relative}
+.page-head .eyebrow{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;color:#fff3ec;font-family:"M PLUS Rounded 1c",sans-serif}
+.page-head h1{margin:0;font-size:28px}
+.crumbs{font-size:13px;color:var(--muted);margin:18px 0 0}
+.crumbs a{color:var(--coral-d);text-decoration:none}
+
+/* ---- 汎用セクション ---- */
+section.block{padding:46px 0}
+section.block h2.sec{font-size:25px;margin:0 0 6px;color:var(--ink);display:flex;align-items:center;gap:11px}
+section.block h2.sec::before{content:"";width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--yellow), var(--coral));display:inline-block;box-shadow:0 2px 6px rgba(243,153,110,.4)}
+section.block p.sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 24px}
+
+/* ---- ボタン ---- */
+.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#f8b07f,var(--coral));color:#fff;text-decoration:none;font-size:16px;padding:14px 30px;border-radius:999px;transition:.18s;border:none;cursor:pointer;box-shadow:0 6px 14px rgba(243,153,110,.34)}
+.btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 20px rgba(243,153,110,.4)}
+.btn.secondary{background:#fff;color:var(--coral-d);border:2px solid var(--peach);box-shadow:var(--shadow-sm)}
+.btn.accent{background:linear-gradient(135deg,#ffdc8a,var(--yellow));color:#7a5a1e}
+
+/* ---- 今月の勉強会カード ---- */
+.feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}
+.feature .top{background:linear-gradient(135deg,var(--coral),var(--pink-d));color:#fff;padding:20px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.badge{background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.5);padding:5px 15px;border-radius:999px;font-size:13px}
+.feature .top h2{margin:0;font-size:22px;flex:1;min-width:200px}
+.feature .body{padding:28px}
+.feature h3{font-size:30px;margin:0 0 14px;line-height:1.45;color:var(--coral-d)}
+@media(max-width:560px){ .feature h3{font-size:23px} }
+.summary{color:#7a675b;margin:0 0 22px;white-space:pre-line}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 22px}
+@media(max-width:640px){ .grid{grid-template-columns:1fr} }
+.meta{display:flex;gap:12px;align-items:flex-start;background:#fff6ee;border:1px solid var(--line);border-radius:16px;padding:11px 15px}
+.meta .k{flex:0 0 58px;color:var(--coral-d);font-size:13px;font-weight:700;padding-top:2px}
+.meta .v{font-size:15px}
+
+/* ---- 講師 ---- */
+.speakers{border-top:2px dotted var(--peach);padding-top:22px;margin-top:6px}
+.speakers h4{font-size:14px;color:var(--muted);margin:0 0 14px;font-weight:700}
+.speaker{display:flex;gap:20px;align-items:flex-start;margin-bottom:22px}
+.avatar{flex:0 0 100px;width:100px;height:100px;border-radius:50%;object-fit:cover;border:5px solid #fff;box-shadow:0 6px 16px rgba(190,140,110,.26);background:linear-gradient(135deg,#ffe6d3,#ffd0dd);display:grid;place-items:center;color:var(--coral-d);font-size:38px;overflow:hidden;font-family:"Zen Maru Gothic",sans-serif}
+.sp-body{flex:1;min-width:0}
+.speaker .name{font-weight:700;font-size:18px}
+.speaker .org{display:flex;align-items:center;gap:7px;color:var(--coral-d);font-size:13.5px;font-weight:500;margin:2px 0 5px}
+.speaker .org-logo{height:40px;width:auto;max-width:130px;object-fit:contain;border-radius:5px;background:#fff;padding:2px}
+.speaker .profile{color:var(--muted);font-size:14px;margin:0}
+
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px;padding-top:22px;border-top:2px dotted var(--peach)}
+.cta .note{color:var(--muted);font-size:13px;flex:1;min-width:220px}
+.empty{color:var(--muted);font-size:14.5px;padding:16px 0}
+
+/* ---- アーカイブ一覧（動的） ---- */
+.arch-item{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);padding:18px 22px;margin-bottom:12px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;transition:.16s}
+.arch-item:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.arch-item .no{flex:0 0 auto;background:linear-gradient(135deg,var(--coral),var(--pink-d));color:#fff;border-radius:12px;padding:6px 14px;font-size:14px;font-family:"Zen Maru Gothic",sans-serif}
+.arch-item .main{flex:1;min-width:220px}
+.arch-item .date{color:var(--muted);font-size:13px;margin:0 0 3px}
+.arch-item h3{font-size:17px;margin:0 0 4px;color:var(--ink)}
+.arch-item .who{color:var(--muted);font-size:13.5px;margin:0}
+
+/* ---- 表 ---- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);background:#fff}
+table.records{border-collapse:collapse;width:100%;min-width:680px;font-size:14px}
+table.records th,table.records td{border-bottom:1px solid var(--line);padding:13px 15px;text-align:left;vertical-align:top}
+table.records th{background:#fff0e4;color:var(--coral-d);font-weight:700;white-space:nowrap}
+table.records td.no{font-weight:700;white-space:nowrap;color:var(--coral-d)}
+table.records tr:last-child td{border-bottom:none}
+table.records tbody tr:hover{background:#fff8f2}
+
+/* ---- 文章ページ ---- */
+.prose{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:30px 34px;margin-bottom:22px}
+.prose h2{font-size:22px;margin:0 0 14px;color:var(--coral-d)}
+.prose h3{font-size:16px;margin:22px 0 6px;color:var(--mint-d)}
+.prose p{margin:0 0 12px}
+.rinen{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.rinen li{background:linear-gradient(135deg,#fff3e9,#fff8f1);border:2px dotted var(--peach);border-radius:18px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start}
+.rinen li:nth-child(2){background:linear-gradient(135deg,#eef9ee,#f7fcf6);border-color:#bfe3b8}
+.rinen li:nth-child(3){background:linear-gradient(135deg,#eaf6fb,#f4fbfd);border-color:#b6e0ee}
+.rinen li .n{flex:0 0 34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--pink-d));color:#fff;display:grid;place-items:center;font-size:15px;font-family:"Zen Maru Gothic",sans-serif}
+.rinen li:nth-child(2) .n{background:linear-gradient(135deg,var(--mint-d),var(--mint))}
+.rinen li:nth-child(3) .n{background:linear-gradient(135deg,var(--sky-d),var(--sky))}
+.kaisoku ul{margin:4px 0 16px;padding-left:20px;color:#7a675b}
+.kaisoku ol{margin:4px 0 16px;padding-left:22px;color:#7a675b}
+
+/* ---- お問い合わせ ---- */
+.contact-card{background:linear-gradient(135deg,var(--coral),var(--pink-d));color:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:34px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.contact-card h2{margin:0 0 8px;font-size:22px}
+.contact-text{max-width:560px}
+.contact-text p{margin:0 0 10px;color:#fff2ec;font-size:15px}
+.contact-card .btn{background:#fff;color:var(--coral-d)}
+
+/* ---- フッター ---- */
+footer{background:#fbe5d6;color:#8a715f;padding:34px 0;font-size:13.5px;margin-top:12px;border-top:3px dotted var(--peach)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer strong{color:var(--coral-d)}
+footer a{color:var(--coral-d);text-decoration:none}
+footer .fnav a{margin-right:14px;line-height:2.1}
+
+/* ---- かわいい挿絵（いろんなデザインより） ---- */
+.deco-side{float:right;width:200px;margin:2px 0 12px 22px;filter:drop-shadow(0 6px 10px rgba(190,140,110,.14))}
+.deco-center{display:block;margin:10px auto 6px;max-width:230px;filter:drop-shadow(0 6px 10px rgba(190,140,110,.14))}
+.deco-strip{display:flex;justify-content:center;align-items:flex-end;gap:34px;flex-wrap:wrap;margin:38px 0 0}
+.deco-strip img{height:100px;width:auto;filter:drop-shadow(0 6px 9px rgba(190,140,110,.14))}
+@media(max-width:560px){ .deco-side{float:none;display:block;margin:0 auto 12px;width:165px} .deco-strip img{height:66px} .deco-strip{gap:20px} }
+
+/* ---- 左右の余白に置くかわいい挿絵（広い画面だけ表示） ---- */
+.side-deco{display:none}
+@media(min-width:1240px){
+  .side-deco{display:block}
+  .side-deco .sd{position:fixed;width:122px;z-index:0;opacity:.92;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(190,140,110,.16))}
+  .sd-l1{left:16px;top:108px}
+  .sd-l2{left:4px;top:45%}
+  .sd-l3{left:22px;bottom:64px;width:98px}
+  .sd-r1{right:14px;top:118px}
+  .sd-r2{right:6px;top:47%;width:132px}
+  .sd-r3{right:22px;bottom:64px;width:106px}
+}
+
+/* 右下に寄せる挿絵 */
+.deco-br{text-align:right;margin:4px 0 26px}
+.deco-br img{width:300px;max-width:62%;filter:drop-shadow(0 6px 10px rgba(190,140,110,.14))}
+@media(max-width:560px){ .deco-br img{width:200px} }
+
+/* ① ロゴ名（大きく・ロゴ色に合わせた暖色グラデ） */
+.logo .logo-name{font-size:32px;line-height:1;font-family:"Zen Maru Gothic",sans-serif;background:linear-gradient(95deg,#ee8a52,#f3a14a 50%,#dca04a);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(max-width:560px){ .logo .logo-name{font-size:25px} }
+
+/* ④ ヒーローの大見出し「船堀会」 */
+.hero .hero-brand{font-size:62px;line-height:1.06;margin:0 0 6px;background:linear-gradient(100deg,#ef8d5a,#f3a14e 48%,#e39a59);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .hero-catch{font-size:23px;line-height:1.5;margin:0 0 14px;color:var(--ink);font-family:"Zen Maru Gothic",sans-serif}
+@media(max-width:560px){ .hero .hero-brand{font-size:44px} .hero .hero-catch{font-size:18px} }
+
+/* ⑥ 参加を申し込むボタン（大きく・目立つ） */
+.btn-join{font-size:18px;padding:18px 44px;box-shadow:0 10px 22px rgba(248,184,79,.5)}
+.btn-join:hover{transform:translateY(-3px) scale(1.03)}
+@media(min-width:641px){ .btn-join{animation:joinBounce 2.6s ease-in-out infinite} }
+@keyframes joinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* ② タワーホールの絵を左右の余白に（広い画面のみ・2枚だけ） */
+.tower-deco{display:none}
+@media(min-width:1280px){
+  .tower-deco{display:block}
+  .tower-deco .tw{position:fixed;z-index:0;pointer-events:none;opacity:.9;filter:drop-shadow(0 6px 11px rgba(190,140,110,.18))}
+  .tower-deco .tw-l{left:18px;top:210px;width:118px}
+  .tower-deco .tw-r{right:22px;bottom:96px;width:150px}
+}
+
+/* 「船堀会」の文字を、丸くてかわいい書体に */
+.logo .logo-name, .hero .hero-brand{font-family:"Zen Maru Gothic",sans-serif;font-weight:900}
+.logo .logo-name{line-height:1.28;padding-bottom:2px}
+.hero .hero-brand{font-size:60px;line-height:1.26;padding:4px 0}
+@media(max-width:560px){ .hero .hero-brand{font-size:44px} .logo .logo-name{font-size:26px} }
+
+/* 中央寄せの横長バナー挿絵（タワー等） */
+.deco-banner{display:block;margin:20px auto 6px;max-width:520px;width:100%;filter:drop-shadow(0 8px 14px rgba(190,140,110,.14))}
+
+/* 注意事項は2列ぶち抜きで表示 */
+.meta.meta-wide{grid-column:1 / -1}
+
+/* 懇親会セクション */
+.social{margin-top:24px;padding:20px 22px;background:#fff6ee;border:2px dotted var(--peach);border-radius:16px}
+.social h4{margin:0 0 14px;color:var(--coral-d);font-size:17px;display:flex;align-items:center;gap:8px}
+.social h4::before{content:"🍵"}
+.social .grid{margin:0}
+.social .meta{background:#fff}
+.social .meta .v a{color:var(--coral-d)}
+
+/* 上部の参加申込ボタン（区切り線なし・コンパクト） */
+.cta.cta-top{border-top:none;padding-top:0;margin:8px 0 4px}
+
+/* スマホ：トップは「写真を上・文章を下」に */
+@media(max-width:760px){
+  .hero .hero-inner{flex-direction:column; gap:26px}
+  .hero .hero-art{order:-1; flex:none; width:100%; max-width:100%}
+  .hero .hero-text{flex:none; width:100%}
+}
+
+/* トップ：サイト名「船堀会」を最上部に */
+.hero .hero-head{padding-top:46px;margin-bottom:12px}
+.hero .hero-inner{padding-top:16px}
+@media(max-width:760px){
+  .hero .hero-head{padding-top:30px;margin-bottom:6px}
+}
