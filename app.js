@@ -18,12 +18,12 @@ const SAMPLE_EVENTS = [
     title:"障害福祉制度から考える障害者入所支援の今後",
     summary:"今年で無認可時代を含めると創立58年を迎えた「もぐらの家」と、同じ江戸川区にある今年で23年を迎えた「あゆみの園」。\n2026年から利用者の地域移行への意向確認が義務化され、施設から地域への移行がすすめられています。養護学校卒業後の働く場所として設立した「もぐらの家」、知的障害者の親なきあとを想い設立した「あゆみの園」。両施設の歴史と今後の在り方を、障害福祉制度の歴史と共に、両施設の職員が発信し、障害福祉について共有できればと思います。",
     speakers:[
-      {name:"土田 一平", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"三事業サービス管理責任者", logo:"images/sample/logo1.png", photo:""},
-      {name:"成田 充里", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"就労継続支援B型責任者", logo:"images/sample/logo1.png", photo:""},
-      {name:"鈴木 優一", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"生活支援員", logo:"images/sample/logo1.png", photo:""},
+      {name:"土田 一平", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"三事業サービス管理責任者", logo:"", photo:""},
+      {name:"成田 充里", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"就労継続支援B型責任者", logo:"", photo:""},
+      {name:"鈴木 優一", company:"社会福祉法人つばき土の会　障害者支援施設 もぐらの家", profile:"生活支援員", logo:"", photo:""},
       {name:"長谷部 淳", company:"もぐらの家／第二オハナ", profile:"指導員", logo:"", photo:""},
       {name:"大藤 さゆり", company:"もぐらの家／第二オハナ", profile:"指導員", logo:"", photo:""},
-      {name:"星野 由紀子", company:"社会福祉法人いすず会　一之江あゆみの園", profile:"施設長", logo:"images/sample/logo2.png", photo:""}
+      {name:"星野 由紀子", company:"社会福祉法人いすず会　一之江あゆみの園", profile:"施設長", logo:"", photo:""}
     ],
     datetime:"2026-07-18T18:45",
     dateLabel:"2026年6月18日（木）18:45〜20:10　※18:30〜受付開始",
@@ -103,10 +103,11 @@ function splitEvents(events){
 }
 
 function speakerHTML(s){
+  const initial = esc((s.name||"・").trim().charAt(0));
   const avatar = s.photo
-    ? '<img class="avatar" src="'+esc(s.photo)+'" alt="'+esc(s.name)+'">'
-    : '<span class="avatar">'+esc((s.name||"・").trim().charAt(0))+'</span>';
-  const logo = s.logo ? '<img class="org-logo" src="'+esc(s.logo)+'" alt="'+esc(s.company)+'">' : "";
+    ? '<img class="avatar" src="'+esc(s.photo)+'" alt="'+esc(s.name)+'" onerror="this.outerHTML=\'<span class=&quot;avatar&quot;>'+initial+'</span>\'">'
+    : '<span class="avatar">'+initial+'</span>';
+  const logo = s.logo ? '<img class="org-logo" src="'+esc(s.logo)+'" alt="'+esc(s.company)+'" onerror="this.remove()">' : "";
   return '<div class="speaker">'+avatar+
     '<div class="sp-body"><div class="name">'+esc(s.name)+'</div>'+
     '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>'+

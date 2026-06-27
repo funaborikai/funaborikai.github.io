@@ -144,8 +144,9 @@ section.block p.sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 24px}
 .avatar{flex:0 0 100px;width:100px;height:100px;border-radius:50%;object-fit:cover;border:5px solid #fff;box-shadow:0 6px 16px rgba(190,140,110,.26);background:linear-gradient(135deg,#ffe6d3,#ffd0dd);display:grid;place-items:center;color:var(--coral-d);font-size:38px;overflow:hidden;font-family:"Zen Maru Gothic",sans-serif}
 .sp-body{flex:1;min-width:0}
 .speaker .name{font-weight:700;font-size:18px}
-.speaker .org{display:flex;align-items:center;gap:7px;color:var(--coral-d);font-size:13.5px;font-weight:500;margin:2px 0 5px}
-.speaker .org-logo{height:40px;width:auto;max-width:130px;object-fit:contain;border-radius:5px;background:#fff;padding:2px}
+.speaker .org{display:flex;align-items:center;flex-wrap:wrap;gap:4px 9px;color:var(--coral-d);font-size:13.5px;font-weight:500;margin:2px 0 5px}
+.speaker .org-logo{flex:0 0 auto;height:38px;width:auto;max-width:130px;object-fit:contain;border-radius:5px;background:#fff;padding:2px}
+.speaker .org span{flex:1 1 auto;min-width:0}
 .speaker .profile{color:var(--muted);font-size:14px;margin:0}
 
 .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px;padding-top:22px;border-top:2px dotted var(--peach)}
