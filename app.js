@@ -1,20 +1,18 @@
 /* ============================================================
    船堀会サイト 共通スクリプト
-   スプレッドシートの「公開」タブ(CSV)を読み込み、
    ・ホーム(#feature-mount)に「今月の勉強会」
+   ・ホーム(#schedule-mount)に「今後の予定」
+   ・ホーム(#reports-mount)に「活動報告・お知らせ」
    ・アーカイブ(#archive-mount)に過去の勉強会
-   を自動表示します。開催日が過ぎた回は自動でアーカイブへ。
-   ※ index.html?sample=1 を開くと、データが入っていても見本（サンプル）を表示します。
+   ※ index.html?sample=1 で見本（サンプル）を表示します。
    ============================================================ */
 
-/* スプレッドシート「公開」タブのCSV URL。空ならサンプル表示。 */
 const CONFIG = {
   SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv",
   REPORTS_CSV_URL: "",
   SCHEDULE_CSV_URL: ""
 };
 
-/* CSV未設定・読み込み失敗時に表示されるサンプル（登場する人物・団体はすべて架空です） */
 const SAMPLE_EVENTS = [
   {
     published:true, no:126,
@@ -56,7 +54,7 @@ function parseCSV(text){
       if(c==='"') q=true;
       else if(c===','){ row.push(field); field=""; }
       else if(c==='\n'){ row.push(field); rows.push(row); row=[]; field=""; }
-      else if(c==='\r'){ /* skip */ }
+      else if(c==='\r'){ }
       else field+=c;
     }
   }

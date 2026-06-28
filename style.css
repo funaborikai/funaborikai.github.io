@@ -287,11 +287,8 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 .sched .s-place{color:var(--muted);font-size:13.5px}
 #schedule-mount .empty{color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:18px;text-align:center}
 
-/* === スライダーのドット（写真4枚の目印） === */
-.slide-dots{position:absolute;left:0;right:0;bottom:13px;z-index:3;display:flex;justify-content:center;gap:10px;pointer-events:none}
-.slide-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 1px 3px rgba(80,50,30,.35)}
-.slide-dots span:nth-child(1){animation:dotOn 24s infinite;animation-delay:0s}
-.slide-dots span:nth-child(2){animation:dotOn 24s infinite;animation-delay:6s}
-.slide-dots span:nth-child(3){animation:dotOn 24s infinite;animation-delay:12s}
-.slide-dots span:nth-child(4){animation:dotOn 24s infinite;animation-delay:18s}
-@keyframes dotOn{0%{background:rgba(255,255,255,.55);transform:scale(1)}3%{background:#fff;transform:scale(1.35)}22%{background:#fff;transform:scale(1.35)}25%{background:rgba(255,255,255,.55);transform:scale(1)}100%{background:rgba(255,255,255,.55);transform:scale(1)}}
+/* === 写真の両サイドの水玉（装飾・ランダム配置） === */
+.hero-photo .wrap{position:relative;z-index:1}
+.side-dots{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.side-dots span{position:absolute;border-radius:50%;box-shadow:0 2px 5px rgba(190,140,110,.18)}
+@media(max-width:1100px){ .side-dots{display:none} }
