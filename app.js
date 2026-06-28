@@ -223,10 +223,31 @@ async function loadReports(){
 }
 
 function reportHTML(r){
-  const img = r.photo ? '<img class="report-photo" src="'+esc(r.photo)+'" alt="'+esc(r.title)+'" loading="lazy" onerror="this.remove()">' : "";
-  return '<article class="report-item">'+img+
-    '<div class="report-body"><p class="report-date">'+esc(r.date)+'</p>'+
-    '<h3>'+esc(r.title)+'</h3><p class="report-text">'+esc(tidySummary(r.body))+'</p></div></article>';
+  const img = r.photo ? '<img class="rep-thumb" src="'+esc(r.photo)+'" alt="'+esc(r.title)+'" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;rep-thumb rep-noimg&quot;></span>\'">' : '<span class="rep-thumb rep-noimg"></span>';
+  return '<button type="button" class="rep-card" data-date="'+esc(r.date)+'" data-title="'+esc(r.title)+'" data-body="'+esc(tidySummary(r.body))+'" data-photo="'+esc(r.photo||"")+'">'+
+    img+'<span class="rep-cap"><span class="rep-date">'+esc(r.date)+'</span><span class="rep-title">'+esc(r.title)+'</span></span></button>';
+}
+function setupReports(rm, reports){
+  rm.innerHTML = reports.length ? reports.slice(0,9).map(reportHTML).join("") : '<p class="empty">活動報告は準備中です。</p>';
+  let modal=document.getElementById("rep-modal");
+  if(!modal){
+    modal=document.createElement("div"); modal.id="rep-modal"; modal.className="rep-modal";
+    modal.innerHTML='<div class="rep-box"><button type="button" class="rep-close" aria-label="閉じる">×</button><img class="rep-big" alt=""><div class="rep-mbody"><p class="rep-mdate"></p><h3 class="rep-mtitle"></h3><p class="rep-mtext"></p></div></div>';
+    document.body.appendChild(modal);
+    const close=function(){ modal.classList.remove("open"); };
+    modal.addEventListener("click",function(e){ if(e.target===modal || e.target.classList.contains("rep-close")) close(); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape") close(); });
+  }
+  rm.querySelectorAll(".rep-card").forEach(function(card){
+    card.addEventListener("click",function(){
+      const big=modal.querySelector(".rep-big"); const ph=card.getAttribute("data-photo");
+      if(ph){ big.src=ph; big.style.display=""; } else { big.style.display="none"; }
+      modal.querySelector(".rep-mdate").textContent=card.getAttribute("data-date")||"";
+      modal.querySelector(".rep-mtitle").textContent=card.getAttribute("data-title")||"";
+      modal.querySelector(".rep-mtext").textContent=card.getAttribute("data-body")||"";
+      modal.classList.add("open");
+    });
+  });
 }
 
 function initEvents(){
@@ -247,12 +268,6 @@ function initEvents(){
     }
   });
   if(scm){ loadSchedule().then(function(list){ scm.innerHTML = scheduleHTML(list); }); }
-  if(rm){
-    loadReports().then(function(reports){
-      rm.innerHTML = reports.length
-        ? reports.slice(0,6).map(reportHTML).join("")
-        : '<p class="empty">活動報告は準備中です。</p>';
-    });
-  }
+  if(rm){ loadReports().then(function(reports){ setupReports(rm, reports); }); }
 }
 document.addEventListener("DOMContentLoaded", initEvents);
