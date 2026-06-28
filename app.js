@@ -10,7 +10,8 @@
 const CONFIG = {
   SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv",
   REPORTS_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHKnrRh3nnT5vx_FE99R1EMgZZ84j1FtdaFUcDUGrVI-Qb8xPvkB7my7YLCW92jQBf7h1bVz8iaAwI/pub?gid=1823708050&single=true&output=csv",
-  SCHEDULE_CSV_URL: ""
+  SCHEDULE_CSV_URL: "",
+  CONTACT_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSePLU1BvrMc3LwfKMR21jm-T5EjtvwsXnSaixPYV8ZQ2AJezw/viewform"
 };
 
 const SAMPLE_EVENTS = [
@@ -28,7 +29,7 @@ const SAMPLE_EVENTS = [
     fee:"200円　※受付にて徴収させていただきます",
     party:"",
     notes:"※こちらは表示見本（サンプル）です。登場する人物・団体はすべて架空です。実際の勉強会データを入力すると自動で差し替わります。",
-    social:{ place:"居酒屋 さんぽ道 船堀店（サンプル）", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、開催の2日前18時までに船堀会の下記メールアドレスまでご連絡をお願いいたします。", email:"funaborikai@gmail.com" },
+    social:{ place:"居酒屋 さんぽ道 船堀店（サンプル）", time:"20:30〜", fee:"3,500円", cancel:"懇親会をキャンセルする場合は、開催の2日前18時までにお問い合わせフォームよりご連絡ください。それ以降または当日の無断キャンセルの場合は、キャンセル料を徴収いたします。" },
     formUrl:"https://docs.google.com/forms/d/e/1FAIpQLSe-upse0rPJLEx2xo_NvYNhK3_PYIuaF1aK6EU4nb576aTIoQ/viewform"
   }
 ];
@@ -130,12 +131,16 @@ function fmtDeadline(datetime){
 }
 function socialHTML(e){
   const s=e.social;
-  if(!s || !(s.place||s.time||s.fee||s.cancel||s.email)) return "";
+  if(!s || !(s.place||s.time||s.fee||s.cancel)) return "";
   let cancel=s.cancel||"";
   if(cancel.indexOf("{期限}")>=0) cancel=cancel.replace("{期限}", fmtDeadline(e.datetime)||"開催の前々日18時");
   const row=(k,v,wide)=> v?'<div class="meta'+(wide?' meta-wide':'')+'"><span class="k">'+k+'</span><span class="v">'+esc(v)+'</span></div>':"";
-  const mail = s.email?'<div class="meta meta-wide"><span class="k">メール</span><span class="v"><a href="mailto:'+esc(s.email)+'">'+esc(s.email)+'</a></span></div>':"";
-  return '<div class="social"><h4>懇親会</h4><div class="grid">'+row("場所",s.place)+row("時間",s.time)+row("参加費",s.fee)+row("キャンセル",cancel,true)+mail+'</div></div>';
+  let cancelRow="";
+  if(cancel){
+    const link='<a href="'+esc(CONFIG.CONTACT_FORM_URL)+'" target="_blank" rel="noopener">お問い合わせフォーム</a>';
+    cancelRow='<div class="meta meta-wide"><span class="k">キャンセル</span><span class="v">'+esc(cancel).split("お問い合わせフォーム").join(link)+'</span></div>';
+  }
+  return '<div class="social"><h4>懇親会</h4><div class="grid">'+row("場所",s.place)+row("時間",s.time)+row("参加費",s.fee)+cancelRow+'</div></div>';
 }
 function featureHTML(e){
   const partyRow = e.party ? '<div class="meta"><span class="k">懇親会</span><span class="v">'+esc(e.party)+'</span></div>' : "";
