@@ -9,7 +9,7 @@
 
 const CONFIG = {
   SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv",
-  REPORTS_CSV_URL: "",
+  REPORTS_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHKnrRh3nnT5vx_FE99R1EMgZZ84j1FtdaFUcDUGrVI-Qb8xPvkB7my7YLCW92jQBf7h1bVz8iaAwI/pub?gid=1823708050&single=true&output=csv",
   SCHEDULE_CSV_URL: ""
 };
 
@@ -197,6 +197,12 @@ const SAMPLE_REPORTS = [
   { date:"2026年5月17日", title:"船堀会BBQを開催しました！", body:"新左近川バーベキュー場で恒例のBBQを開催しました。たくさんのご家族・事業所の皆さまにご参加いただき、職種を越えて交流を深めました。ご参加ありがとうございました！（※これは表示見本です）", photo:"images/sample-report1.svg" },
   { date:"2026年4月16日", title:"第123回 勉強会を開催しました", body:"「こども食堂」をテーマに、地域包括ケアについて学びました。活発な意見交換ができ、参加者同士のつながりも広がりました。（※これは表示見本です）", photo:"images/sample-report2.svg" }
 ];
+function driveImg(u){
+  u=String(u||"").trim(); if(!u) return "";
+  if(!/drive\.google|googleusercontent/.test(u)) return u;
+  const m=u.match(/[-\w]{25,}/);
+  return m ? "https://drive.google.com/thumbnail?id="+m[0]+"&sz=w1000" : u;
+}
 async function loadReports(){
   if(!CONFIG.REPORTS_CSV_URL) return SAMPLE_REPORTS;
   try{
@@ -206,12 +212,16 @@ async function loadReports(){
     if(rows.length<2) return SAMPLE_REPORTS;
     const h = rows[0].map(s=>s.trim());
     const get=(cells,name)=>{ const i=h.indexOf(name); return i>=0?(cells[i]||"").trim():""; };
-    return rows.slice(1).map(function(cells){
-      return { date:get(cells,"日付"), title:get(cells,"タイトル"), body:get(cells,"本文"), photo:get(cells,"写真URL"),
+    const data = rows.slice(1).map(function(cells){
+      return { date:get(cells,"日付"), title:get(cells,"タイトル"), body:get(cells,"本文"),
+        photo:driveImg(get(cells,"写真")||get(cells,"写真URL")),
         published: h.indexOf("公開")>=0 ? isPublished(get(cells,"公開")) : true };
     }).filter(r=>r.published && (r.title||r.body));
+    data.reverse();
+    return data;
   }catch(err){ console.warn("お知らせ読み込みに失敗。サンプルを表示します:",err); return SAMPLE_REPORTS; }
 }
+
 function reportHTML(r){
   const img = r.photo ? '<img class="report-photo" src="'+esc(r.photo)+'" alt="'+esc(r.title)+'" loading="lazy" onerror="this.remove()">' : "";
   return '<article class="report-item">'+img+
