@@ -161,11 +161,42 @@ function featureHTML(e){
     socialHTML(e)+cta+'</div></div>';
 }
 
+function archDateLabel(e){
+  const d=new Date(e.datetime);
+  let s = isNaN(d) ? (e.dateLabel||"") : (d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日");
+  if(e.place) s += " ・ " + String(e.place).split("（")[0].split("(")[0].trim();
+  return s;
+}
 function archItemHTML(e){
-  const who = e.speakers.map(s=>s.name+"（"+s.company+"）").join(" / ");
+  const who = e.speakers.map(function(s){ return s.company ? s.company+" ／ "+nameHonor(s.name) : nameHonor(s.name); }).join(" ／ ");
   return '<div class="arch-item"><span class="no">第'+esc(e.no)+'回</span>'+
-    '<div class="main"><p class="date">'+esc(e.dateLabel)+'</p><h3>'+esc(e.title)+'</h3>'+
+    '<div class="main"><p class="date">'+esc(archDateLabel(e))+'</p><h3>'+esc(e.title)+'</h3>'+
     '<p class="who">'+esc(who)+'</p></div></div>';
+}
+function placeIntoArchive(am, past){
+  if(!am) return;
+  am.innerHTML="";
+  const existing=new Set();
+  document.querySelectorAll(".year-acc .arch-item .no").forEach(function(el){ const n=el.textContent.replace(/[^0-9]/g,""); if(n) existing.add(n); });
+  function foldFor(year){ let f=null; document.querySelectorAll(".year-acc").forEach(function(d){ const sm=d.querySelector("summary"); if(sm && sm.textContent.indexOf(year+"年")>=0) f=d; }); return f; }
+  const touched=new Set();
+  past.slice().reverse().forEach(function(e){
+    const noNum=String(e.no).replace(/[^0-9]/g,"");
+    if(noNum && existing.has(noNum)) return;
+    const d=new Date(e.datetime); if(isNaN(d)) return;
+    const year=d.getFullYear();
+    let fold=foldFor(year);
+    if(!fold){
+      fold=document.createElement("details"); fold.className="year-acc";
+      fold.innerHTML="<summary>"+year+"年 <span class='cnt'></span></summary><div class='year-body'></div>";
+      let placed=false; const folds=document.querySelectorAll(".year-acc");
+      for(let i=0;i<folds.length;i++){ const sm=folds[i].querySelector("summary"); const m=sm&&sm.textContent.match(/([0-9]{4})年/); if(m && year>+m[1]){ folds[i].parentNode.insertBefore(fold,folds[i]); placed=true; break; } }
+      if(!placed) am.insertAdjacentElement("afterend",fold);
+    }
+    fold.querySelector(".year-body").insertAdjacentHTML("afterbegin", archItemHTML(e));
+    if(noNum) existing.add(noNum); touched.add(fold);
+  });
+  touched.forEach(function(fold){ const cnt=fold.querySelector(".cnt"); const n=fold.querySelectorAll(".arch-item").length; if(cnt) cnt.textContent=n+"回"; });
 }
 
 /* ===== 今後の予定（活動スケジュール）：専用シートから ===== */
@@ -190,11 +221,13 @@ async function loadSchedule(){
 }
 function scheduleHTML(list){
   if(!list || !list.length) return '<p class="empty">次回以降の予定が決まり次第、こちらに掲載します。</p>';
-  const rows = list.map(function(r){
+  const cards = list.map(function(r){
     const no = /^\d+$/.test((r.no||"").trim()) ? "第"+r.no.trim()+"回" : (r.no||"");
-    return '<tr><td class="s-date">'+esc(r.date)+'</td><td class="s-no">'+esc(no)+'</td><td class="s-title">'+esc(r.title||"内容未定")+'</td><td class="s-place">'+esc(r.place||"")+'</td></tr>';
+    const noBadge = no ? '<span class="s-no">'+esc(no)+'</span>' : "";
+    const place = r.place ? '<p class="s-place">'+esc(r.place)+'</p>' : "";
+    return '<div class="sched-card">'+noBadge+'<div class="s-main"><p class="s-date">'+esc(r.date)+'</p><h3 class="s-title">'+esc(r.title||"内容未定")+'</h3>'+place+'</div></div>';
   }).join("");
-  return '<div class="sched"><table><thead><tr><th>日程</th><th>回</th><th>内容</th><th>会場</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  return '<div class="sched-list">'+cards+'</div>';
 }
 
 /* ===== 活動報告・お知らせ ===== */
@@ -268,9 +301,7 @@ function initEvents(){
         ? featureHTML(sp.upcoming[0])
         : '<div class="feature"><div class="body"><p class="empty">次回の勉強会は準備中です。決まり次第こちらに掲載します。</p></div></div>';
     }
-    if(am){
-      am.innerHTML = sp.past.length ? sp.past.map(archItemHTML).join("") : "";
-    }
+    if(am){ placeIntoArchive(am, sp.past); }
   });
   if(scm){ loadSchedule().then(function(list){ scm.innerHTML = scheduleHTML(list); }); }
   if(rm){ loadReports().then(function(reports){ setupReports(rm, reports); }); }
