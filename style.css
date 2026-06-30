@@ -78,7 +78,7 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(255,250,244,.92);ba
 
 /* ---- 写真ヒーロー（A案：囲み枠・角丸・左上に白文字） ---- */
 .hero-photo{position:relative;background:none;padding:18px 0 2px}
-.hero-photo .hero-stage{position:relative;height:330px;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:#ffe0c9}
+.hero-photo .hero-stage{position:relative;aspect-ratio:16/9;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:#fff3e8}
 .hero-photo .hero-bg{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:0;border:none;box-shadow:none}
 .hero-photo .hero-bg .slide{border-radius:0}
 .hero-photo .hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,rgba(70,40,24,.58) 0%,rgba(70,40,24,.28) 44%,rgba(70,40,24,0) 72%)}
@@ -87,7 +87,7 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(255,250,244,.92);ba
 .hero-photo .hero-brand{font-size:60px;line-height:1.05;margin:0;padding:0;background:none;-webkit-text-fill-color:#fff;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.42)}
 @media(max-width:760px){
   .hero-photo{padding:12px 0 2px}
-  .hero-photo .hero-stage{height:220px;border-radius:20px}
+  .hero-photo .hero-stage{border-radius:20px}
   .hero-photo .hero-scrim{background:linear-gradient(150deg,rgba(70,40,24,.56) 0%,rgba(70,40,24,.30) 60%,rgba(70,40,24,.12) 100%)}
   .hero-photo .hero-overlay{left:24px;top:22px;right:24px}
   .hero-photo .hero-brand{font-size:42px}
