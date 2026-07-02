@@ -111,15 +111,15 @@ function splitEvents(events){
 }
 
 function speakerHTML(s){
-  const initial = esc((s.name||"・").trim().charAt(0));
-  const avatar = s.photo
-    ? '<img class="avatar" src="'+esc(s.photo)+'" alt="'+esc(s.name)+'" onerror="this.outerHTML=\'<span class=&quot;avatar&quot;>'+initial+'</span>\'">'
-    : '<span class="avatar">'+initial+'</span>';
+  const hasPhoto = !!(s.photo && String(s.photo).trim());
+  const avatar = hasPhoto ? '<img class="avatar" src="'+esc(s.photo)+'" alt="'+esc(s.name)+'" onerror="this.remove()">' : '';
   const logo = s.logo ? '<img class="org-logo" src="'+esc(s.logo)+'" alt="'+esc(s.company)+'" onerror="this.remove()">' : "";
-  return '<div class="speaker">'+avatar+
+  const orgText = s.company ? '<span>'+esc(s.company)+'</span>' : '';
+  const org = (logo||orgText) ? '<div class="org">'+logo+orgText+'</div>' : '';
+  const profile = s.profile ? '<p class="profile">'+esc(s.profile)+'</p>' : '';
+  return '<div class="speaker'+(hasPhoto?'':' no-avatar')+'">'+avatar+
     '<div class="sp-body"><div class="name">'+esc(nameHonor(s.name))+'</div>'+
-    '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>'+
-    '<p class="profile">'+esc(s.profile)+'</p></div></div>';
+    org+profile+'</div></div>';
 }
 
 function fmtDeadline(datetime){

@@ -326,3 +326,7 @@ footer .fnav a{margin-right:14px;line-height:2.1}
   .speaker .name{font-size:24px}
   .speaker .profile{font-size:14.5px}
 }
+
+/* 日本語の改行を自然な位置に（中途半端な改行防止） */
+.feature h3,.summary,.speaker .name,.speaker .org span,.speaker .profile,.arch-item h3,.arch-item .who,.rep-mtitle,.sched-card .s-title{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+@media(max-width:600px){ .speaker.no-avatar{align-items:flex-start;text-align:left} }
