@@ -142,6 +142,7 @@ function socialHTML(e){
   }
   return '<div class="social"><h4>懇親会</h4><div class="grid">'+row("場所",s.place)+row("時間",s.time)+row("参加費",s.fee)+cancelRow+'</div></div>';
 }
+function fmtTitle(t){ return esc(t).replace(/[ 　]+([〜～])/g,"<br>$1"); }
 function featureHTML(e){
   const partyRow = e.party ? '<div class="meta"><span class="k">懇親会</span><span class="v">'+esc(e.party)+'</span></div>' : "";
   const notesRow = e.notes ? '<div class="meta meta-wide"><span class="k">注意事項</span><span class="v">'+esc(e.notes)+'</span></div>' : "";
@@ -149,7 +150,7 @@ function featureHTML(e){
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
   const cta = joinBtn ? '<div class="cta">'+joinBtn+'<span class="note">ボタンを押すとお申し込みフォームが開きます。</span></div>' : "";
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
-    '<div class="body"><h3>'+esc(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
+    '<div class="body"><h3>'+fmtTitle(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
     '<div class="grid">'+
       '<div class="meta"><span class="k">日時</span><span class="v">'+esc(e.dateLabel)+'</span></div>'+
       '<div class="meta"><span class="k">会場</span><span class="v">'+esc(e.place)+'</span></div>'+
