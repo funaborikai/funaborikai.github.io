@@ -10,7 +10,7 @@
 const CONFIG = {
   SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv",
   REPORTS_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHKnrRh3nnT5vx_FE99R1EMgZZ84j1FtdaFUcDUGrVI-Qb8xPvkB7my7YLCW92jQBf7h1bVz8iaAwI/pub?gid=1823708050&single=true&output=csv",
-  SCHEDULE_CSV_URL: "",
+  SCHEDULE_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=1407874179&single=true&output=csv",
   CONTACT_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSePLU1BvrMc3LwfKMR21jm-T5EjtvwsXnSaixPYV8ZQ2AJezw/viewform"
 };
 
@@ -63,7 +63,7 @@ function parseCSV(text){
   return rows;
 }
 
-const isPublished = v => /^(true|1|✓|○|公開|はい|yes)$/i.test(String(v||"").trim());
+const isPublished = v => /^(true|1|✓|○|〇|◯|公開|はい|yes)$/i.test(String(v||"").trim());
 
 function rowToEvent(h, cells){
   const get = name => { const i=h.indexOf(name); return i>=0 ? (cells[i]||"").trim() : ""; };
@@ -101,13 +101,30 @@ async function loadEvents(){
   }
 }
 
+function dedupByNo(list){
+  const map={}; const out=[];
+  list.forEach(function(e){
+    const key=String(e.no==null?"":e.no).trim();
+    if(!key){ out.push(e); return; }
+    if(!map[key]){ map[key]=e; out.push(e); return; }
+    const a=map[key];
+    Object.keys(e).forEach(function(k){
+      if(k==="speakers"||k==="social") return;
+      if((a[k]===""||a[k]==null) && e[k]) a[k]=e[k];
+    });
+    if(String(a.formUrl||"").indexOf("http")!==0 && String(e.formUrl||"").indexOf("http")===0) a.formUrl=e.formUrl;
+    if((!a.speakers||!a.speakers.length) && e.speakers && e.speakers.length) a.speakers=e.speakers;
+    if(a.social && e.social){ ["place","time","fee","cancel","email"].forEach(function(f){ if(!a.social[f] && e.social[f]) a.social[f]=e.social[f]; }); }
+  });
+  return out;
+}
 function splitEvents(events){
   const now=new Date();
   const startOfToday=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   const visible=events.filter(e=>e.published && e.datetime && !isNaN(new Date(e.datetime)));
   const upcoming=visible.filter(e=>new Date(e.datetime)>=startOfToday).sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
   const past=visible.filter(e=>new Date(e.datetime)<startOfToday).sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));
-  return {upcoming,past};
+  return {upcoming:dedupByNo(upcoming), past:dedupByNo(past)};
 }
 
 function speakerHTML(s){
@@ -146,7 +163,7 @@ function fmtTitle(t){ return esc(t).replace(/[ 　]+([〜～])/g,"<br>$1"); }
 function featureHTML(e){
   const partyRow = e.party ? '<div class="meta"><span class="k">懇親会</span><span class="v">'+esc(e.party)+'</span></div>' : "";
   const notesRow = e.notes ? '<div class="meta meta-wide"><span class="k">注意事項</span><span class="v">'+esc(e.notes)+'</span></div>' : "";
-  const joinBtn = e.formUrl ? '<a class="btn accent btn-join" href="'+esc(e.formUrl)+'" target="_blank" rel="noopener">参加を申し込む ▶</a>' : "";
+  const joinBtn = (String(e.formUrl||"").indexOf("http")===0) ? '<a class="btn accent btn-join" href="'+esc(e.formUrl)+'" target="_blank" rel="noopener">参加を申し込む ▶</a>' : "";
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
   const cta = joinBtn ? '<div class="cta">'+joinBtn+'<span class="note">ボタンを押すとお申し込みフォームが開きます。</span></div>' : "";
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
