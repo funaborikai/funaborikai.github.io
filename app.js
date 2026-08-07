@@ -73,7 +73,7 @@ function rowToEvent(h, cells){
   nums.forEach(n=>{
     const name=get("講師"+n+"氏名");
     if(!name) return;
-    speakers.push({ name, company:get("講師"+n+"所属"), profile:get("講師"+n+"プロフィール"), logo:get("講師"+n+"ロゴURL"), photo:get("講師"+n+"写真URL") });
+    speakers.push({ name, company:get("講師"+n+"所属"), profile:get("講師"+n+"プロフィール"), logo:driveImg(get("講師"+n+"ロゴURL")), photo:driveImg(get("講師"+n+"写真URL")) });
   });
   const dtRaw=get("日時");
   return {
