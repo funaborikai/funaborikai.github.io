@@ -141,7 +141,7 @@ section.block p.sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 24px}
 .speakers{border-top:2px dotted var(--peach);padding-top:22px;margin-top:6px}
 .speakers h4{font-size:27px;color:var(--coral-d);margin:0 0 18px;font-weight:700;letter-spacing:.04em;font-family:"Zen Maru Gothic","M PLUS Rounded 1c",sans-serif}
 .speaker{display:flex;gap:20px;align-items:flex-start;margin-bottom:22px}
-.avatar{flex:0 0 200px;width:200px;height:200px;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:0 8px 20px rgba(190,140,110,.28);background:linear-gradient(135deg,#ffe6d3,#ffd0dd);display:grid;place-items:center;color:var(--coral-d);font-size:64px;overflow:hidden;font-family:"Zen Maru Gothic",sans-serif}
+.avatar{flex:0 0 240px;width:240px;height:240px;border-radius:50%;object-fit:cover;object-position:50% 28%;border:6px solid #fff;box-shadow:0 8px 20px rgba(190,140,110,.28);background:linear-gradient(135deg,#ffe6d3,#ffd0dd);display:grid;place-items:center;color:var(--coral-d);font-size:76px;overflow:hidden;font-family:"Zen Maru Gothic",sans-serif}
 .sp-body{flex:1;min-width:0}
 .speaker .name{font-weight:700;font-size:28px}
 .speaker .org{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;color:var(--coral-d);font-size:16.5px;font-weight:600;margin:6px 0 9px}
@@ -321,7 +321,7 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 @media(max-width:600px){
   .speaker{flex-direction:column;align-items:center;text-align:center;gap:12px}
   .speaker .org{justify-content:center}
-  .avatar{width:170px;height:170px;flex:0 0 auto;font-size:54px}
+  .avatar{width:190px;height:190px;flex:0 0 auto;font-size:60px}
   .speaker .org-logo{height:130px}
   .speaker .name{font-size:24px}
   .speaker .profile{font-size:14.5px}
