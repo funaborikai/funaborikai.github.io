@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勉強会チラシ ｜ 船堀会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#4a3b32; --coral:#f3996e; --coral-d:#e07a4e; --peach:#fbd2b3; --pink-d:#ec88a1; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#e9e6e1; font-family:"M PLUS Rounded 1c",system-ui,"Hiragino Maru Gothic ProN",Meiryo,sans-serif; color:var(--ink); }
+  .toolbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid #ddd; padding:12px 16px; display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; }
+  .toolbar .lbl{ font-size:14px; color:#8a715f; }
+  .toolbar .btn{ background:linear-gradient(135deg,#f8b07f,#f3996e); color:#fff; border:none; border-radius:999px; padding:11px 26px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(243,153,110,.35); font-family:inherit; }
+  .page{ display:flex; justify-content:center; padding:20px; }
+  .flyer{ --tint:#fff; --band:#fbe5d6; width:210mm; min-height:297mm; background:#fff9f0; box-shadow:0 10px 34px rgba(0,0,0,.22); position:relative; overflow:hidden; display:flex; flex-direction:column; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  /* テーマ配色 */
+  .flyer.theme-blue{ --coral:#74b6d6; --coral-d:#3d8cb5; --pink-d:#5aa6cf; --peach:#bcdcec; --tint:#eef6fb; --band:#dcebf4; }
+  .flyer.theme-green{ --coral:#8fca8f; --coral-d:#4f9a56; --pink-d:#7cc487; --peach:#cbe7c6; --tint:#eef8ec; --band:#dcefd7; }
+  .flyer.theme-yellow{ --coral:#f4c256; --coral-d:#cf8a1c; --pink-d:#f0a842; --peach:#f7e2a0; --tint:#fdf6e3; --band:#f8ecc6; }
+  /* 飾り */
+  .deco{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .deco .blob{ position:absolute; border-radius:50%; filter:blur(1px); }
+  .deco .dot{ position:absolute; border-radius:50%; }
+  .deco .spark{ position:absolute; color:#fff; opacity:.7; }
+  /* 上部：波型（四角い帯なし） */
+  .top{ position:relative; z-index:1; background:linear-gradient(160deg,var(--coral),var(--pink-d)); color:#fff; padding:28px 46px 82px; text-align:left; }
+  .top .brand{ display:flex; align-items:center; justify-content:flex-start; gap:14px; font-size:20px; font-weight:700; opacity:.98; }
+  .top .brand img{ height:54px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+  .top .no{ display:inline-block; background:rgba(255,255,255,.24); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:3px 20px; font-size:15px; margin:12px 0 12px; font-weight:700; }
+  .top .ttl{ font-family:"Zen Maru Gothic",sans-serif; font-size:34px; font-weight:900; line-height:1.35; text-shadow:0 2px 10px rgba(0,0,0,.16); word-break:keep-all; overflow-wrap:anywhere; }
+  .top .wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:74px; display:block; }
+  /* 本文 */
+  .body{ position:relative; z-index:1; flex:1; padding:0 44px 20px; display:flex; flex-direction:column; }
+  .speakers{ display:flex; flex-direction:column; gap:22px; margin:30px 0 8px; position:relative; z-index:2; }
+  .sp{ display:flex; gap:26px; align-items:center; text-align:left; }
+  .ring{ flex:0 0 auto; width:176px; height:176px; border-radius:50%; background:radial-gradient(circle,#fff,var(--peach)); padding:9px; box-shadow:0 10px 26px rgba(120,110,100,.28); margin:0; }
+  .ring .ph{ width:100%; height:100%; border-radius:50%; object-fit:contain; background:#fff9f0; border:4px solid #fff; display:block; }
+  .sp-body{ flex:1; min-width:0; }
+  .nm{ font-family:"Zen Maru Gothic",sans-serif; font-size:30px; font-weight:700; }
+  .org{ display:flex; align-items:center; justify-content:flex-start; gap:14px; color:var(--coral-d); font-weight:700; font-size:18px; margin:7px 0 6px; flex-wrap:wrap; }
+  .org img{ height:60px; max-width:200px; object-fit:contain; background:#fff; border-radius:12px; padding:6px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
+  .org span{ word-break:keep-all; overflow-wrap:anywhere; }
+  .prof{ font-size:14px; color:#8a7a6e; line-height:1.85; margin:4px 0 0; }
+  .pills{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin:22px 0 18px; }
+  .pill{ background:#fff; border-radius:22px; padding:14px 24px; min-width:162px; text-align:center; box-shadow:0 4px 12px rgba(150,140,130,.16); border:1px solid #f0e6db; }
+  .pill b{ display:block; color:var(--coral-d); font-size:12px; margin-bottom:4px; letter-spacing:.05em; }
+  .pill span{ font-size:15px; font-weight:600; }
+  .summary{ font-size:13.5px; line-height:1.75; margin:2px 0 16px; text-align:left; white-space:pre-line; }
+  .qr{ display:flex; gap:42px; justify-content:center; margin-top:auto; padding-top:10px; }
+  .qr .item{ text-align:center; }
+  .qr .item>div, .qr .item canvas, .qr .item img{ display:block; margin:0 auto; border:6px solid #fff; box-shadow:0 3px 10px rgba(0,0,0,.14); border-radius:14px; }
+  .qr .lbl{ font-size:13.5px; font-weight:700; margin-top:8px; color:var(--ink); }
+  .foot{ position:relative; z-index:1; background:var(--band); color:#7a6a5e; font-size:12px; text-align:center; padding:12px; }
+  .empty{ padding:120px 40px; text-align:center; color:#8a715f; font-size:16px; line-height:2; }
+  /* 懇親会 */
+  .party{ background:var(--tint); border:2px dotted var(--peach); border-radius:18px; padding:14px 22px; max-width:640px; margin:2px auto 18px; text-align:center; }
+  .party-h{ font-family:"Zen Maru Gothic",sans-serif; color:var(--coral-d); font-weight:700; font-size:18px; margin-bottom:6px; }
+  .party-body{ display:flex; gap:24px; justify-content:center; flex-wrap:wrap; font-size:15px; }
+  .party-body b{ color:var(--coral-d); margin-right:6px; font-size:12.5px; }
+  .party-note{ font-size:11.5px; color:#9a8a7e; margin-top:8px; line-height:1.6; text-align:left; }
+
+  /* ===== レイアウト② 中央シンボル ===== */
+  .flyer.lay-center .top{ text-align:center; padding-bottom:100px; }
+  .flyer.lay-center .top .brand{ justify-content:center; }
+  .flyer.lay-center .top .ttl{ font-size:33px; }
+  .flyer.lay-center .speakers-c{ position:relative; z-index:2; }
+  .flyer.lay-center .sp-c{ text-align:center; margin-bottom:14px; }
+  .flyer.lay-center .center-ph{ width:190px; height:190px; border-radius:50%; margin:14px auto 8px; background:radial-gradient(circle,#fff,var(--peach)); padding:9px; box-shadow:0 12px 28px rgba(120,110,100,.3); }
+  .flyer.lay-center .speakers-c>.sp-c:first-child .center-ph{ margin-top:-92px; }
+  .flyer.lay-center .center-ph img{ width:100%; height:100%; border-radius:50%; object-fit:contain; background:#fff9f0; border:4px solid #fff; display:block; }
+  .flyer.lay-center .sp-c .nm{ text-align:center; }
+  .flyer.lay-center .sp-c .org{ justify-content:center; }
+  .flyer.lay-center .sp-c .prof{ text-align:center; max-width:640px; margin:6px auto 0; }
+  .flyer.lay-center .summary{ max-width:660px; margin-left:auto; margin-right:auto; }
+
+  /* ===== レイアウト③ サイド帯（曲線） ===== */
+  .flyer.lay-side .side{ position:relative; z-index:1; flex:1; display:flex; }
+  .flyer.lay-side .side-l{ width:38%; flex:0 0 38%; background:linear-gradient(165deg,var(--coral),var(--pink-d)); color:#fff; padding:34px 26px; display:flex; flex-direction:column; border-radius:0 70px 40px 0; position:relative; z-index:2; }
+  .flyer.lay-side .side-l .brand{ display:flex; align-items:center; gap:10px; font-size:15px; font-weight:700; }
+  .flyer.lay-side .side-l .brand img{ height:40px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+  .flyer.lay-side .side-l .no{ display:inline-block; align-self:flex-start; background:rgba(255,255,255,.24); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:3px 18px; font-size:14px; margin:16px 0 10px; font-weight:700; }
+  .flyer.lay-side .side-l .ttl{ font-family:"Zen Maru Gothic",sans-serif; font-size:27px; font-weight:900; line-height:1.35; text-shadow:0 2px 8px rgba(0,0,0,.16); word-break:keep-all; overflow-wrap:anywhere; }
+  .flyer.lay-side .side-l .info{ margin-top:22px; }
+  .flyer.lay-side .side-l .info .row{ margin-bottom:12px; }
+  .flyer.lay-side .side-l .info b{ display:block; font-size:11.5px; opacity:.9; letter-spacing:.06em; margin-bottom:2px; }
+  .flyer.lay-side .side-l .info span{ font-size:15px; font-weight:600; }
+  .flyer.lay-side .side-l .qr{ margin-top:auto; gap:16px; justify-content:flex-start; }
+  .flyer.lay-side .side-l .qr .lbl{ color:#fff; font-size:11.5px; }
+  .flyer.lay-side .side-r{ flex:1; padding:32px 34px 24px; display:flex; flex-direction:column; }
+  .flyer.lay-side .side-r .speakers{ margin-top:0; }
+  .flyer.lay-side .side-r .sp{ gap:18px; }
+  .flyer.lay-side .side-r .ring{ width:120px; height:120px; }
+  .flyer.lay-side .side-r .nm{ font-size:24px; }
+  .flyer.lay-side .side-r .org img{ height:48px; }
+
+  /* ===== レイアウト④ ミニマル（線画・帯なし） ===== */
+  .flyer.lay-minimal{ background:#fffdf9; }
+  .flyer.lay-minimal .deco{ display:none; }
+  .flyer.lay-minimal .top{ background:none; color:var(--ink); text-align:left; padding:44px 48px 6px; }
+  .flyer.lay-minimal .top .brand{ color:var(--coral-d); font-size:16px; }
+  .flyer.lay-minimal .top .brand img{ height:40px; filter:none; }
+  .flyer.lay-minimal .top .no{ background:none; border:none; color:var(--coral-d); padding:0; font-size:15px; margin:16px 0 4px; }
+  .flyer.lay-minimal .top .ttl{ color:var(--ink); text-shadow:none; border-left:6px solid var(--coral); padding-left:16px; }
+  .flyer.lay-minimal .top .wave{ display:none; }
+  .flyer.lay-minimal .body{ padding-top:10px; }
+  .flyer.lay-minimal .ring{ width:132px; height:132px; box-shadow:none; background:radial-gradient(circle,#fff,var(--peach)); }
+  .flyer.lay-minimal .nm{ font-size:26px; }
+  .flyer.lay-minimal .pills{ justify-content:flex-start; }
+  .flyer.lay-minimal .pill{ box-shadow:none; border:1px solid var(--peach); background:var(--tint); }
+  .flyer.lay-minimal .party{ box-shadow:none; }
+  .flyer.lay-minimal .foot{ background:none; border-top:1px solid var(--peach); color:#9a8a7e; }
+
+  /* ===== レイアウト⑤ ポップ（カード） ===== */
+  .flyer.lay-pop{ background:var(--tint); }
+  .flyer.lay-pop .top{ background:linear-gradient(135deg,var(--coral),var(--pink-d)); border-radius:0 0 46px 46px; text-align:center; padding:28px 46px 30px; }
+  .flyer.lay-pop .top .brand{ justify-content:center; }
+  .flyer.lay-pop .top .wave{ display:none; }
+  .flyer.lay-pop .body{ padding-top:24px; }
+  .flyer.lay-pop .speakers .sp{ background:#fff; border-radius:26px; padding:18px 22px; box-shadow:0 6px 16px rgba(150,140,130,.16); }
+  .flyer.lay-pop .pill{ border-radius:18px; transform:rotate(-1.5deg); }
+  .flyer.lay-pop .pill:nth-child(2){ transform:rotate(1.5deg); }
+  .flyer.lay-pop .pill:nth-child(3){ transform:rotate(-1deg); }
+  .flyer.lay-pop .summary{ background:#fff; border-radius:22px; padding:18px 22px; box-shadow:0 6px 16px rgba(150,140,130,.12); margin-bottom:16px; }
+  .flyer.lay-pop .party{ background:#fff; }
+  .flyer.lay-pop .foot{ background:var(--coral); color:#fff; }
+
+  @page{ size:A4; margin:0; }
+  @media print{ body{ background:#fff; } .toolbar{ display:none; } .page{ padding:0; } .flyer{ box-shadow:none; } }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <span class="lbl">🖼 勉強会チラシ（「公開」シートの最新イベントから自動生成）</span>
+  <button class="btn" onclick="window.print()">🖨 印刷 / PDFで保存</button>
+</div>
+<div class="page"><div class="flyer" id="flyer"><div class="empty">読み込み中…</div></div></div>
+
+<script src="app.js?v=28"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var WAVE='<svg class="wave" viewBox="0 0 1200 110" preserveAspectRatio="none"><path fill="#fff9f0" d="M0,58 C170,112 340,18 540,54 C760,94 900,20 1120,56 C1160,64 1200,60 1200,60 L1200,110 L0,110 Z"></path></svg>';
+function themeClass(t){ t=String(t||'').trim();
+  if(/青|ブルー|医療|blue/i.test(t)) return ' theme-blue';
+  if(/緑|グリーン|福祉|green/i.test(t)) return ' theme-green';
+  if(/黄|イエロー|オレンジ|交流|にぎやか|yellow/i.test(t)) return ' theme-yellow';
+  return '';
+}
+function layoutName(t){ t=String(t||'').trim();
+  if(/中央|センター|center|シンボル/i.test(t)) return 'center';
+  if(/サイド|side|縦帯|帯/i.test(t)) return 'side';
+  if(/ミニマル|minimal|線|シンプル|すっきり/i.test(t)) return 'minimal';
+  if(/ポップ|pop|カード|card/i.test(t)) return 'pop';
+  return 'wave';
+}
+function decoHTML(){
+  var cols=['var(--peach)','var(--coral)','var(--pink-d)'];
+  var s='<div class="deco"><span class="blob" style="width:300px;height:300px;background:var(--peach);right:-110px;top:150px;opacity:.13"></span><span class="blob" style="width:230px;height:230px;background:var(--coral);left:-90px;bottom:160px;opacity:.10"></span>';
+  for(var i=0;i<16;i++){
+    var side=i%2?'right':'left';
+    var sz=(7+Math.random()*11).toFixed(0), top=(6+Math.random()*86).toFixed(1), off=(3+Math.random()*16).toFixed(1);
+    s+='<span class="dot" style="width:'+sz+'px;height:'+sz+'px;'+side+':'+off+'px;top:'+top+'%;background:'+cols[i%3]+';opacity:'+(0.3+Math.random()*0.2).toFixed(2)+'"></span>';
+  }
+  s+='<span class="spark" style="left:15%;top:4%;font-size:18px">✦</span><span class="spark" style="right:17%;top:7%;font-size:13px">✦</span><span class="spark" style="left:70%;top:3%;font-size:12px">✦</span>';
+  return s+'</div>';
+}
+function speakerBlock(s){
+  var ph = s.photo ? '<div class="ring"><img class="ph" src="'+esc(s.photo)+'" onerror="this.parentNode.remove()"></div>' : '';
+  var logo = s.logo ? '<img src="'+esc(s.logo)+'" onerror="this.remove()">' : '';
+  var org = s.company ? '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>' : '';
+  var prof = s.profile ? '<p class="prof">'+esc(s.profile)+'</p>' : '';
+  return '<div class="sp">'+ph+'<div class="sp-body"><div class="nm">'+esc(nameHonor(s.name))+'</div>'+org+prof+'</div></div>';
+}
+function speakerCenter(s){
+  var ph = s.photo ? '<div class="center-ph"><img src="'+esc(s.photo)+'" onerror="this.parentNode.remove()"></div>' : '';
+  var logo = s.logo ? '<img src="'+esc(s.logo)+'" onerror="this.remove()">' : '';
+  var org = s.company ? '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>' : '';
+  var prof = s.profile ? '<p class="prof">'+esc(s.profile)+'</p>' : '';
+  return '<div class="sp-c">'+ph+'<div class="nm">'+esc(nameHonor(s.name))+'</div>'+org+prof+'</div>';
+}
+function partHTML(e){
+  var s=e.social||{}; var pit='';
+  if(s.place) pit+='<span><b>場所</b>'+esc(s.place)+'</span>';
+  if(s.time) pit+='<span><b>時間</b>'+esc(s.time)+'</span>';
+  if(s.fee) pit+='<span><b>会費</b>'+esc(s.fee)+'</span>';
+  if(!pit) return '';
+  var pnote=''; if(s.cancel){ var cc=s.cancel.indexOf('{期限}')>=0 ? s.cancel.replace('{期限}',(fmtDeadline(e.datetime)||'開催の前々日18時')) : s.cancel; pnote='<div class="party-note">※'+esc(cc)+'</div>'; }
+  return '<div class="party"><div class="party-h">🍻 懇親会</div><div class="party-body">'+pit+'</div>'+pnote+'</div>';
+}
+function pillsHTML(e){
+  return '<div class="pills">'+
+    '<div class="pill"><b>日時</b><span>'+esc(e.dateLabel)+'</span></div>'+
+    '<div class="pill"><b>会場</b><span>'+esc(e.place)+'</span></div>'+
+    (e.fee?'<div class="pill"><b>参加費</b><span>'+esc(e.fee)+'</span></div>':'')+
+  '</div>';
+}
+function summaryHTML(e){ return e.summary ? '<p class="summary">'+esc(tidySummary(e.summary))+'</p>' : ''; }
+function qrHTML(applyOK){
+  var qrApply = applyOK ? '<div class="item"><div id="qr-apply"></div><div class="lbl">お申し込みはこちら</div></div>' : '';
+  return '<div class="qr"><div class="item"><div id="qr-site"></div><div class="lbl">ホームページ</div></div>'+qrApply+'</div>';
+}
+var FOOT='<div class="foot">船堀会 ｜ 地域でつなぐ介護・医療の連携　／　お問い合わせ：funaborikai@gmail.com　／　funaborikai.github.io</div>';
+function brandTop(e){
+  return '<div class="brand"><img src="logo-mark.png" onerror="this.style.display=\'none\'"><span>船堀会 勉強会のご案内</span></div>'+
+    '<div class="no">第'+esc(e.no)+'回</div>'+
+    '<div class="ttl">'+fmtTitle(e.title)+'</div>';
+}
+
+/* ---- レイアウト別ビルダー ---- */
+function buildWave(e,applyOK){
+  return decoHTML()+
+    '<div class="top">'+brandTop(e)+WAVE+'</div>'+
+    '<div class="body">'+
+      '<div class="speakers">'+e.speakers.map(speakerBlock).join('')+'</div>'+
+      pillsHTML(e)+summaryHTML(e)+partHTML(e)+qrHTML(applyOK)+
+    '</div>'+FOOT;
+}
+function buildCenter(e,applyOK){
+  return decoHTML()+
+    '<div class="top">'+brandTop(e)+WAVE+'</div>'+
+    '<div class="body">'+
+      '<div class="speakers-c">'+e.speakers.map(speakerCenter).join('')+'</div>'+
+      pillsHTML(e)+summaryHTML(e)+partHTML(e)+qrHTML(applyOK)+
+    '</div>'+FOOT;
+}
+function buildSide(e,applyOK){
+  var s=e.social||{};
+  var info='<div class="info">'+
+    '<div class="row"><b>日時</b><span>'+esc(e.dateLabel)+'</span></div>'+
+    '<div class="row"><b>会場</b><span>'+esc(e.place)+'</span></div>'+
+    (e.fee?'<div class="row"><b>参加費</b><span>'+esc(e.fee)+'</span></div>':'')+
+    '</div>';
+  return decoHTML()+
+    '<div class="side">'+
+      '<div class="side-l">'+brandTop(e)+info+qrHTML(applyOK)+'</div>'+
+      '<div class="side-r">'+
+        '<div class="speakers">'+e.speakers.map(speakerBlock).join('')+'</div>'+
+        summaryHTML(e)+partHTML(e)+
+      '</div>'+
+    '</div>'+FOOT;
+}
+function buildMinimal(e,applyOK){ return buildWave(e,applyOK); }
+function buildPop(e,applyOK){ return buildWave(e,applyOK); }
+
+function genQR(e,applyOK){
+  try{ new QRCode(document.getElementById('qr-site'), {text:'https://funaborikai.github.io/', width:118, height:118, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){}
+  if(applyOK){ try{ new QRCode(document.getElementById('qr-apply'), {text:e.formUrl, width:118, height:118, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){} }
+}
+function renderFlyer(e){
+  var el=document.getElementById('flyer');
+  if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; return; }
+  var applyOK = String(e.formUrl||'').indexOf('http')===0;
+  var lay=layoutName(e.layout);
+  var builders={ wave:buildWave, center:buildCenter, side:buildSide, minimal:buildMinimal, pop:buildPop };
+  el.className='flyer lay-'+lay+themeClass(e.theme);
+  el.innerHTML=(builders[lay]||buildWave)(e,applyOK);
+  genQR(e,applyOK);
+}
+loadEvents().then(function(events){ var sp=splitEvents(events); renderFlyer(sp.upcoming[0]||sp.past[0]); })
+  .catch(function(){ renderFlyer(null); });
+</script>
+</body>
+</html>

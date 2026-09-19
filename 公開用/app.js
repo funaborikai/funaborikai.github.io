@@ -81,7 +81,7 @@ function rowToEvent(h, cells){
     no:get("回"), title:get("タイトル"), summary:get("要約"), speakers,
     datetime:dtRaw.replace(/\//g,"-").replace(" ","T"),
     dateLabel:get("日時表示")||dtRaw,
-    place:get("会場"), fee:get("参加費"), party:get("懇親会"), notes:get("注意事項"), social:{place:get("懇親会場所"),time:get("懇親会時間"),fee:get("懇親会参加費"),cancel:get("懇親会キャンセル"),email:get("懇親会メール")}, formUrl:get("申込フォームURL")
+    place:get("会場"), fee:get("参加費"), party:get("懇親会"), notes:get("注意事項"), social:{place:get("懇親会場所"),time:get("懇親会時間"),fee:get("懇親会参加費"),cancel:get("懇親会キャンセル"),email:get("懇親会メール")}, theme:get("テーマ")||get("デザイン"), layout:get("レイアウト")||get("型")||get("レイアウト種別"), formUrl:get("申込フォームURL")
   };
 }
 
