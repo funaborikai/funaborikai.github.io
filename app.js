@@ -271,6 +271,7 @@ async function loadReports(){
     const data = rows.slice(1).map(function(cells){
       return { date:get(cells,"日付"), title:get(cells,"タイトル"), body:get(cells,"本文"),
         photo:driveImg(get(cells,"写真")||get(cells,"写真URL")),
+        url:get(cells,"URL")||get(cells,"リンク")||get(cells,"詳細URL")||get(cells,"詳細サイトURL"),
         published: h.indexOf("公開")>=0 ? isPublished(get(cells,"公開")) : true };
     }).filter(r=>r.published && (r.title||r.body));
     data.reverse();
@@ -279,8 +280,9 @@ async function loadReports(){
 }
 
 function reportHTML(r){
-  const img = r.photo ? '<img class="rep-thumb" src="'+esc(r.photo)+'" alt="'+esc(r.title)+'" loading="lazy" onerror="this.outerHTML=\'<span class=&quot;rep-thumb rep-noimg&quot;></span>\'">' : '<span class="rep-thumb rep-noimg"></span>';
-  return '<button type="button" class="rep-card" data-date="'+esc(r.date)+'" data-title="'+esc(r.title)+'" data-body="'+esc(tidySummary(r.body))+'" data-photo="'+esc(r.photo||"")+'">'+
+  const hasPhoto = !!(r.photo && String(r.photo).trim());
+  const img = hasPhoto ? '<img class="rep-thumb" src="'+esc(r.photo)+'" alt="'+esc(r.title)+'" loading="lazy" onerror="var c=this.closest(&quot;.rep-card&quot;);if(c)c.classList.add(&quot;no-photo&quot;);this.remove()">' : '';
+  return '<button type="button" class="rep-card'+(hasPhoto?'':' no-photo')+'" data-date="'+esc(r.date)+'" data-title="'+esc(r.title)+'" data-body="'+esc(tidySummary(r.body))+'" data-photo="'+esc(r.photo||"")+'" data-url="'+esc(r.url||"")+'">'+
     img+'<span class="rep-cap"><span class="rep-date">'+esc(r.date)+'</span><span class="rep-title">'+esc(r.title)+'</span></span></button>';
 }
 function setupReports(rm, reports){
@@ -288,7 +290,7 @@ function setupReports(rm, reports){
   let modal=document.getElementById("rep-modal");
   if(!modal){
     modal=document.createElement("div"); modal.id="rep-modal"; modal.className="rep-modal";
-    modal.innerHTML='<div class="rep-box"><button type="button" class="rep-close" aria-label="閉じる">×</button><img class="rep-big" alt=""><div class="rep-mbody"><p class="rep-mdate"></p><h3 class="rep-mtitle"></h3><p class="rep-mtext"></p></div></div>';
+    modal.innerHTML='<div class="rep-box"><button type="button" class="rep-close" aria-label="閉じる">×</button><img class="rep-big" alt=""><div class="rep-mbody"><p class="rep-mdate"></p><h3 class="rep-mtitle"></h3><p class="rep-mtext"></p><a class="rep-mlink" target="_blank" rel="noopener" hidden>詳しくはこちら ▶</a></div></div>';
     document.body.appendChild(modal);
     const close=function(){ modal.classList.remove("open"); };
     modal.addEventListener("click",function(e){ if(e.target===modal || e.target.classList.contains("rep-close")) close(); });
@@ -301,6 +303,8 @@ function setupReports(rm, reports){
       modal.querySelector(".rep-mdate").textContent=card.getAttribute("data-date")||"";
       modal.querySelector(".rep-mtitle").textContent=card.getAttribute("data-title")||"";
       modal.querySelector(".rep-mtext").textContent=card.getAttribute("data-body")||"";
+      var lk=modal.querySelector(".rep-mlink"); var url=card.getAttribute("data-url")||"";
+      if(url.indexOf("http")===0){ lk.href=url; lk.hidden=false; } else { lk.hidden=true; }
       modal.classList.add("open");
     });
   });
