@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チラシ素材（今月の勉強会）｜ 船堀会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#5b4630; --coral:#f3996e; --coral-d:#e87f51; --peach:#fbd2b3; --muted:#a78f81; --line:#f3e6d8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#fff7ef; font-family:"M PLUS Rounded 1c",system-ui,"Hiragino Maru Gothic ProN",Meiryo,sans-serif; color:var(--ink); line-height:1.8; }
+  .wrap{ max-width:760px; margin:0 auto; padding:28px 18px 60px; }
+  h1{ font-family:"Zen Maru Gothic",sans-serif; font-size:26px; margin:0 0 6px; }
+  .sub{ color:var(--muted); font-size:14px; margin:0 0 22px; }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:20px; box-shadow:0 6px 18px rgba(190,140,110,.12); padding:22px 24px; margin:0 0 20px; }
+  .card h2{ font-family:"Zen Maru Gothic",sans-serif; font-size:19px; color:var(--coral-d); margin:0 0 6px; }
+  .hint{ color:var(--muted); font-size:13px; margin:0 0 12px; }
+  .box{ background:#fff8f2; border:1px dashed var(--peach); border-radius:14px; padding:14px 16px; font-size:14px; white-space:pre-wrap; word-break:break-word; margin:0 0 12px; font-family:inherit; max-height:340px; overflow:auto; }
+  .btn{ background:linear-gradient(135deg,#f8b07f,var(--coral)); color:#fff; border:none; border-radius:999px; padding:11px 26px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(243,153,110,.35); font-family:inherit; }
+  .btn:hover{ transform:translateY(-1px); }
+  .imgs{ display:flex; gap:18px; flex-wrap:wrap; }
+  .imgs figure{ margin:0; text-align:center; }
+  .imgs img{ width:130px; height:130px; object-fit:contain; background:#fff6ef; border:1px solid var(--line); border-radius:14px; display:block; }
+  .imgs figcaption{ font-size:12.5px; margin-top:6px; }
+  .imgs a{ color:var(--coral-d); font-size:12.5px; }
+  .mini{ font-size:12.5px; color:var(--muted); word-break:break-all; }
+  .empty{ color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>チラシ素材（今月の勉強会）</h1>
+  <p class="sub">「公開」シートの最新の回を自動で読み込みます。下の②をコピーして ChatGPT に貼り、③の画像を添付するだけです。</p>
+  <div id="mount"><p class="empty">読み込み中…</p></div>
+</div>
+
+<script src="app.js?v=28"></script>
+<script>
+function copyText(id, btn){
+  var t=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(t).then(function(){ var o=btn.textContent; btn.textContent='コピーしました ✓'; setTimeout(function(){btn.textContent=o;},1500); },
+  function(){ var el=document.getElementById(id); var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); });
+}
+function briefText(e){
+  var sp=e.speakers.map(function(s,i){
+    return '・講師'+(i+1)+'：'+nameHonor(s.name)+(s.company?'（'+s.company+'）':'')+(s.profile?'\n　　プロフィール：'+s.profile:'');
+  }).join('\n');
+  var applyOK=String(e.formUrl||'').indexOf('http')===0;
+  return '【船堀会 第'+e.no+'回 勉強会】\n'+
+    'タイトル：'+e.title+'\n'+
+    '日時：'+e.dateLabel+'\n'+
+    '会場：'+e.place+'\n'+
+    (e.fee?'参加費：'+e.fee+'\n':'')+
+    '講師：\n'+sp+'\n'+
+    (e.summary?'内容：\n'+tidySummary(e.summary)+'\n':'')+
+    (applyOK?'申込フォーム：'+e.formUrl+'\n':'')+
+    'ホームページ：https://funaborikai.github.io/';
+}
+function promptText(e){
+  return 'あなたはプロのグラフィックデザイナーです。次の情報で、日本の地域向け「介護・医療・福祉の勉強会」告知チラシ（A4縦・印刷用）を、やわらかく親しみやすいデザインで作ってください。\n'+
+    '・四角い色ベタの帯は避け、波・曲線・角丸・ふんわりした飾りを使う。\n'+
+    '・タイトルを大きく主役に。講師の顔写真は丸く、所属ロゴを添える。\n'+
+    '・日時／会場／参加費を見やすく。下部にQRコード（ホームページ・申込）用のスペースを空ける。\n'+
+    '・配色は内容に合った優しい色合いで。\n'+
+    '・講師の顔写真と所属ロゴは、この後この画像を添付します。その画像を使ってください。\n・日本語の文字は正確に、崩さないこと。\n\n'+
+    '【チラシに載せる情報】\n'+briefText(e);
+}
+function imgsCard(e){
+  var items='';
+  e.speakers.forEach(function(s,i){
+    if(s.photo) items+='<figure><img src="'+esc(s.photo)+'" alt=""><figcaption>講師'+(i+1)+' 写真<br><a href="'+esc(s.photo)+'" target="_blank" rel="noopener">開く/保存</a></figcaption></figure>';
+    if(s.logo)  items+='<figure><img src="'+esc(s.logo)+'" alt=""><figcaption>講師'+(i+1)+' ロゴ<br><a href="'+esc(s.logo)+'" target="_blank" rel="noopener">開く/保存</a></figcaption></figure>';
+  });
+  if(!items) return '';
+  return '<div class="card"><h2>③ 画像（保存して ChatGPT に添付）</h2><p class="hint">写真・ロゴを保存して、ChatGPT のメッセージに添付して使えます。</p><div class="imgs">'+items+'</div></div>';
+}
+function render(e){
+  var m=document.getElementById('mount');
+  if(!e){ m.innerHTML='<div class="card"><p class="empty">まだ勉強会が登録されていません。「公開」シートに入力すると、ここに素材が出ます。</p></div>'; return; }
+  m.innerHTML=
+    '<div class="card"><h2>① チラシ用データ</h2><p class="hint">そのまま使える整形済みデータです（②のプロンプトにも含まれています）。</p>'+
+      '<pre id="brief" class="box">'+esc(briefText(e))+'</pre><button class="btn" onclick="copyText(\'brief\',this)">コピー</button></div>'+
+    '<div class="card"><h2>② ChatGPT用プロンプト</h2><p class="hint">ChatGPT に貼って送るだけ。デザイン案を作ってくれます。</p>'+
+      '<pre id="prompt" class="box">'+esc(promptText(e))+'</pre><button class="btn" onclick="copyText(\'prompt\',this)">コピー</button></div>'+
+    imgsCard(e);
+}
+loadEvents().then(function(events){ var sp=splitEvents(events); render(sp.upcoming[0]||sp.past[0]); })
+  .catch(function(){ render(null); });
+</script>
+</body>
+</html>
