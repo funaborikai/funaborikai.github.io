@@ -14,6 +14,15 @@
   .toolbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid #ddd; padding:12px 16px; display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; }
   .toolbar .lbl{ font-size:14px; color:#8a715f; }
   .toolbar .btn{ background:linear-gradient(135deg,#f8b07f,#f3996e); color:#fff; border:none; border-radius:999px; padding:11px 26px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(243,153,110,.35); font-family:inherit; }
+  .toolbar .seg{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .toolbar .seg-lbl{ font-size:12px; color:#8a715f; font-weight:700; margin-right:2px; }
+  .toolbar .seg button{ border:1px solid #e6d8cc; background:#fff; color:#7a6455; border-radius:999px; padding:6px 13px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .toolbar .seg button:hover{ border-color:#f3996e; }
+  .toolbar .seg button.on{ background:#f3996e; color:#fff; border-color:#f3996e; }
+  .toolbar .seg button.on.c-blue{ background:#5aa6cf; border-color:#5aa6cf; }
+  .toolbar .seg button.on.c-green{ background:#7cc487; border-color:#7cc487; }
+  .toolbar .seg button.on.c-yellow{ background:#f0a842; border-color:#f0a842; }
+  .toolbar select{ font-family:inherit; font-size:13px; font-weight:700; color:#7a6455; border:1px solid #e6d8cc; border-radius:999px; padding:7px 14px; background:#fff; cursor:pointer; max-width:340px; }
   .page{ display:flex; justify-content:center; padding:20px; }
   .flyer{ --tint:#fff; --band:#fbe5d6; width:210mm; min-height:297mm; background:#fff9f0; box-shadow:0 10px 34px rgba(0,0,0,.22); position:relative; overflow:hidden; display:flex; flex-direction:column; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   /* テーマ配色 */
@@ -133,12 +142,27 @@
 </head>
 <body>
 <div class="toolbar">
-  <span class="lbl">🖼 勉強会チラシ（「公開」シートの最新イベントから自動生成）</span>
+  <div class="seg"><span class="seg-lbl">回</span><select id="ev-select"></select></div>
+  <div class="seg" id="seg-lay">
+    <span class="seg-lbl">デザイン</span>
+    <button data-lay="wave">波型</button>
+    <button data-lay="center">中央</button>
+    <button data-lay="side">サイド</button>
+    <button data-lay="minimal">ミニマル</button>
+    <button data-lay="pop">ポップ</button>
+  </div>
+  <div class="seg" id="seg-theme">
+    <span class="seg-lbl">色</span>
+    <button data-th="">標準</button>
+    <button data-th="blue" class="c-blue">青</button>
+    <button data-th="green" class="c-green">緑</button>
+    <button data-th="yellow" class="c-yellow">黄</button>
+  </div>
   <button class="btn" onclick="window.print()">🖨 印刷 / PDFで保存</button>
 </div>
 <div class="page"><div class="flyer" id="flyer"><div class="empty">読み込み中…</div></div></div>
 
-<script src="app.js?v=28"></script>
+<script src="app.js?v=31"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 var WAVE='<svg class="wave" viewBox="0 0 1200 110" preserveAspectRatio="none"><path fill="#fff9f0" d="M0,58 C170,112 340,18 540,54 C760,94 900,20 1120,56 C1160,64 1200,60 1200,60 L1200,110 L0,110 Z"></path></svg>';
@@ -248,18 +272,50 @@ function genQR(e,applyOK){
   try{ new QRCode(document.getElementById('qr-site'), {text:'https://funaborikai.github.io/', width:118, height:118, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){}
   if(applyOK){ try{ new QRCode(document.getElementById('qr-apply'), {text:e.formUrl, width:118, height:118, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){} }
 }
-function renderFlyer(e){
-  var el=document.getElementById('flyer');
+function themeKey(t){ t=String(t||'').trim();
+  if(/青|ブルー|医療|blue/i.test(t)) return 'blue';
+  if(/緑|グリーン|福祉|green/i.test(t)) return 'green';
+  if(/黄|イエロー|オレンジ|交流|にぎやか|yellow/i.test(t)) return 'yellow';
+  return '';
+}
+var EVENT=null, curLay='wave', curTheme='';
+function syncButtons(){
+  var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ ls[i].classList.toggle('on', ls[i].getAttribute('data-lay')===curLay); }
+  var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ ts[j].classList.toggle('on', ts[j].getAttribute('data-th')===curTheme); }
+}
+function draw(){
+  var el=document.getElementById('flyer'), e=EVENT;
   if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; return; }
   var applyOK = String(e.formUrl||'').indexOf('http')===0;
-  var lay=layoutName(e.layout);
   var builders={ wave:buildWave, center:buildCenter, side:buildSide, minimal:buildMinimal, pop:buildPop };
-  el.className='flyer lay-'+lay+themeClass(e.theme);
-  el.innerHTML=(builders[lay]||buildWave)(e,applyOK);
+  el.className='flyer lay-'+curLay+(curTheme?' theme-'+curTheme:'');
+  el.innerHTML=(builders[curLay]||buildWave)(e,applyOK);
   genQR(e,applyOK);
+  syncButtons();
 }
-loadEvents().then(function(events){ var sp=splitEvents(events); renderFlyer(sp.upcoming[0]||sp.past[0]); })
-  .catch(function(){ renderFlyer(null); });
+function wireButtons(){
+  var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ (function(b){ b.onclick=function(){ curLay=b.getAttribute('data-lay'); draw(); }; })(ls[i]); }
+  var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ (function(b){ b.onclick=function(){ curTheme=b.getAttribute('data-th'); draw(); }; })(ts[j]); }
+}
+var ALL=[];
+function selectEvent(e){ EVENT=e; if(e){ curLay=layoutName(e.layout); curTheme=themeKey(e.theme); } draw(); }
+loadEvents().then(function(events){
+  var sp=splitEvents(events);
+  ALL=sp.upcoming.concat(sp.past);
+  ALL.sort(function(a,b){ return (parseInt(b.no,10)||0)-(parseInt(a.no,10)||0); });
+  var def=sp.upcoming[0]||sp.past[0];
+  var sel=document.getElementById('ev-select'); sel.innerHTML=''; var defIdx=0;
+  ALL.forEach(function(e,i){
+    var o=document.createElement('option'); o.value=i;
+    var t=String(e.title||'').split(/[ 　]*[〜～]/)[0]; if(t.length>22) t=t.slice(0,22)+'…';
+    o.textContent='第'+e.no+'回：'+t; sel.appendChild(o);
+    if(def && e.no===def.no) defIdx=i;
+  });
+  sel.value=defIdx;
+  sel.onchange=function(){ selectEvent(ALL[+sel.value]); };
+  wireButtons();
+  selectEvent(ALL[defIdx]||def);
+}).catch(function(){ EVENT=null; wireButtons(); draw(); });
 </script>
 </body>
 </html>
