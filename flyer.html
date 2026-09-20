@@ -29,7 +29,8 @@
   .toolbar .seg button.on.c-red{ background:#d44a4f; border-color:#d44a4f; }
   .toolbar select{ font-family:inherit; font-size:13px; font-weight:700; color:#7a6455; border:1px solid #e6d8cc; border-radius:999px; padding:7px 14px; background:#fff; cursor:pointer; max-width:340px; }
   .page{ display:flex; justify-content:center; padding:20px; }
-  .flyer{ --tint:#fff; --band:#fbe5d6; width:210mm; min-height:297mm; background:#fff9f0; box-shadow:0 10px 34px rgba(0,0,0,.22); position:relative; overflow:hidden; display:flex; flex-direction:column; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .flyer{ --tint:#fff; --band:#fbe5d6; width:210mm; height:297mm; background:#fff9f0; box-shadow:0 10px 34px rgba(0,0,0,.22); position:relative; overflow:hidden; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .sheet{ width:100%; min-height:297mm; background:inherit; position:relative; display:flex; flex-direction:column; transform-origin:top center; }
   /* テーマ配色 */
   .flyer.theme-blue{ --coral:#74b6d6; --coral-d:#3d8cb5; --pink-d:#5aa6cf; --peach:#bcdcec; --tint:#eef6fb; --band:#dcebf4; }
   .flyer.theme-green{ --coral:#8fca8f; --coral-d:#4f9a56; --pink-d:#7cc487; --peach:#cbe7c6; --tint:#eef8ec; --band:#dcefd7; }
@@ -45,12 +46,12 @@
   .deco .dot{ position:absolute; border-radius:50%; }
   .deco .spark{ position:absolute; color:#fff; opacity:.7; }
   /* 上部：波型（四角い帯なし） */
-  .top{ position:relative; z-index:1; background:linear-gradient(160deg,var(--coral),var(--pink-d)); color:#fff; padding:28px 46px 82px; text-align:left; }
-  .top .brand{ display:flex; align-items:center; justify-content:flex-start; gap:14px; font-size:20px; font-weight:700; opacity:.98; }
-  .top .brand img{ height:54px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
-  .top .no{ display:inline-block; background:rgba(255,255,255,.24); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:3px 20px; font-size:15px; margin:12px 0 12px; font-weight:700; }
-  .top .ttl{ font-family:"Zen Maru Gothic",sans-serif; font-size:34px; font-weight:900; line-height:1.35; text-shadow:0 2px 10px rgba(0,0,0,.16); word-break:keep-all; overflow-wrap:anywhere; }
-  .top .wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:74px; display:block; }
+  .top{ position:relative; z-index:1; background:linear-gradient(160deg,var(--coral),var(--pink-d)); color:#fff; padding:20px 46px 58px; text-align:left; }
+  .top .brand{ display:flex; align-items:center; justify-content:flex-start; gap:12px; font-size:18px; font-weight:700; opacity:.98; }
+  .top .brand img{ height:44px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+  .top .no{ display:inline-block; background:rgba(255,255,255,.24); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:2px 18px; font-size:14px; margin:9px 0 8px; font-weight:700; }
+  .top .ttl{ font-family:"Zen Maru Gothic",sans-serif; font-size:31px; font-weight:900; line-height:1.3; text-shadow:0 2px 10px rgba(0,0,0,.16); word-break:keep-all; overflow-wrap:anywhere; }
+  .top .wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:54px; display:block; }
   /* 本文 */
   .body{ position:relative; z-index:1; flex:1; padding:0 44px 20px; display:flex; flex-direction:column; }
   .speakers{ display:flex; flex-direction:column; gap:22px; margin:30px 0 8px; position:relative; z-index:2; }
@@ -63,8 +64,8 @@
   .org img{ height:60px; max-width:200px; object-fit:contain; background:#fff; border-radius:12px; padding:6px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
   .org span{ word-break:keep-all; overflow-wrap:anywhere; }
   .prof{ font-size:14px; color:#8a7a6e; line-height:1.85; margin:4px 0 0; }
-  .pills{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin:22px 0 18px; }
-  .pill{ background:#fff; border-radius:22px; padding:14px 24px; min-width:162px; text-align:center; box-shadow:0 4px 12px rgba(150,140,130,.16); border:1px solid #f0e6db; }
+  .pills{ display:flex; gap:12px; justify-content:center; margin:22px 0 18px; }
+  .pill{ flex:1 1 0; min-width:0; background:#fff; border-radius:20px; padding:13px 16px; text-align:center; box-shadow:0 4px 12px rgba(150,140,130,.16); border:1px solid #f0e6db; }
   .pill b{ display:block; color:var(--coral-d); font-size:12px; margin-bottom:4px; letter-spacing:.05em; }
   .pill span{ font-size:15px; font-weight:600; }
   .summary{ font-size:13.5px; line-height:1.75; margin:2px 0 16px; text-align:left; white-space:pre-line; }
@@ -342,20 +343,29 @@ function syncButtons(){
   var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ ls[i].classList.toggle('on', ls[i].getAttribute('data-lay')===curLay); }
   var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ ts[j].classList.toggle('on', ts[j].getAttribute('data-th')===curTheme); }
 }
+function fitSheet(){
+  var el=document.getElementById('flyer'); if(!el) return;
+  var sheet=el.querySelector('.sheet'); if(!sheet) return;
+  sheet.style.transform='none';
+  var pageH=el.clientHeight, natH=sheet.scrollHeight;
+  var s=(natH>pageH && pageH>0) ? (pageH/natH) : 1;
+  sheet.style.transform = s<1 ? 'scale('+s+')' : 'none';
+}
+function refit(){ fitSheet(); fitFlyer(); }
 function draw(){
   var el=document.getElementById('flyer'), e=EVENT;
-  if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; fitFlyer(); return; }
+  if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; refit(); return; }
   var applyOK = String(e.formUrl||'').indexOf('http')===0;
   var builders={ wave:buildWave, center:buildCenter, side:buildSide, minimal:buildMinimal, pop:buildPop };
   el.className='flyer lay-'+curLay+(curTheme?' theme-'+curTheme:'');
-  el.innerHTML=(builders[curLay]||buildWave)(e,applyOK);
+  el.innerHTML='<div class="sheet">'+(builders[curLay]||buildWave)(e,applyOK)+'</div>';
   genQR(e,applyOK);
   syncButtons();
-  fitFlyer();
-  Array.prototype.forEach.call(el.querySelectorAll('img'),function(im){ im.addEventListener('load',fitFlyer); im.addEventListener('error',fitFlyer); });
-  setTimeout(fitFlyer,400);
+  refit();
+  Array.prototype.forEach.call(el.querySelectorAll('img'),function(im){ im.addEventListener('load',refit); im.addEventListener('error',refit); });
+  setTimeout(refit,400); setTimeout(refit,1200);
 }
-window.addEventListener('resize',fitFlyer);
+window.addEventListener('resize',refit);
 function wireButtons(){
   var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ (function(b){ b.onclick=function(){ curLay=b.getAttribute('data-lay'); draw(); }; })(ls[i]); }
   var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ (function(b){ b.onclick=function(){ curTheme=b.getAttribute('data-th'); draw(); }; })(ts[j]); }
