@@ -136,8 +136,16 @@
   .flyer.lay-pop .party{ background:#fff; }
   .flyer.lay-pop .foot{ background:var(--coral); color:#fff; }
 
+  /* 画面フィット（スマホでもPDFと同じ形を全体表示） */
+  .fitwrap{ position:relative; margin:0 auto; }
+  .flyer{ transform-origin:top left; }
+  body.embed .toolbar{ display:none; }
+  body.embed .page{ padding:0; }
+  body.embed{ background:transparent; }
+  @media(max-width:820px){ .page{ padding:10px; } }
+
   @page{ size:A4; margin:0; }
-  @media print{ body{ background:#fff; } .toolbar{ display:none; } .page{ padding:0; } .flyer{ box-shadow:none; } }
+  @media print{ body{ background:#fff; } .toolbar{ display:none; } .page{ padding:0; } .flyer{ box-shadow:none; transform:none !important; } .fitwrap{ width:auto !important; height:auto !important; } }
 </style>
 </head>
 <body>
@@ -160,9 +168,9 @@
   </div>
   <button class="btn" onclick="window.print()">🖨 印刷 / PDFで保存</button>
 </div>
-<div class="page"><div class="flyer" id="flyer"><div class="empty">読み込み中…</div></div></div>
+<div class="page"><div class="fitwrap"><div class="flyer" id="flyer"><div class="empty">読み込み中…</div></div></div></div>
 
-<script src="app.js?v=30"></script>
+<script src="app.js?v=32"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 var WAVE='<svg class="wave" viewBox="0 0 1200 110" preserveAspectRatio="none"><path fill="#fff9f0" d="M0,58 C170,112 340,18 540,54 C760,94 900,20 1120,56 C1160,64 1200,60 1200,60 L1200,110 L0,110 Z"></path></svg>';
@@ -279,25 +287,44 @@ function themeKey(t){ t=String(t||'').trim();
   return '';
 }
 var EVENT=null, curLay='wave', curTheme='';
+function fitFlyer(){
+  var page=document.querySelector('.page'), wrap=document.querySelector('.fitwrap'), fl=document.getElementById('flyer');
+  if(!page||!wrap||!fl) return;
+  fl.style.transform='none'; wrap.style.width=''; wrap.style.height='';
+  var flW=fl.offsetWidth, flH=fl.offsetHeight;
+  if(!flW) return;
+  var cs=getComputedStyle(page);
+  var avail=page.clientWidth - parseFloat(cs.paddingLeft||0) - parseFloat(cs.paddingRight||0);
+  var scale=Math.min(1, avail/flW);
+  fl.style.transform='scale('+scale+')';
+  wrap.style.width=Math.ceil(flW*scale)+'px';
+  wrap.style.height=Math.ceil(flH*scale)+'px';
+}
 function syncButtons(){
   var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ ls[i].classList.toggle('on', ls[i].getAttribute('data-lay')===curLay); }
   var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ ts[j].classList.toggle('on', ts[j].getAttribute('data-th')===curTheme); }
 }
 function draw(){
   var el=document.getElementById('flyer'), e=EVENT;
-  if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; return; }
+  if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; fitFlyer(); return; }
   var applyOK = String(e.formUrl||'').indexOf('http')===0;
   var builders={ wave:buildWave, center:buildCenter, side:buildSide, minimal:buildMinimal, pop:buildPop };
   el.className='flyer lay-'+curLay+(curTheme?' theme-'+curTheme:'');
   el.innerHTML=(builders[curLay]||buildWave)(e,applyOK);
   genQR(e,applyOK);
   syncButtons();
+  fitFlyer();
+  Array.prototype.forEach.call(el.querySelectorAll('img'),function(im){ im.addEventListener('load',fitFlyer); im.addEventListener('error',fitFlyer); });
+  setTimeout(fitFlyer,400);
 }
+window.addEventListener('resize',fitFlyer);
 function wireButtons(){
   var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ (function(b){ b.onclick=function(){ curLay=b.getAttribute('data-lay'); draw(); }; })(ls[i]); }
   var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ (function(b){ b.onclick=function(){ curTheme=b.getAttribute('data-th'); draw(); }; })(ts[j]); }
 }
 var ALL=[];
+var PARAMS=new URLSearchParams(location.search);
+if(PARAMS.get('embed')==='1'){ document.body.classList.add('embed'); }
 function selectEvent(e){ EVENT=e; if(e){ curLay=layoutName(e.layout); curTheme=themeKey(e.theme); } draw(); }
 loadEvents().then(function(events){
   var sp=splitEvents(events);
@@ -311,6 +338,8 @@ loadEvents().then(function(events){
     o.textContent='第'+e.no+'回：'+t; sel.appendChild(o);
     if(def && e.no===def.no) defIdx=i;
   });
+  var noP=PARAMS.get('no');
+  if(noP){ for(var k=0;k<ALL.length;k++){ if(String(ALL[k].no)===String(noP)){ defIdx=k; break; } } }
   sel.value=defIdx;
   sel.onchange=function(){ selectEvent(ALL[+sel.value]); };
   wireButtons();

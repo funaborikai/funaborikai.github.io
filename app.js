@@ -171,6 +171,10 @@ function featureHTML(e){
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
   const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn secondary btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">参加・懇親会をキャンセルする ▶</a>' : "";
   const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
+  const flyerPrev = e.no ? '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
+    '<a class="flyer-prev-link" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener" title="チラシを大きく見る／印刷">'+
+    '<iframe src="flyer.html?no='+esc(e.no)+'&embed=1" loading="lazy" scrolling="no" tabindex="-1" title="今月のチラシ"></iframe>'+
+    '<span class="flyer-prev-cta">🔍 タップで拡大 / 印刷（PDF保存）</span></a></div>' : "";
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
     '<div class="body"><h3>'+fmtTitle(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
     '<div class="grid">'+
@@ -181,7 +185,7 @@ function featureHTML(e){
     '</div>'+
     topCta+
     '<div class="speakers"><h4>講師</h4>'+e.speakers.map(speakerHTML).join("")+'</div>'+
-    socialHTML(e)+cta+'</div></div>';
+    socialHTML(e)+cta+flyerPrev+'</div></div>';
 }
 
 function archDateLabel(e){
@@ -192,9 +196,10 @@ function archDateLabel(e){
 }
 function archItemHTML(e){
   const who = e.speakers.map(function(s){ return s.company ? s.company+" ／ "+nameHonor(s.name) : nameHonor(s.name); }).join(" ／ ");
+  const flyer = e.no ? '<a class="arch-flyer" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener">チラシ ▶</a>' : "";
   return '<div class="arch-item"><span class="no">第'+esc(e.no)+'回</span>'+
     '<div class="main"><p class="date">'+esc(archDateLabel(e))+'</p><h3>'+esc(e.title)+'</h3>'+
-    '<p class="who">'+esc(who)+'</p></div></div>';
+    '<p class="who">'+esc(who)+'</p>'+flyer+'</div></div>';
 }
 function placeIntoArchive(am, past){
   if(!am) return;
