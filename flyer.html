@@ -30,7 +30,7 @@
   .toolbar select{ font-family:inherit; font-size:13px; font-weight:700; color:#7a6455; border:1px solid #e6d8cc; border-radius:999px; padding:7px 14px; background:#fff; cursor:pointer; max-width:340px; }
   .page{ display:flex; justify-content:center; padding:20px; }
   .flyer{ --tint:#fff; --band:#fbe5d6; width:210mm; height:297mm; background:#fff9f0; box-shadow:0 10px 34px rgba(0,0,0,.22); position:relative; overflow:hidden; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .sheet{ width:100%; min-height:297mm; background:inherit; position:relative; display:flex; flex-direction:column; transform-origin:top center; }
+  .sheet{ width:100%; min-height:297mm; background:inherit; position:relative; display:flex; flex-direction:column; transform-origin:top left; }
   /* テーマ配色 */
   .flyer.theme-blue{ --coral:#74b6d6; --coral-d:#3d8cb5; --pink-d:#5aa6cf; --peach:#bcdcec; --tint:#eef6fb; --band:#dcebf4; }
   .flyer.theme-green{ --coral:#8fca8f; --coral-d:#4f9a56; --pink-d:#7cc487; --peach:#cbe7c6; --tint:#eef8ec; --band:#dcefd7; }
@@ -346,10 +346,18 @@ function syncButtons(){
 function fitSheet(){
   var el=document.getElementById('flyer'); if(!el) return;
   var sheet=el.querySelector('.sheet'); if(!sheet) return;
-  sheet.style.transform='none';
-  var pageH=el.clientHeight, natH=sheet.scrollHeight;
-  var s=(natH>pageH && pageH>0) ? (pageH/natH) : 1;
-  sheet.style.transform = s<1 ? 'scale('+s+')' : 'none';
+  var pageH=el.clientHeight, pageW=el.clientWidth;
+  if(!pageH||!pageW) return;
+  sheet.style.transform='none'; sheet.style.transformOrigin='top left'; sheet.style.width=pageW+'px';
+  var natH=sheet.scrollHeight;
+  if(natH<=pageH+1){ return; }               /* 収まっている → 全面フルサイズ */
+  var s=pageH/natH;
+  for(var it=0; it<3; it++){                  /* 幅を広げて測り直し→全面のまま縮小 */
+    sheet.style.width=(pageW/s)+'px';
+    s=Math.min(1, pageH/sheet.scrollHeight);
+  }
+  sheet.style.width=(pageW/s)+'px';
+  sheet.style.transform='scale('+s+')';
 }
 function refit(){ fitSheet(); fitFlyer(); }
 function draw(){
