@@ -82,7 +82,7 @@ function rowToEvent(h, cells){
     no:get("回"), title:get("タイトル"), summary:get("要約"), speakers,
     datetime:dtRaw.replace(/\//g,"-").replace(" ","T"),
     dateLabel:get("日時表示")||dtRaw,
-    place:get("会場"), fee:get("参加費"), party:get("懇親会"), notes:get("注意事項"), social:{place:get("懇親会場所"),time:get("懇親会時間"),fee:get("懇親会参加費"),cancel:get("懇親会キャンセル"),email:get("懇親会メール")}, theme:get("テーマ")||get("デザイン"), layout:get("レイアウト")||get("型")||get("レイアウト種別"), formUrl:get("申込フォームURL")
+    place:get("会場"), fee:get("参加費"), party:get("懇親会"), notes:get("注意事項"), social:{place:get("懇親会場所"),time:get("懇親会時間"),fee:get("懇親会参加費"),cancel:get("懇親会キャンセル"),email:get("懇親会メール")}, theme:get("テーマ")||get("デザイン"), layout:get("レイアウト")||get("型")||get("レイアウト種別"), formUrl:get("申込フォームURL"), pdf:get("チラシPDF")||get("チラシpdf")||get("PDF")||get("PDF URL")
   };
 }
 
@@ -171,11 +171,22 @@ function featureHTML(e){
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
   const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">本会・懇親会をキャンセルする ▶</a>' : "";
   const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
-  const flyerPrev = e.no ? '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
-    '<a class="flyer-prev-link" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener" title="チラシを大きく見る／印刷">'+
-    '<iframe src="flyer.html?no='+esc(e.no)+'&embed=1" loading="lazy" scrolling="no" tabindex="-1" title="今月のチラシ"></iframe>'+
-    '<span class="flyer-prev-cta">🔍 タップで拡大・印刷（PDF保存）</span></a>'+
-    '<p class="flyer-prev-note">ぜひ印刷して、勉強会の周知・お声がけにご活用ください。</p></div>' : "";
+  let flyerPrev = "";
+  if(e.no){
+    const pdfUrl = String(e.pdf||"").trim();
+    const note = '<p class="flyer-prev-note">ぜひ印刷して、勉強会の周知・お声がけにご活用ください。<br>※印刷はパソコンからがおすすめです（スマホだと2ページに分かれることがあります）。</p>';
+    if(pdfUrl.indexOf("http")===0){
+      flyerPrev = '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
+        '<a class="flyer-prev-link" href="'+esc(pdfView(pdfUrl))+'" target="_blank" rel="noopener" title="PDFで開く／印刷">'+
+        '<img class="flyer-prev-img" src="'+esc(driveImg(pdfUrl))+'" alt="今月のチラシ" loading="lazy">'+
+        '<span class="flyer-prev-cta">📄 PDFで開く / 印刷</span></a>'+note+'</div>';
+    } else {
+      flyerPrev = '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
+        '<a class="flyer-prev-link" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener" title="チラシを大きく見る／印刷">'+
+        '<iframe src="flyer.html?no='+esc(e.no)+'&embed=1" loading="lazy" scrolling="no" tabindex="-1" title="今月のチラシ"></iframe>'+
+        '<span class="flyer-prev-cta">🔍 タップで拡大・印刷（PDF保存）</span></a>'+note+'</div>';
+    }
+  }
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
     '<div class="body"><h3>'+fmtTitle(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
     '<div class="grid">'+
@@ -269,6 +280,12 @@ function driveImg(u){
   if(!/drive\.google|googleusercontent/.test(u)) return u;
   const m=u.match(/[-\w]{25,}/);
   return m ? "https://drive.google.com/thumbnail?id="+m[0]+"&sz=w1000" : u;
+}
+function pdfView(u){
+  u=String(u||"").trim(); if(!u) return "";
+  if(!/drive\.google/.test(u)) return u;
+  const m=u.match(/[-\w]{25,}/);
+  return m ? "https://drive.google.com/file/d/"+m[0]+"/view" : u;
 }
 async function loadReports(){
   if(!CONFIG.REPORTS_CSV_URL) return SAMPLE_REPORTS;

@@ -28,6 +28,7 @@
   .toolbar .seg button.on.c-orange{ background:#d9781f; border-color:#d9781f; }
   .toolbar .seg button.on.c-red{ background:#d44a4f; border-color:#d44a4f; }
   .toolbar select{ font-family:inherit; font-size:13px; font-weight:700; color:#7a6455; border:1px solid #e6d8cc; border-radius:999px; padding:7px 14px; background:#fff; cursor:pointer; max-width:340px; }
+  .toolbar .print-note{ font-size:12px; color:#a5806a; max-width:420px; line-height:1.5; }
   .page{ display:flex; justify-content:center; padding:20px; }
   .flyer{ --tint:#fff; --band:#fbe5d6; width:210mm; height:297mm; background:#fff9f0; box-shadow:0 10px 34px rgba(0,0,0,.22); position:relative; overflow:hidden; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .sheet{ width:100%; min-height:297mm; background:inherit; position:relative; display:flex; flex-direction:column; transform-origin:top left; }
@@ -189,6 +190,7 @@
   </div>
   <button class="btn" onclick="window.print()">🖨 印刷 / PDFで保存</button>
   <button class="btn save-btn" id="save-design">✔ この見た目で決定（保存）</button>
+  <span class="print-note">※印刷はパソコンからがおすすめです。スマートフォンから印刷・PDF化すると、2ページに分かれてしまうことがあります。</span>
 </div>
 <div class="page"><div class="fitwrap"><div class="flyer" id="flyer"><div class="empty">読み込み中…</div></div></div></div>
 
