@@ -235,6 +235,8 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 @media(max-width:560px){ .hero .hero-brand{font-size:44px} .hero .hero-catch{font-size:18px} }
 
 /* ⑥ 参加を申し込むボタン（大きく・目立つ） */
+.btn-cancel{font-size:14px;padding:11px 22px;box-shadow:var(--shadow-sm)}
+.btn-cancel:hover{transform:translateY(-2px) scale(1.01)}
 .btn-join{font-size:18px;padding:18px 44px;box-shadow:0 10px 22px rgba(248,184,79,.5)}
 .btn-join:hover{transform:translateY(-3px) scale(1.03)}
 @media(min-width:641px){ .btn-join{animation:joinBounce 2.6s ease-in-out infinite} }

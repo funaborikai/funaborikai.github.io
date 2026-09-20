@@ -11,7 +11,8 @@ const CONFIG = {
   SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=143586583&single=true&output=csv",
   REPORTS_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=828218348&single=true&output=csv",
   SCHEDULE_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQL32ULS5VWLJJf1sOh4UBgIcm-bBOU4VNOjazDaWaNn8Sv94qtUbFoJQ6gDUgztn4IJtxuI22g0i_j/pub?gid=1407874179&single=true&output=csv",
-  CONTACT_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSePLU1BvrMc3LwfKMR21jm-T5EjtvwsXnSaixPYV8ZQ2AJezw/viewform"
+  CONTACT_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSePLU1BvrMc3LwfKMR21jm-T5EjtvwsXnSaixPYV8ZQ2AJezw/viewform",
+  CANCEL_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSfHTGMNbLUl1N_D82eMAu3fGjMXR8si51hUdoo2OcnL8CqoyQ/viewform"
 };
 
 const SAMPLE_EVENTS = [
@@ -154,8 +155,11 @@ function socialHTML(e){
   const row=(k,v,wide)=> v?'<div class="meta'+(wide?' meta-wide':'')+'"><span class="k">'+k+'</span><span class="v">'+esc(v)+'</span></div>':"";
   let cancelRow="";
   if(cancel){
-    const link='<a href="'+esc(CONFIG.CONTACT_FORM_URL)+'" target="_blank" rel="noopener">お問い合わせフォーム</a>';
-    cancelRow='<div class="meta meta-wide"><span class="k">キャンセル</span><span class="v">'+esc(cancel).split("お問い合わせフォーム").join(link)+'</span></div>';
+    const cform=CONFIG.CANCEL_FORM_URL||CONFIG.CONTACT_FORM_URL;
+    const link='<a href="'+esc(cform)+'" target="_blank" rel="noopener">キャンセルフォーム</a>';
+    let cv=esc(cancel).split("お問い合わせフォーム").join(link).split("お問合せフォーム").join(link);
+    if(cv.indexOf("</a>")<0 && String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0){ cv+='　<a href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">キャンセルフォームを開く ▶</a>'; }
+    cancelRow='<div class="meta meta-wide"><span class="k">キャンセル</span><span class="v">'+cv+'</span></div>';
   }
   return '<div class="social"><h4>懇親会</h4><div class="grid">'+row("場所",s.place)+row("時間",s.time)+row("参加費",s.fee)+cancelRow+'</div></div>';
 }
@@ -165,7 +169,8 @@ function featureHTML(e){
   const notesRow = e.notes ? '<div class="meta meta-wide"><span class="k">注意事項</span><span class="v">'+esc(e.notes)+'</span></div>' : "";
   const joinBtn = (String(e.formUrl||"").indexOf("http")===0) ? '<a class="btn accent btn-join" href="'+esc(e.formUrl)+'" target="_blank" rel="noopener">参加を申し込む ▶</a>' : "";
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
-  const cta = joinBtn ? '<div class="cta">'+joinBtn+'<span class="note">ボタンを押すとお申し込みフォームが開きます。</span></div>' : "";
+  const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn secondary btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">参加・懇親会をキャンセルする ▶</a>' : "";
+  const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
     '<div class="body"><h3>'+fmtTitle(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
     '<div class="grid">'+
