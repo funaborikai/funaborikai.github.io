@@ -64,10 +64,10 @@
   .org img{ height:60px; max-width:200px; object-fit:contain; background:#fff; border-radius:12px; padding:6px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
   .org span{ word-break:keep-all; overflow-wrap:anywhere; }
   .prof{ font-size:14px; color:#8a7a6e; line-height:1.85; margin:4px 0 0; }
-  .pills{ display:flex; gap:12px; justify-content:center; margin:22px 0 18px; }
-  .pill{ flex:1 1 0; min-width:0; background:#fff; border-radius:20px; padding:13px 16px; text-align:center; box-shadow:0 4px 12px rgba(150,140,130,.16); border:1px solid #f0e6db; }
-  .pill b{ display:block; color:var(--coral-d); font-size:12px; margin-bottom:4px; letter-spacing:.05em; }
-  .pill span{ font-size:15px; font-weight:600; }
+  .pills{ display:flex; gap:12px; justify-content:center; margin:20px 0 16px; }
+  .pill{ flex:1 1 0; min-width:0; height:84px; overflow:hidden; background:#fff; border-radius:18px; padding:8px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(150,140,130,.16); border:1px solid #f0e6db; }
+  .pill b{ display:block; color:var(--coral-d); font-size:11px; margin-bottom:3px; letter-spacing:.04em; }
+  .pill span{ font-size:14px; font-weight:600; line-height:1.35; text-align:center; word-break:keep-all; overflow-wrap:anywhere; }
   .summary{ font-size:13.5px; line-height:1.75; margin:2px 0 16px; text-align:left; white-space:pre-line; }
   .qr{ display:flex; gap:42px; justify-content:center; margin-top:auto; padding-top:10px; }
   .qr .item{ text-align:center; }
@@ -343,23 +343,32 @@ function syncButtons(){
   var ls=document.querySelectorAll('#seg-lay button'); for(var i=0;i<ls.length;i++){ ls[i].classList.toggle('on', ls[i].getAttribute('data-lay')===curLay); }
   var ts=document.querySelectorAll('#seg-theme button'); for(var j=0;j<ts.length;j++){ ts[j].classList.toggle('on', ts[j].getAttribute('data-th')===curTheme); }
 }
+var SAFE=0.93;   /* ほんの少し小さめ（薄い余白）。スマホ印刷でも1枚に収めるため */
+function fitPills(){
+  var pills=document.querySelectorAll('#flyer .pills .pill');
+  for(var i=0;i<pills.length;i++){
+    var sp=pills[i].querySelector('span'); if(!sp) continue;
+    sp.style.fontSize=''; var fs=14, g=0;
+    while(pills[i].scrollHeight>pills[i].clientHeight+1 && fs>9.5 && g<40){ fs-=0.5; sp.style.fontSize=fs+'px'; g++; }
+  }
+}
 function fitSheet(){
   var el=document.getElementById('flyer'); if(!el) return;
   var sheet=el.querySelector('.sheet'); if(!sheet) return;
   var pageH=el.clientHeight, pageW=el.clientWidth;
   if(!pageH||!pageW) return;
-  sheet.style.transform='none'; sheet.style.transformOrigin='top left'; sheet.style.width=pageW+'px';
-  var natH=sheet.scrollHeight;
-  if(natH<=pageH+1){ return; }               /* 収まっている → 全面フルサイズ */
-  var s=pageH/natH;
-  for(var it=0; it<3; it++){                  /* 幅を広げて測り直し→全面のまま縮小 */
-    sheet.style.width=(pageW/s)+'px';
-    s=Math.min(1, pageH/sheet.scrollHeight);
+  var availW=pageW*SAFE, availH=pageH*SAFE;
+  var mx=(pageW-availW)/2, my=(pageH-availH)/2;
+  sheet.style.transformOrigin='top left'; sheet.style.transform='none'; sheet.style.width=availW+'px';
+  var natH=sheet.scrollHeight, s=1;
+  if(natH>availH){
+    s=availH/natH;
+    for(var it=0; it<3; it++){ sheet.style.width=(availW/s)+'px'; s=Math.min(1, availH/sheet.scrollHeight); }
+    sheet.style.width=(availW/s)+'px';
   }
-  sheet.style.width=(pageW/s)+'px';
-  sheet.style.transform='scale('+s+')';
+  sheet.style.transform='translate('+mx+'px,'+my+'px) scale('+s+')';
 }
-function refit(){ fitSheet(); fitFlyer(); }
+function refit(){ fitPills(); fitSheet(); fitFlyer(); }
 function draw(){
   var el=document.getElementById('flyer'), e=EVENT;
   if(!e){ el.className='flyer'; el.innerHTML='<div class="empty">次回の勉強会がまだ登録されていません。<br>「公開」シートに開催予定を入力すると、<br>ここに自動でチラシが表示されます。</div>'; refit(); return; }
