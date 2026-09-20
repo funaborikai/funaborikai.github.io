@@ -241,6 +241,7 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 .flyer-prev-link{display:inline-block;position:relative;width:100%;max-width:360px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 20px rgba(190,140,110,.22);background:#fff9f0}
 .flyer-prev-link iframe{width:100%;aspect-ratio:210/297;border:0;display:block;pointer-events:none}
 .flyer-prev-cta{position:absolute;left:0;right:0;bottom:0;padding:9px;background:rgba(74,59,50,.72);color:#fff;font-size:13px;font-weight:700}
+.flyer-prev-note{color:var(--muted);font-size:13px;margin:10px 0 0}
 .arch-flyer{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--coral-d);text-decoration:none;border:1px solid var(--peach);border-radius:999px;padding:3px 13px}
 .arch-flyer:hover{background:var(--tint)}
 .btn-cancel:hover{transform:translateY(-2px) scale(1.01)}

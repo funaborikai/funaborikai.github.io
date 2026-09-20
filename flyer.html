@@ -142,6 +142,8 @@
   body.embed .toolbar{ display:none; }
   body.embed .page{ padding:0; }
   body.embed{ background:transparent; }
+  /* 一般公開ではデザイン・色の切替を隠す（幹事は ?admin=1 で表示） */
+  body:not(.admin) #seg-lay, body:not(.admin) #seg-theme{ display:none; }
   @media(max-width:820px){ .page{ padding:10px; } }
 
   @page{ size:A4; margin:0; }
@@ -325,6 +327,7 @@ function wireButtons(){
 var ALL=[];
 var PARAMS=new URLSearchParams(location.search);
 if(PARAMS.get('embed')==='1'){ document.body.classList.add('embed'); }
+if(PARAMS.get('admin')==='1'||PARAMS.get('design')==='1'){ document.body.classList.add('admin'); }
 function selectEvent(e){ EVENT=e; if(e){ curLay=layoutName(e.layout); curTheme=themeKey(e.theme); } draw(); }
 loadEvents().then(function(events){
   var sp=splitEvents(events);

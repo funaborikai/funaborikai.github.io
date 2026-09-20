@@ -174,7 +174,8 @@ function featureHTML(e){
   const flyerPrev = e.no ? '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
     '<a class="flyer-prev-link" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener" title="チラシを大きく見る／印刷">'+
     '<iframe src="flyer.html?no='+esc(e.no)+'&embed=1" loading="lazy" scrolling="no" tabindex="-1" title="今月のチラシ"></iframe>'+
-    '<span class="flyer-prev-cta">🔍 タップで拡大 / 印刷（PDF保存）</span></a></div>' : "";
+    '<span class="flyer-prev-cta">🔍 タップで拡大・印刷（PDF保存）</span></a>'+
+    '<p class="flyer-prev-note">ぜひ印刷して、勉強会の周知・お声がけにご活用ください。</p></div>' : "";
   return '<div class="feature"><div class="top"><span class="badge">今月の勉強会</span><h2>第'+esc(e.no)+'回 船堀会</h2></div>'+
     '<div class="body"><h3>'+fmtTitle(e.title)+'</h3><p class="summary">'+esc(tidySummary(e.summary))+'</p>'+
     '<div class="grid">'+
