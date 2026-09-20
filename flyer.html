@@ -154,6 +154,9 @@
   body.embed{ background:transparent; }
   /* 一般公開ではデザイン・色の切替を隠す（幹事は ?admin=1 で表示） */
   body:not(.admin) #seg-lay, body:not(.admin) #seg-theme, body:not(.admin) #seg-ev{ display:none; }
+  #save-design{ display:none; }
+  body.admin #save-design{ display:inline-flex; align-items:center; }
+  .toolbar .save-btn{ background:linear-gradient(135deg,#7cc487,#4f9a56); box-shadow:0 4px 12px rgba(79,154,86,.35); }
   @media(max-width:820px){ .page{ padding:10px; } }
 
   @page{ size:A4; margin:0; }
@@ -184,6 +187,7 @@
     <button data-th="red" class="c-red">赤</button>
   </div>
   <button class="btn" onclick="window.print()">🖨 印刷 / PDFで保存</button>
+  <button class="btn save-btn" id="save-design">✔ この見た目で決定（保存）</button>
 </div>
 <div class="page"><div class="fitwrap"><div class="flyer" id="flyer"><div class="empty">読み込み中…</div></div></div></div>
 
@@ -191,6 +195,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 var WAVE='<svg class="wave" viewBox="0 0 1200 110" preserveAspectRatio="none"><path fill="#fff9f0" d="M0,58 C170,112 340,18 540,54 C760,94 900,20 1120,56 C1160,64 1200,60 1200,60 L1200,110 L0,110 Z"></path></svg>';
+var SAVE_URL='https://script.google.com/macros/s/AKfycbysm549vXH40jaOs7YodR2GmtCZlU6YUrcHhr7kTFUIGw8HZI5Iic2kw6Axvn_ZTAnOYQ/exec';
+var LAY_JP={wave:'波型',center:'中央',side:'サイド',minimal:'ミニマル',pop:'ポップ'};
+var TH_JP={'':'',blue:'青',green:'緑',yellow:'黄',purple:'紫',pink:'桃',teal:'青緑',orange:'橙',red:'赤'};
+function saveDesign(){
+  var btn=document.getElementById('save-design');
+  if(!EVENT||!EVENT.no||!btn) return;
+  var body='no='+encodeURIComponent(EVENT.no)+'&layout='+encodeURIComponent(LAY_JP[curLay]||'')+'&theme='+encodeURIComponent(TH_JP[curTheme]||'');
+  var old=btn.textContent; btn.textContent='保存中…'; btn.style.opacity='.6';
+  fetch(SAVE_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:body})
+    .then(function(){ btn.textContent='✔ 保存しました（数分で反映）'; btn.style.opacity='1'; setTimeout(function(){ btn.textContent=old; },3000); })
+    .catch(function(){ btn.textContent='⚠ 失敗・もう一度'; btn.style.opacity='1'; setTimeout(function(){ btn.textContent=old; },3000); });
+}
 function themeClass(t){ t=String(t||'').trim();
   if(/青|ブルー|医療|blue/i.test(t)) return ' theme-blue';
   if(/緑|グリーン|福祉|green/i.test(t)) return ' theme-green';
@@ -348,6 +364,7 @@ var ALL=[];
 var PARAMS=new URLSearchParams(location.search);
 if(PARAMS.get('embed')==='1'){ document.body.classList.add('embed'); }
 if(PARAMS.get('admin')==='1'||PARAMS.get('design')==='1'){ document.body.classList.add('admin'); }
+(function(){ var sd=document.getElementById('save-design'); if(sd) sd.onclick=saveDesign; })();
 function selectEvent(e){ EVENT=e; if(e){ curLay=layoutName(e.layout); curTheme=themeKey(e.theme); } draw(); }
 loadEvents().then(function(events){
   var sp=splitEvents(events);
