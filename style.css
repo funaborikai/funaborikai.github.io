@@ -235,7 +235,7 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 @media(max-width:560px){ .hero .hero-brand{font-size:44px} .hero .hero-catch{font-size:18px} }
 
 /* ⑥ 参加を申し込むボタン（大きく・目立つ） */
-.btn-cancel{font-size:14px;padding:11px 22px;box-shadow:var(--shadow-sm)}
+.btn-cancel{font-size:15px;padding:13px 26px;background:linear-gradient(135deg,#f5906f,#ec7d92);color:#fff;border:none;box-shadow:0 6px 14px rgba(236,125,146,.38)}
 .flyer-prev{margin:26px 0 4px;text-align:center}
 .flyer-prev-h{font-size:15px;color:var(--coral-d);margin:0 0 10px}
 .flyer-prev-link{display:inline-block;position:relative;width:100%;max-width:360px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 20px rgba(190,140,110,.22);background:#fff9f0}
@@ -244,7 +244,7 @@ footer .fnav a{margin-right:14px;line-height:2.1}
 .flyer-prev-note{color:var(--muted);font-size:13px;margin:10px 0 0}
 .arch-flyer{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--coral-d);text-decoration:none;border:1px solid var(--peach);border-radius:999px;padding:3px 13px}
 .arch-flyer:hover{background:var(--tint)}
-.btn-cancel:hover{transform:translateY(-2px) scale(1.01)}
+.btn-cancel:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 20px rgba(236,125,146,.46)}
 .btn-join{font-size:18px;padding:18px 44px;box-shadow:0 10px 22px rgba(248,184,79,.5)}
 .btn-join:hover{transform:translateY(-3px) scale(1.03)}
 @media(min-width:641px){ .btn-join{animation:joinBounce 2.6s ease-in-out infinite} }

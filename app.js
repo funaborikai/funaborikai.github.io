@@ -169,7 +169,7 @@ function featureHTML(e){
   const notesRow = e.notes ? '<div class="meta meta-wide"><span class="k">注意事項</span><span class="v">'+esc(e.notes)+'</span></div>' : "";
   const joinBtn = (String(e.formUrl||"").indexOf("http")===0) ? '<a class="btn accent btn-join" href="'+esc(e.formUrl)+'" target="_blank" rel="noopener">参加を申し込む ▶</a>' : "";
   const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
-  const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn secondary btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">参加・懇親会をキャンセルする ▶</a>' : "";
+  const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">本会・懇親会をキャンセルする ▶</a>' : "";
   const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
   const flyerPrev = e.no ? '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
     '<a class="flyer-prev-link" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener" title="チラシを大きく見る／印刷">'+
