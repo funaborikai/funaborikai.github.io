@@ -145,7 +145,7 @@ section.block p.sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 24px}
 .sp-body{flex:1;min-width:0}
 .speaker .name{font-weight:700;font-size:34px}
 .speaker .org{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;color:var(--coral-d);font-size:16.5px;font-weight:600;margin:6px 0 9px}
-.speaker .org-logo{flex:0 0 auto;height:72px;width:auto;max-width:220px;object-fit:contain;border-radius:10px;background:#fff;padding:6px;border:1px solid #f0e2d4;box-shadow:0 3px 9px rgba(190,140,110,.16)}
+.speaker .org-logo{flex:0 0 auto;height:144px;width:auto;max-width:440px;object-fit:contain;border-radius:12px;background:#fff;padding:8px;border:1px solid #f0e2d4;box-shadow:0 3px 9px rgba(190,140,110,.16)}
 .speaker .org span{flex:1 1 auto;min-width:0}
 .speaker .profile{color:var(--muted);font-size:16px;margin:0}
 
@@ -340,7 +340,7 @@ footer .fnav a{margin-right:14px;line-height:2.1}
   .speaker{flex-direction:column;align-items:center;text-align:center;gap:12px}
   .speaker .org{justify-content:center}
   .avatar{width:220px;height:220px;flex:0 0 auto;font-size:70px}
-  .speaker .org-logo{height:64px}
+  .speaker .org-logo{height:128px}
   .speaker .name{font-size:27px}
   .speaker .profile{font-size:14.5px}
 }
