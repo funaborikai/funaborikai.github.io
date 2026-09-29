@@ -338,6 +338,20 @@ function setupReports(rm, reports){
   });
 }
 
+function fitLines(el, maxLines){
+  if(!el) return;
+  el.style.fontSize="";
+  for(var i=0;i<50;i++){
+    var cs=getComputedStyle(el);
+    var lh=parseFloat(cs.lineHeight), fs=parseFloat(cs.fontSize);
+    if(!lh || isNaN(lh)) lh=fs*1.45;
+    if(el.scrollHeight <= lh*maxLines + 2) return;
+    if(fs<=15) return;
+    el.style.fontSize=(fs-0.5)+"px";
+  }
+}
+function fitFeatureTitle(){ var fm=document.getElementById("feature-mount"); if(fm) fitLines(fm.querySelector(".feature h3"),2); }
+window.addEventListener("resize", fitFeatureTitle);
 function initEvents(){
   const fm=document.getElementById("feature-mount");
   const am=document.getElementById("archive-mount");
@@ -350,6 +364,7 @@ function initEvents(){
       fm.innerHTML = sp.upcoming.length
         ? featureHTML(sp.upcoming[0])
         : '<div class="feature"><div class="body"><p class="empty">次回の勉強会は準備中です。決まり次第こちらに掲載します。</p></div></div>';
+      fitFeatureTitle();
     }
     if(am){ placeIntoArchive(am, sp.past); }
   });
