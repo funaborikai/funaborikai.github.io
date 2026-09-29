@@ -38,13 +38,13 @@ img{max-width:100%}
 header.site{position:sticky;top:0;z-index:50;background:rgba(255,250,244,.92);backdrop-filter:blur(10px);border-bottom:2px dotted var(--peach)}
 .nav{display:flex;align-items:center;justify-content:space-between;min-height:70px;flex-wrap:wrap;gap:6px}
 .logo{display:flex;align-items:center;gap:12px;font-size:21px;color:var(--ink);text-decoration:none}
-.logo .logo-mark{height:52px;width:auto;display:block;filter:drop-shadow(0 3px 5px rgba(190,140,110,.18))}
+.logo .logo-mark{height:70px;width:auto;display:block;filter:drop-shadow(0 3px 5px rgba(190,140,110,.18))}
 .logo small{display:block;font-size:11px;color:var(--muted);font-family:"M PLUS Rounded 1c",sans-serif;letter-spacing:.02em}
 .nav nav{display:flex;flex-wrap:wrap}
 .nav nav a{margin-left:6px;padding:9px 17px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:700;font-size:14.5px;transition:.16s;font-family:"M PLUS Rounded 1c",sans-serif}
 .nav nav a:hover{color:var(--coral-d);background:#fde9dc}
 .nav nav a.active{color:#fff;background:linear-gradient(135deg,var(--coral),var(--pink-d));box-shadow:var(--shadow-sm)}
-@media(max-width:560px){ .nav nav a{margin-left:2px;padding:7px 12px;font-size:13.5px} .logo{font-size:18px} .logo .logo-mark{height:44px} }
+@media(max-width:560px){ .nav nav a{margin-left:2px;padding:7px 12px;font-size:13.5px} .logo{font-size:18px} .logo .logo-mark{height:56px} }
 
 /* ---- ヒーロー（2カラム：テキスト＋写真スライド） ---- */
 .hero{position:relative;background:

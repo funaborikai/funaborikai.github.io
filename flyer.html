@@ -60,11 +60,11 @@
   .ring{ flex:0 0 auto; width:176px; height:176px; border-radius:50%; background:radial-gradient(circle,#fff,var(--peach)); padding:9px; box-shadow:0 10px 26px rgba(120,110,100,.28); margin:0; }
   .ring .ph{ width:100%; height:100%; border-radius:50%; object-fit:contain; background:#fff9f0; border:4px solid #fff; display:block; }
   .sp-body{ flex:1; min-width:0; }
-  .nm{ font-family:"Zen Maru Gothic",sans-serif; font-size:30px; font-weight:700; }
-  .org{ display:flex; align-items:center; justify-content:flex-start; gap:14px; color:var(--coral-d); font-weight:700; font-size:18px; margin:7px 0 6px; flex-wrap:wrap; }
-  .org img{ height:60px; max-width:200px; object-fit:contain; background:#fff; border-radius:12px; padding:6px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
+  .nm{ font-family:"Zen Maru Gothic",sans-serif; font-size:33px; font-weight:700; }
+  .org{ display:flex; align-items:center; justify-content:flex-start; gap:15px; color:var(--coral-d); font-weight:700; font-size:20px; margin:8px 0 7px; flex-wrap:wrap; }
+  .org img{ height:76px; max-width:240px; object-fit:contain; background:#fff; border-radius:12px; padding:6px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
   .org span{ word-break:keep-all; overflow-wrap:anywhere; }
-  .prof{ font-size:14px; color:#8a7a6e; line-height:1.85; margin:4px 0 0; }
+  .prof{ font-size:15.5px; color:#8a7a6e; line-height:1.8; margin:5px 0 0; }
   .pills{ display:flex; gap:12px; justify-content:center; margin:20px 0 16px; }
   .pill{ flex:1 1 0; min-width:0; height:84px; overflow:hidden; background:#fff; border-radius:18px; padding:8px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(150,140,130,.16); border:1px solid #f0e6db; }
   .pill b{ display:block; color:var(--coral-d); font-size:11px; margin-bottom:3px; letter-spacing:.04em; }
@@ -313,8 +313,8 @@ function buildMinimal(e,applyOK){ return buildWave(e,applyOK); }
 function buildPop(e,applyOK){ return buildWave(e,applyOK); }
 
 function genQR(e,applyOK){
-  try{ new QRCode(document.getElementById('qr-site'), {text:'https://funaborikai.github.io/', width:118, height:118, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){}
-  if(applyOK){ try{ new QRCode(document.getElementById('qr-apply'), {text:e.formUrl, width:118, height:118, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){} }
+  try{ new QRCode(document.getElementById('qr-site'), {text:'https://funaborikai.github.io/', width:100, height:100, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){}
+  if(applyOK){ try{ new QRCode(document.getElementById('qr-apply'), {text:e.formUrl, width:100, height:100, colorDark:'#4a3b32', colorLight:'#ffffff'}); }catch(err){} }
 }
 function themeKey(t){ t=String(t||'').trim();
   if(/紫|パープル|むらさき|purple/i.test(t)) return 'purple';

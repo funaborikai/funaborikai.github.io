@@ -39,10 +39,10 @@ const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&l
 function nameHonor(n){ n=String(n==null?"":n).trim(); if(!n) return ""; return /(氏|先生|様|さん|博士|教授|ちゃん|君|医師|院長|理事長)$/.test(n)?n:n+" 氏"; }
 function tidySummary(s){
   return String(s==null?"":s).replace(/\r/g,"")
-    .split(/\n{2,}/)
-    .map(function(p){ return p.split("\n").join(""); })
-    .filter(function(p){ return p.length>0; })
-    .join("\n\n");
+    .replace(/[ \t　]+\n/g,"\n")
+    .replace(/\n[ \t　]+/g,"\n")
+    .replace(/\n{3,}/g,"\n\n")
+    .trim();
 }
 
 function parseCSV(text){
