@@ -183,7 +183,7 @@ function featureHTML(e){
     } else {
       flyerPrev = '<div class="flyer-prev"><h4 class="flyer-prev-h">今月のチラシ</h4>'+
         '<a class="flyer-prev-link" href="flyer.html?no='+esc(e.no)+'" target="_blank" rel="noopener" title="チラシを大きく見る／印刷">'+
-        '<iframe src="flyer.html?no='+esc(e.no)+'&embed=1" loading="lazy" scrolling="no" tabindex="-1" title="今月のチラシ"></iframe>'+
+        '<iframe src="flyer.html?no='+esc(e.no)+'&embed=1&t='+Date.now()+'" loading="lazy" scrolling="no" tabindex="-1" title="今月のチラシ"></iframe>'+
         '<span class="flyer-prev-cta">🔍 タップで拡大・印刷（PDF保存）</span></a>'+note+'</div>';
     }
   }
@@ -352,6 +352,30 @@ function fitLines(el, maxLines){
 }
 function fitFeatureTitle(){ var fm=document.getElementById("feature-mount"); if(fm) fitLines(fm.querySelector(".feature h3"),2); }
 window.addEventListener("resize", fitFeatureTitle);
+/* 印刷時はアーカイブの折りたたみを全部開く（一括印刷用） */
+window.addEventListener("beforeprint", function(){ document.querySelectorAll("details.year-acc").forEach(function(d){ d.open=true; }); });
+function setupArchivePrint(){
+  var am=document.getElementById("archive-mount"); if(!am) return;
+  if(document.querySelector(".arch-print")) return;
+  var folds=Array.prototype.slice.call(document.querySelectorAll("details.year-acc"));
+  if(!folds.length) return;
+  var years=[];
+  folds.forEach(function(d){ var sm=d.querySelector("summary"); var m=sm&&sm.textContent.match(/([0-9]{4})年/); if(m && years.indexOf(m[1])<0) years.push(m[1]); });
+  years.sort(function(a,b){ return (+b)-(+a); });
+  var opts='<option value="all">すべての年</option>'+years.map(function(y){ return '<option value="'+y+'">'+y+'年</option>'; }).join("");
+  var box=document.createElement("div"); box.className="arch-print";
+  box.innerHTML='<span class="ap-lbl">印刷する年：</span><select id="arch-year">'+opts+'</select><button type="button" id="arch-print-btn" class="btn">🖨 印刷 / PDF保存</button>';
+  am.parentNode.insertBefore(box, am);
+  document.getElementById("arch-print-btn").onclick=function(){
+    var y=document.getElementById("arch-year").value;
+    folds.forEach(function(d){
+      var sm=d.querySelector("summary"); var m=sm&&sm.textContent.match(/([0-9]{4})年/); var yy=m?m[1]:"";
+      if(y==="all" || yy===y){ d.classList.remove("print-hide"); d.open=true; }
+      else { d.classList.add("print-hide"); }
+    });
+    window.print();
+  };
+}
 function initEvents(){
   const fm=document.getElementById("feature-mount");
   const am=document.getElementById("archive-mount");
@@ -366,7 +390,7 @@ function initEvents(){
         : '<div class="feature"><div class="body"><p class="empty">次回の勉強会は準備中です。決まり次第こちらに掲載します。</p></div></div>';
       fitFeatureTitle();
     }
-    if(am){ placeIntoArchive(am, sp.past); }
+    if(am){ placeIntoArchive(am, sp.past); setupArchivePrint(); }
   });
   if(scm){ loadSchedule().then(function(list){ scm.innerHTML = scheduleHTML(list); }); }
   if(rm){ loadReports().then(function(reports){ setupReports(rm, reports); }); }
