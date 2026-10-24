@@ -49,7 +49,7 @@
   /* 上部：波型（四角い帯なし） */
   .top{ position:relative; z-index:1; background:linear-gradient(160deg,var(--coral),var(--pink-d)); color:#fff; padding:20px 46px 58px; text-align:left; }
   .top .brand{ display:flex; align-items:center; justify-content:flex-start; gap:12px; font-size:18px; font-weight:700; opacity:.98; }
-  .top .brand img{ height:44px; }
+  .top .brand .bmark{ display:inline-block; width:44px; height:44px; background-position:center; background-size:contain; background-repeat:no-repeat; background-image:url('logo-mark.png'); }
   .top .no{ display:inline-block; background:rgba(255,255,255,.24); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:2px 18px; font-size:14px; margin:9px 0 8px; font-weight:700; }
   .top .ttl{ font-family:"Zen Maru Gothic",sans-serif; font-size:31px; font-weight:900; line-height:1.3; text-shadow:0 2px 10px rgba(0,0,0,.16); word-break:keep-all; overflow-wrap:anywhere; }
   .top .wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:54px; display:block; }
@@ -58,11 +58,11 @@
   .speakers{ display:flex; flex-direction:column; gap:22px; margin:30px 0 8px; position:relative; z-index:2; }
   .sp{ display:flex; gap:26px; align-items:center; text-align:left; }
   .ring{ flex:0 0 auto; width:215px; height:215px; border-radius:50%; background:radial-gradient(circle,#fff,var(--peach)); padding:10px; box-shadow:0 10px 26px rgba(120,110,100,.28); margin:0; }
-  .ring .ph{ width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:center 8%; background:#fff9f0; border:4px solid #fff; display:block; }
+  .ring .ph{ width:100%; height:100%; border-radius:50%; background-color:#fff9f0; background-position:center 8%; background-size:cover; background-repeat:no-repeat; border:4px solid #fff; display:block; }
   .sp-body{ flex:1; min-width:0; }
   .nm{ font-family:"Zen Maru Gothic",sans-serif; font-size:33px; font-weight:700; }
   .org{ display:flex; align-items:center; justify-content:flex-start; gap:15px; color:var(--coral-d); font-weight:700; font-size:20px; margin:8px 0 7px; flex-wrap:wrap; }
-  .org img{ height:118px; max-width:360px; object-fit:contain; background:#fff; border-radius:14px; padding:8px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
+  .org .orglogo{ display:inline-block; height:118px; width:260px; max-width:50%; background-color:#fff; background-position:center; background-size:contain; background-repeat:no-repeat; border-radius:14px; padding:8px; box-shadow:0 3px 9px rgba(150,140,130,.2); }
   .org span{ word-break:keep-all; overflow-wrap:anywhere; }
   .prof{ font-size:15.5px; color:#8a7a6e; line-height:1.8; margin:5px 0 0; }
   .pills{ display:flex; gap:12px; justify-content:center; margin:20px 0 16px; }
@@ -91,7 +91,7 @@
   .flyer.lay-center .sp-c{ text-align:center; margin-bottom:14px; }
   .flyer.lay-center .center-ph{ width:190px; height:190px; border-radius:50%; margin:14px auto 8px; background:radial-gradient(circle,#fff,var(--peach)); padding:9px; box-shadow:0 12px 28px rgba(120,110,100,.3); }
   .flyer.lay-center .speakers-c>.sp-c:first-child .center-ph{ margin-top:-92px; }
-  .flyer.lay-center .center-ph img{ width:100%; height:100%; border-radius:50%; object-fit:cover; object-position:center 8%; background:#fff9f0; border:4px solid #fff; display:block; }
+  .flyer.lay-center .center-ph .ph{ width:100%; height:100%; border-radius:50%; background-color:#fff9f0; background-position:center 8%; background-size:cover; background-repeat:no-repeat; border:4px solid #fff; display:block; }
   .flyer.lay-center .sp-c .nm{ text-align:center; }
   .flyer.lay-center .sp-c .org{ justify-content:center; }
   .flyer.lay-center .sp-c .prof{ text-align:center; max-width:640px; margin:6px auto 0; }
@@ -101,7 +101,7 @@
   .flyer.lay-side .side{ position:relative; z-index:1; flex:1; display:flex; }
   .flyer.lay-side .side-l{ width:38%; flex:0 0 38%; background:linear-gradient(165deg,var(--coral),var(--pink-d)); color:#fff; padding:34px 26px; display:flex; flex-direction:column; border-radius:0 70px 40px 0; position:relative; z-index:2; }
   .flyer.lay-side .side-l .brand{ display:flex; align-items:center; gap:10px; font-size:15px; font-weight:700; }
-  .flyer.lay-side .side-l .brand img{ height:40px; }
+  .flyer.lay-side .side-l .brand .bmark{ width:40px; height:40px; }
   .flyer.lay-side .side-l .no{ display:inline-block; align-self:flex-start; background:rgba(255,255,255,.24); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:3px 18px; font-size:14px; margin:16px 0 10px; font-weight:700; }
   .flyer.lay-side .side-l .ttl{ font-family:"Zen Maru Gothic",sans-serif; font-size:27px; font-weight:900; line-height:1.35; text-shadow:0 2px 8px rgba(0,0,0,.16); word-break:keep-all; overflow-wrap:anywhere; }
   .flyer.lay-side .side-l .info{ margin-top:22px; }
@@ -115,14 +115,14 @@
   .flyer.lay-side .side-r .sp{ gap:18px; }
   .flyer.lay-side .side-r .ring{ width:120px; height:120px; }
   .flyer.lay-side .side-r .nm{ font-size:24px; }
-  .flyer.lay-side .side-r .org img{ height:48px; }
+  .flyer.lay-side .side-r .org .orglogo{ height:48px; width:120px; }
 
   /* ===== レイアウト④ ミニマル（線画・帯なし） ===== */
   .flyer.lay-minimal{ background:#fffdf9; }
   .flyer.lay-minimal .deco{ display:none; }
   .flyer.lay-minimal .top{ background:none; color:var(--ink); text-align:left; padding:44px 48px 6px; }
   .flyer.lay-minimal .top .brand{ color:var(--coral-d); font-size:16px; }
-  .flyer.lay-minimal .top .brand img{ height:40px; filter:none; }
+  .flyer.lay-minimal .top .brand .bmark{ width:40px; height:40px; }
   .flyer.lay-minimal .top .no{ background:none; border:none; color:var(--coral-d); padding:0; font-size:15px; margin:16px 0 4px; }
   .flyer.lay-minimal .top .ttl{ color:var(--ink); text-shadow:none; border-left:6px solid var(--coral); padding-left:16px; }
   .flyer.lay-minimal .top .wave{ display:none; }
@@ -163,7 +163,11 @@
 
   @page{ size:A4; margin:0; }
   @media print{ body{ background:#fff; } .toolbar{ display:none; } .page{ padding:0; } .flyer{ box-shadow:none; transform:none !important; } .fitwrap{ width:auto !important; height:auto !important; }
-    .ring, .org img, .pill, .qr .item>div, .qr .item canvas, .qr .item img, .flyer.lay-center .center-ph, .deco .blob{ box-shadow:none !important; filter:none !important; }
+    .deco{ display:none !important; }
+    .top .brand, .flyer.lay-side .side-l .info b{ opacity:1 !important; }
+    .top .ttl, .flyer.lay-side .side-l .ttl{ text-shadow:none !important; }
+    .ring, .org .orglogo, .pill, .qr .item>div, .qr .item canvas, .qr .item img, .flyer.lay-center .center-ph{ box-shadow:none !important; filter:none !important; }
+    .qr .item canvas, .qr .item img{ border-radius:0 !important; }
   }
 </style>
 </head>
@@ -237,15 +241,15 @@ function decoHTML(){
   return s+'</div>';
 }
 function speakerBlock(s){
-  var ph = s.photo ? '<div class="ring"><img class="ph" src="'+esc(s.photo)+'" onerror="this.parentNode.remove()"></div>' : '';
-  var logo = s.logo ? '<img src="'+esc(s.logo)+'" onerror="this.remove()">' : '';
+  var ph = s.photo ? '<div class="ring"><div class="ph" style="background-image:url(\''+esc(s.photo)+'\')"></div></div>' : '';
+  var logo = s.logo ? '<span class="orglogo" style="background-image:url(\''+esc(s.logo)+'\')"></span>' : '';
   var org = s.company ? '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>' : '';
   var prof = s.profile ? '<p class="prof">'+esc(s.profile)+'</p>' : '';
   return '<div class="sp">'+ph+'<div class="sp-body"><div class="nm">'+esc(nameHonor(s.name))+'</div>'+org+prof+'</div></div>';
 }
 function speakerCenter(s){
-  var ph = s.photo ? '<div class="center-ph"><img src="'+esc(s.photo)+'" onerror="this.parentNode.remove()"></div>' : '';
-  var logo = s.logo ? '<img src="'+esc(s.logo)+'" onerror="this.remove()">' : '';
+  var ph = s.photo ? '<div class="center-ph"><div class="ph" style="background-image:url(\''+esc(s.photo)+'\')"></div></div>' : '';
+  var logo = s.logo ? '<span class="orglogo" style="background-image:url(\''+esc(s.logo)+'\')"></span>' : '';
   var org = s.company ? '<div class="org">'+logo+'<span>'+esc(s.company)+'</span></div>' : '';
   var prof = s.profile ? '<p class="prof">'+esc(s.profile)+'</p>' : '';
   return '<div class="sp-c">'+ph+'<div class="nm">'+esc(nameHonor(s.name))+'</div>'+org+prof+'</div>';
@@ -273,7 +277,7 @@ function qrHTML(applyOK){
 }
 var FOOT='<div class="foot">船堀会 ｜ 地域でつなぐ介護・医療の連携　／　お問い合わせ：funaborikai@gmail.com　／　funaborikai.github.io</div>';
 function brandTop(e){
-  return '<div class="brand"><img src="logo-mark.png" onerror="this.style.display=\'none\'"><span>船堀会 勉強会のご案内</span></div>'+
+  return '<div class="brand"><span class="bmark"></span><span>船堀会 勉強会のご案内</span></div>'+
     '<div class="no">第'+esc(e.no)+'回</div>'+
     '<div class="ttl">'+fmtTitle(e.title)+'</div>';
 }
