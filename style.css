@@ -151,6 +151,9 @@ section.block p.sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 24px}
 
 .cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px;padding-top:22px;border-top:2px dotted var(--peach)}
 .cta .note{color:var(--muted);font-size:13px;flex:1;min-width:220px}
+.cta-top{flex-direction:column;align-items:flex-start;gap:12px}
+.apply-deadline{flex-basis:100%;font-size:15.5px;font-weight:700;color:#d9534f;letter-spacing:.01em}
+.apply-deadline.passed{color:var(--muted)}
 .empty{color:var(--muted);font-size:14.5px;padding:16px 0}
 
 /* ---- アーカイブ一覧（動的） ---- */

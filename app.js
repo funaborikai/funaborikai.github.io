@@ -147,6 +147,15 @@ function fmtDeadline(datetime){
   const w=["日","月","火","水","木","金","土"][d.getDay()];
   return (d.getMonth()+1)+"月"+d.getDate()+"日（"+w+"）18時";
 }
+function applyDeadline(datetime){
+  const ev=new Date(datetime);
+  if(isNaN(ev)) return "";
+  const d=new Date(ev); d.setDate(d.getDate()-2); d.setHours(18,0,0,0);
+  const w=["日","月","火","水","木","金","土"][d.getDay()];
+  const md=(d.getMonth()+1)+"月"+d.getDate()+"日（"+w+"）";
+  if(Date.now() > d.getTime()) return {passed:true, text:"締め切りの"+md+"が過ぎました。"};
+  return {passed:false, text:"申込締切　"+md+"18:00まで"};
+}
 function socialHTML(e){
   const s=e.social;
   if(!s || !(s.place||s.time||s.fee||s.cancel)) return "";
@@ -168,7 +177,9 @@ function featureHTML(e){
   const partyRow = e.party ? '<div class="meta"><span class="k">懇親会</span><span class="v">'+esc(e.party)+'</span></div>' : "";
   const notesRow = e.notes ? '<div class="meta meta-wide"><span class="k">注意事項</span><span class="v">'+esc(e.notes)+'</span></div>' : "";
   const joinBtn = (String(e.formUrl||"").indexOf("http")===0) ? '<a class="btn accent btn-join" href="'+esc(e.formUrl)+'" target="_blank" rel="noopener">参加を申し込む ▶</a>' : "";
-  const topCta = joinBtn ? '<div class="cta cta-top">'+joinBtn+'</div>' : "";
+  const dl = applyDeadline(e.datetime);
+  const dlHTML = dl ? '<div class="apply-deadline'+(dl.passed?' passed':'')+'">'+esc(dl.text)+'</div>' : "";
+  const topCta = joinBtn ? '<div class="cta cta-top">'+dlHTML+joinBtn+'</div>' : "";
   const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">本会・懇親会をキャンセルする ▶</a>' : "";
   const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
   let flyerPrev = "";
