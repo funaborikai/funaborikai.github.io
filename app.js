@@ -178,10 +178,19 @@ function featureHTML(e){
   const notesRow = e.notes ? '<div class="meta meta-wide"><span class="k">注意事項</span><span class="v">'+esc(e.notes)+'</span></div>' : "";
   const joinBtn = (String(e.formUrl||"").indexOf("http")===0) ? '<a class="btn accent btn-join" href="'+esc(e.formUrl)+'" target="_blank" rel="noopener">参加を申し込む ▶</a>' : "";
   const dl = applyDeadline(e.datetime);
-  const dlHTML = dl ? '<div class="apply-deadline'+(dl.passed?' passed':'')+'">'+esc(dl.text)+'</div>' : "";
+  let dlHTML = "";
+  if(dl){
+    if(dl.passed){
+      const cform=CONFIG.CONTACT_FORM_URL;
+      const flink=(String(cform||"").indexOf("http")===0) ? '<a href="'+esc(cform)+'" target="_blank" rel="noopener">お問い合わせフォーム</a>' : 'お問い合わせフォーム';
+      dlHTML = '<div class="apply-deadline passed">'+esc(dl.text)+'<br>締め切り後のお申し込みは'+flink+'よりお願いします。</div>';
+    } else {
+      dlHTML = '<div class="apply-deadline">'+esc(dl.text)+'</div>';
+    }
+  }
   const topCta = joinBtn ? '<div class="cta cta-top">'+dlHTML+joinBtn+'</div>' : "";
   const cancelBtn = (String(CONFIG.CANCEL_FORM_URL||"").indexOf("http")===0) ? '<a class="btn btn-cancel" href="'+esc(CONFIG.CANCEL_FORM_URL)+'" target="_blank" rel="noopener">本会・懇親会をキャンセルする ▶</a>' : "";
-  const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
+  const cta = (joinBtn||cancelBtn) ? '<div class="cta">'+dlHTML+joinBtn+cancelBtn+'<span class="note">「申し込む」はお申し込みフォーム、「キャンセル」はキャンセル用フォームが開きます。</span></div>' : "";
   let flyerPrev = "";
   if(e.no){
     const pdfUrl = String(e.pdf||"").trim();
